@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="Curve" id=5]
+min_value = -500.0
+max_value = 500.0
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.87415, 72.7273 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=6]
+offsets = PoolRealArray( 0, 0.586716, 0.874539, 1 )
+colors = PoolColorArray( 0.347656, 0.0787659, 0.286736, 1, 0.736751, 0.5951, 0.989258, 1, 0.517578, 0.0808716, 0.290695, 1, 0.150391, 0.0199738, 0.0199738, 1 )
+
+[node name="SummonParticles" type="CPUParticles2D"]
+position = Vector2( 1.5497, -21.6957 )
+emitting = false
+amount = 256
+lifetime = 0.7
+one_shot = true
+emission_shape = 1
+emission_sphere_radius = 6.0
+gravity = Vector2( 0, 98 )
+orbit_velocity = 1.0
+orbit_velocity_random = 0.25
+orbit_velocity_curve = SubResource( 5 )
+color_ramp = SubResource( 6 )

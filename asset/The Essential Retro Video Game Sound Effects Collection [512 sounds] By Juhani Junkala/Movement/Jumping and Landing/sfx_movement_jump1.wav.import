@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/sfx_movement_jump1.wav-55a456d2989ea6a85b632e0194b0ef1c.sample"
+
+[deps]
+
+source_file="res://asset/The Essential Retro Video Game Sound Effects Collection [512 sounds] By Juhani Junkala/Movement/Jumping and Landing/sfx_movement_jump1.wav"
+dest_files=[ "res://.import/sfx_movement_jump1.wav-55a456d2989ea6a85b632e0194b0ef1c.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

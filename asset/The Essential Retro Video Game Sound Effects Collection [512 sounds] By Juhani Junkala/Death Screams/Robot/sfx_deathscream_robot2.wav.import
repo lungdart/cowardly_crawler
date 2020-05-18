@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/sfx_deathscream_robot2.wav-e98c49f9b66276a9945c3e024482a3fb.sample"
+
+[deps]
+
+source_file="res://asset/The Essential Retro Video Game Sound Effects Collection [512 sounds] By Juhani Junkala/Death Screams/Robot/sfx_deathscream_robot2.wav"
+dest_files=[ "res://.import/sfx_deathscream_robot2.wav-e98c49f9b66276a9945c3e024482a3fb.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/sfx_movement_stairs2a.wav-8d59058c0cf6420bbbd24b331b07e3a3.sample"
+
+[deps]
+
+source_file="res://asset/The Essential Retro Video Game Sound Effects Collection [512 sounds] By Juhani Junkala/Movement/Climbing Stairs/sfx_movement_stairs2a.wav"
+dest_files=[ "res://.import/sfx_movement_stairs2a.wav-8d59058c0cf6420bbbd24b331b07e3a3.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

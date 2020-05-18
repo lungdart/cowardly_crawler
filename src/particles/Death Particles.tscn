@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="Gradient" id=5]
+colors = PoolColorArray( 0.777344, 0.762554, 0.722687, 1, 1, 1, 1, 0 )
+
+[node name="Death Particles" type="CPUParticles2D"]
+visible = false
+emitting = false
+amount = 64
+lifetime = 0.2
+one_shot = true
+emission_shape = 1
+emission_sphere_radius = 8.0
+direction = Vector2( 0, -10 )
+initial_velocity = 50.0
+color_ramp = SubResource( 5 )

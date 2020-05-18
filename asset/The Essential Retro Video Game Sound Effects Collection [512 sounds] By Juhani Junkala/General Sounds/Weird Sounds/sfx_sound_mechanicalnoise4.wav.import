@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/sfx_sound_mechanicalnoise4.wav-88f0db6af4c01df2d48a97c0592d2c39.sample"
+
+[deps]
+
+source_file="res://asset/The Essential Retro Video Game Sound Effects Collection [512 sounds] By Juhani Junkala/General Sounds/Weird Sounds/sfx_sound_mechanicalnoise4.wav"
+dest_files=[ "res://.import/sfx_sound_mechanicalnoise4.wav-88f0db6af4c01df2d48a97c0592d2c39.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

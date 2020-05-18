@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/sfx_sounds_Blip4.wav-e12b48494e285b8485903a3f7baf4f74.sample"
+
+[deps]
+
+source_file="res://asset/The Essential Retro Video Game Sound Effects Collection [512 sounds] By Juhani Junkala/General Sounds/Simple Bleeps/sfx_sounds_Blip4.wav"
+dest_files=[ "res://.import/sfx_sounds_Blip4.wav-e12b48494e285b8485903a3f7baf4f74.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

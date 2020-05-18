@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/sfx_deathscream_android1.wav-140bd3feb627c8f1a4d6677fc8cb6b7b.sample"
+
+[deps]
+
+source_file="res://asset/The Essential Retro Video Game Sound Effects Collection [512 sounds] By Juhani Junkala/Death Screams/Android/sfx_deathscream_android1.wav"
+dest_files=[ "res://.import/sfx_deathscream_android1.wav-140bd3feb627c8f1a4d6677fc8cb6b7b.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

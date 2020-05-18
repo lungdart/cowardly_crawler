@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/sfx_weapon_shotgun2.wav-68ee17fdb210aa2705bbb0db645958ed.sample"
+
+[deps]
+
+source_file="res://asset/The Essential Retro Video Game Sound Effects Collection [512 sounds] By Juhani Junkala/Weapons/Shotgun/sfx_weapon_shotgun2.wav"
+dest_files=[ "res://.import/sfx_weapon_shotgun2.wav-68ee17fdb210aa2705bbb0db645958ed.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

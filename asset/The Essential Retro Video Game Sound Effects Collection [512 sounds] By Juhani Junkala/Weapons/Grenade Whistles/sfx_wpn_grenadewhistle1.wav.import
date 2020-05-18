@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/sfx_wpn_grenadewhistle1.wav-d6e24ae0e1c54d901590fff9da1e86f8.sample"
+
+[deps]
+
+source_file="res://asset/The Essential Retro Video Game Sound Effects Collection [512 sounds] By Juhani Junkala/Weapons/Grenade Whistles/sfx_wpn_grenadewhistle1.wav"
+dest_files=[ "res://.import/sfx_wpn_grenadewhistle1.wav-d6e24ae0e1c54d901590fff9da1e86f8.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

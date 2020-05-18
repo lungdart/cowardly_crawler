@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/sfx_wpn_laser 10.wav-961f41197c0c8ef4ce3bd4b7a7b54683.sample"
+
+[deps]
+
+source_file="res://asset/The Essential Retro Video Game Sound Effects Collection [512 sounds] By Juhani Junkala/Weapons/Lasers/sfx_wpn_laser 10.wav"
+dest_files=[ "res://.import/sfx_wpn_laser 10.wav-961f41197c0c8ef4ce3bd4b7a7b54683.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
