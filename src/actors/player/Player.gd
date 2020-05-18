@@ -26,11 +26,12 @@ onready var deathParticles = $"Death Particles"
 onready var targetCursor = $"Target Origin"
 
 onready var projectiles = {
-	"fireball": preload("res://src/particles/fireball.tscn")
+	"fireball": preload("res://src/particles/Fireball.tscn"),
+	"ice": preload("res://src/particles/Ice.tscn")
 }
 onready var equipped_projectiles = [
 	projectiles["fireball"],
-	projectiles["fireball"]
+	projectiles["ice"]
 ]
 
 func _ready():
@@ -113,10 +114,7 @@ func shoot(id):
 	
 	var projectile = self.equipped_projectiles[id]
 	var instance = projectile.instance()
-	instance.rotation = self.target_angle
-	instance.direction = -Vector2(cos(self.target_angle), sin(self.target_angle)) 
-	instance.position = global_position + (instance.direction * 48)
-
+	instance.init(global_position, get_global_mouse_position())
 	get_tree().get_root().add_child(instance)
 
 

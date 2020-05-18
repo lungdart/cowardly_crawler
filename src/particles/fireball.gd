@@ -18,6 +18,12 @@ func _ready():
 	self.explodeParticles.set_emitting(false)
 	self.sprite.visible = true
 
+func init(player_position, mouse_position):
+	var target_angle = player_position.angle_to_point(mouse_position)
+	self.rotation = target_angle
+	self.direction = -Vector2(cos(target_angle), sin(target_angle)) 
+	self.position = player_position + (self.direction * 48)
+
 func _physics_process(delta):
 	if moving:
 		move(delta)
