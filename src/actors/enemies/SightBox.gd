@@ -6,7 +6,6 @@ var player = null
 func _ready():
 	connect("body_entered", self, "_on_body_entered")
 	connect("body_exited", self, "_on_body_exited")
-	print("CONNECTED SIGHTBOX")
 
 func can_see_player():
 	return self.player != null

@@ -584,6 +584,9 @@ position = Vector2( 529.532, 532.058 )
 
 [node name="Node2D" type="Node2D" parent="."]
 
+[node name="Necromancer" parent="Node2D" instance=ExtResource( 5 )]
+position = Vector2( 440.142, 334.628 )
+
 [node name="Skeleton" parent="Node2D" instance=ExtResource( 4 )]
 position = Vector2( 520.774, 384.486 )
 
@@ -592,6 +595,3 @@ position = Vector2( 433.239, 448.752 )
 
 [node name="Skeleton3" parent="Node2D" instance=ExtResource( 4 )]
 position = Vector2( 587.256, 450.968 )
-
-[node name="Necromancer" parent="Node2D" instance=ExtResource( 5 )]
-position = Vector2( 423.561, 349.702 )

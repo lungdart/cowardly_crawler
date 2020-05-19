@@ -21,17 +21,19 @@ var velocity = Vector2.ZERO
 var current_state_time = 0.0
 var target_state_time = 0.0
 var current_life = 1 setget set_life
+var frozen = false
 
 onready var sprite = $Sprite
 onready var shadowSprite = $Shadow
 onready var deathSprite = $DeathSprite
 onready var animationPlayer = $AnimationPlayer
-onready var iframesPlayer = $IframesPlayer
+onready var shaderPlayer = $ShaderPlayer
 onready var hitBox = $HitBox
 onready var hurtBox = $HurtBox
 onready var sightBox = $SightBox
 onready var castParticles = $CastParticles
 onready var deathParticles = $DeathParticles
+onready var frozenTimer = $FrozenTimer
 onready var iframesTimer = $IframesTimer
 onready var freeTimer = $FreeTimer
 
@@ -39,6 +41,7 @@ func _ready():
 	# Initialize scene
 	self.hurtBox.connect("area_entered", self, "_on_hurtBox_area_entered")
 	self.animationPlayer.connect("animation_finished", self, "_on_animationPlayer_finished")
+	self.frozenTimer.connect("timeout", self, "_on_frozenTimer_timeout")
 	self.iframesTimer.connect("timeout", self, "_on_iframesTimer_timeout")
 	self.freeTimer.connect("timeout", self, "_on_freeTimer_timeout")
 	self.shadowSprite.set_visible(true)
@@ -123,9 +126,11 @@ func do_move_state(delta):
 	
 	# Slow down when movement finished, speed up to max speed when movement ongoing
 	if self.current_state_time >= self.target_state_time and self.velocity != Vector2.ZERO:
-		self.velocity = self.velocity.move_toward(Vector2.ZERO, FRICTION * delta)
+		var speed = FRICTION * (0.25 if self.frozen else 1.0)
+		self.velocity = self.velocity.move_toward(Vector2.ZERO, speed * delta)
 	else:
-		self.velocity = self.velocity.move_toward(self.direction * MAX_SPEED, ACCELERATION * delta)
+		var speed = MAX_SPEED * (0.25 if self.frozen else 1.0)
+		self.velocity = self.velocity.move_toward(self.direction * speed, ACCELERATION * delta)
 	
 	# Update position
 	self.velocity = move_and_slide(self.velocity)
@@ -169,14 +174,19 @@ func set_life(value):
 func _on_hurtBox_area_entered(area):
 	if area.name == "HitBox":
 		self.current_life -= 1
-		self.iframesPlayer.play("Iframes Start")
+		self.shaderPlayer.play("Iframes Start")
 		self.iframesTimer.start()
 	elif area.name == "FreezeBox":
 		print("FROZEN")
+		self.frozen = true
+		self.sprite.get_material().set_shader_param("frozen", true)
+		self.frozenTimer.start()
+
+func _on_frozenTimer_timeout():
+	self.sprite.get_material().set_shader_param("frozen", false)
 
 func _on_iframesTimer_timeout():
-	print("Iframes stop")
-	self.iframesPlayer.play("Iframes Stop")
+	self.shaderPlayer.play("Iframes Stop")
 
 # Once the death animation finishes, we want to fizzle out the sprites
 func _on_animationPlayer_finished(anim_name):

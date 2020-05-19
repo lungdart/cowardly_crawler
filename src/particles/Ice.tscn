@@ -176,13 +176,25 @@ tracks/8/keys = {
 "update": 1,
 "values": [ false, true ]
 }
+tracks/9/type = "value"
+tracks/9/path = NodePath("FreezeBox/CollisionShape2D:disabled")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
 
 [sub_resource type="CapsuleShape2D" id=15]
 radius = 45.1268
 height = 77.2768
 
 [sub_resource type="CircleShape2D" id=17]
-radius = 173.488
+radius = 200.0
 
 [sub_resource type="Gradient" id=16]
 offsets = PoolRealArray( 0, 0.557196, 1 )
@@ -198,9 +210,9 @@ scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 3 )
 
 [node name="Projectile" type="AnimatedSprite" parent="."]
-modulate = Color( 1, 1, 1, 0.142857 )
+modulate = Color( 1, 1, 1, 0.857143 )
 position = Vector2( 0, -64 )
-scale = Vector2( 1.5, 1.5 )
+scale = Vector2( 1.25, 1.25 )
 frames = SubResource( 13 )
 animation = "Splash"
 frame = 1
@@ -221,11 +233,12 @@ collision_mask = 0
 position = Vector2( 7.00772, -6.12605 )
 rotation = 1.5708
 shape = SubResource( 15 )
-disabled = true
 
-[node name="EffectBox" type="Area2D" parent="."]
+[node name="FreezeBox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EffectBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FreezeBox"]
 shape = SubResource( 17 )
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
