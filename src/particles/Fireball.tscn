@@ -64,11 +64,11 @@ color_ramp = SubResource( 3 )
 wait_time = 5.0
 one_shot = true
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="HitBox" type="Area2D" parent="."]
 collision_layer = 4
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2( -2.30283, 0.628044 )
 shape = SubResource( 4 )
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

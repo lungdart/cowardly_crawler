@@ -1,4 +1,4 @@
-extends StaticBody2D
+extends KinematicBody2D
 
 
 onready var animationPlayer = $AnimationPlayer

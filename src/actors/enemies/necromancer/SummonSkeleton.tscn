@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://src/actors/enemies/skeleton/Skeleton.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/actors/enemies/necromancer/SummonSkeleton.gd" type="Script" id=2]
+[ext_resource path="res://src/particles/SummonParticles.tscn" type="PackedScene" id=3]
+
+[sub_resource type="Shader" id=5]
+code = "shader_type canvas_item;
+
+uniform bool active = true;
+
+void fragment() {
+	vec4 previous_color = texture(TEXTURE, UV);
+	vec4 white_color = vec4(1.0, 1.0, 1.0, previous_color.a);
+	vec4 new_color = previous_color;
+	if (active) {
+		new_color = white_color;
+	}
+	COLOR = new_color;
+}"
+
+[sub_resource type="ShaderMaterial" id=6]
+resource_local_to_scene = true
+shader = SubResource( 5 )
+shader_param/active = false
+
+[node name="SummonSkeleton" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="Sprite" parent="." index="1"]
+material = SubResource( 6 )
+frame = 0
+
+[node name="SightBox" parent="." index="6"]
+collision_mask = 1
+
+[node name="SummonParticles" parent="." index="13" instance=ExtResource( 3 )]
+position = Vector2( 0.268137, -8.02567 )

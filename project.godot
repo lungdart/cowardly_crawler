@@ -89,6 +89,7 @@ shoot2={
 2d_physics/layer_2="Player"
 2d_physics/layer_3="Player Hit"
 2d_physics/layer_4="Player Hurt"
+2d_physics/layer_5="Player Effect"
 
 [rendering]
 
