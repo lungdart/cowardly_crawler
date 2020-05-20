@@ -4,7 +4,7 @@
 [ext_resource path="res://src/actors/enemies/necromancer/SummonSkeleton.gd" type="Script" id=2]
 [ext_resource path="res://src/particles/SummonParticles.tscn" type="PackedScene" id=3]
 
-[sub_resource type="Shader" id=5]
+[sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
 uniform bool white_out = false;
@@ -27,14 +27,13 @@ void fragment() {
 	}
 }"
 
-[sub_resource type="ShaderMaterial" id=6]
+[sub_resource type="ShaderMaterial" id=5]
 resource_local_to_scene = true
-shader = SubResource( 5 )
+shader = SubResource( 1 )
 shader_param/white_out = false
 shader_param/frozen = false
 
-[sub_resource type="Animation" id=2]
-resource_name = "Iframes Start"
+[sub_resource type="Animation" id=6]
 length = 0.2
 loop = true
 tracks/0/type = "value"
@@ -50,8 +49,7 @@ tracks/0/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "Iframes Stop"
+[sub_resource type="Animation" id=4]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:material:shader_param/white_out")
 tracks/0/interp = 1
@@ -69,22 +67,18 @@ tracks/0/keys = {
 script = ExtResource( 2 )
 
 [node name="Sprite" parent="." index="1"]
-material = SubResource( 6 )
+material = SubResource( 5 )
 frame = 2
 
 [node name="DeathSprite" parent="." index="2"]
-position = Vector2( 0, -6 )
 rotation = 6.28319
-
-[node name="HurtBox" parent="." index="5"]
-visible = false
 
 [node name="SightBox" parent="." index="6"]
 collision_mask = 1
 
 [node name="IframesPlayer" type="AnimationPlayer" parent="." index="9"]
-"anims/Iframes Start" = SubResource( 2 )
-"anims/Iframes Stop" = SubResource( 3 )
+"anims/Iframes Start" = SubResource( 6 )
+"anims/Iframes Stop" = SubResource( 4 )
 
 [node name="SummonParticles" parent="." index="13" instance=ExtResource( 3 )]
 position = Vector2( 0.268137, -8.02567 )

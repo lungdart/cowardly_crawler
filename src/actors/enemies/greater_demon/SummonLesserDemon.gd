@@ -1,7 +1,6 @@
-extends "res://src/actors/enemies/skeleton/Skeleton.gd"
+extends "res://src/actors/enemies/EnemyBase.gd"
 
 onready var summonParticles = $SummonParticles
-
 
 # Summon critters fizzle into existence
 func _ready():

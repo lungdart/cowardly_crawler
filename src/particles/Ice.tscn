@@ -157,7 +157,7 @@ tracks/7/path = NodePath("HitBox/CollisionShape2D:disabled")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
-tracks/7/enabled = true
+tracks/7/enabled = false
 tracks/7/keys = {
 "times": PoolRealArray( 0, 0.8, 1.4 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
@@ -204,18 +204,15 @@ colors = PoolColorArray( 0.823723, 0.834052, 0.962891, 1, 0.166924, 0.609867, 0.
 script = ExtResource( 2 )
 
 [node name="Shadow" type="Sprite" parent="."]
-modulate = Color( 1, 1, 1, 0 )
 position = Vector2( 0.836243, 0.891167 )
-scale = Vector2( 1.5, 1.5 )
+scale = Vector2( 0.75, 0.75 )
 texture = ExtResource( 3 )
 
 [node name="Projectile" type="AnimatedSprite" parent="."]
-modulate = Color( 1, 1, 1, 0.857143 )
-position = Vector2( 0, -64 )
-scale = Vector2( 1.25, 1.25 )
+position = Vector2( 0, -196 )
 frames = SubResource( 13 )
-animation = "Splash"
-frame = 1
+animation = "Projectile"
+frame = 9
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -233,6 +230,7 @@ collision_mask = 0
 position = Vector2( 7.00772, -6.12605 )
 rotation = 1.5708
 shape = SubResource( 15 )
+disabled = true
 
 [node name="FreezeBox" type="Area2D" parent="."]
 collision_layer = 4
@@ -240,6 +238,7 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FreezeBox"]
 shape = SubResource( 17 )
+disabled = true
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 position = Vector2( 0.496536, -14.1564 )

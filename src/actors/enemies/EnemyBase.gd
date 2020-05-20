@@ -38,6 +38,8 @@ onready var iframesTimer = $IframesTimer
 onready var freeTimer = $FreeTimer
 
 func _ready():
+	randomize()
+
 	# Initialize scene
 	self.hurtBox.connect("area_entered", self, "_on_hurtBox_area_entered")
 	self.animationPlayer.connect("animation_finished", self, "_on_animationPlayer_finished")
@@ -177,12 +179,12 @@ func _on_hurtBox_area_entered(area):
 		self.shaderPlayer.play("Iframes Start")
 		self.iframesTimer.start()
 	elif area.name == "FreezeBox":
-		print("FROZEN")
 		self.frozen = true
 		self.sprite.get_material().set_shader_param("frozen", true)
 		self.frozenTimer.start()
 
 func _on_frozenTimer_timeout():
+	self.frozen = false
 	self.sprite.get_material().set_shader_param("frozen", false)
 
 func _on_iframesTimer_timeout():

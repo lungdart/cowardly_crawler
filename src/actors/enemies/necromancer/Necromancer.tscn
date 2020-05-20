@@ -1,18 +1,18 @@
 [gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://src/actors/enemies/EnemyBase.tscn" type="PackedScene" id=1]
-[ext_resource path="res://asset/frames/masked_orc_run_anim_f3.png" type="Texture" id=2]
+[ext_resource path="res://asset/frames/necromancer_run_anim_f0.png" type="Texture" id=2]
 [ext_resource path="res://asset/SmallShadow.png" type="Texture" id=3]
-[ext_resource path="res://asset/frames/masked_orc_run_anim_f1.png" type="Texture" id=4]
-[ext_resource path="res://asset/frames/masked_orc_idle_anim_f0.png" type="Texture" id=5]
-[ext_resource path="res://asset/frames/masked_orc_idle_anim_f3.png" type="Texture" id=6]
-[ext_resource path="res://asset/frames/masked_orc_idle_anim_f1.png" type="Texture" id=7]
-[ext_resource path="res://asset/frames/masked_orc_idle_anim_f2.png" type="Texture" id=8]
-[ext_resource path="res://asset/frames/masked_orc_run_anim_f2.png" type="Texture" id=9]
+[ext_resource path="res://asset/frames/necromancer_run_anim_f1.png" type="Texture" id=4]
+[ext_resource path="res://asset/frames/necromancer_idle_anim_f2.png" type="Texture" id=5]
+[ext_resource path="res://asset/frames/necromancer_idle_anim_f0.png" type="Texture" id=6]
+[ext_resource path="res://asset/frames/necromancer_idle_anim_f1.png" type="Texture" id=7]
+[ext_resource path="res://asset/frames/necromancer_idle_anim_f3.png" type="Texture" id=8]
+[ext_resource path="res://asset/frames/necromancer_run_anim_f3.png" type="Texture" id=9]
 [ext_resource path="res://src/actors/enemies/necromancer/Necromancer.gd" type="Script" id=10]
-[ext_resource path="res://asset/frames/masked_orc_run_anim_f0.png" type="Texture" id=11]
+[ext_resource path="res://asset/frames/necromancer_run_anim_f2.png" type="Texture" id=11]
 
-[sub_resource type="Shader" id=5]
+[sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
 uniform bool white_out = false;
@@ -35,36 +35,36 @@ void fragment() {
 	}
 }"
 
-[sub_resource type="ShaderMaterial" id=6]
+[sub_resource type="ShaderMaterial" id=2]
 resource_local_to_scene = true
-shader = SubResource( 5 )
+shader = SubResource( 1 )
 shader_param/white_out = false
 shader_param/frozen = false
 
-[sub_resource type="SpriteFrames" id=1]
+[sub_resource type="SpriteFrames" id=3]
 animations = [ {
-"frames": [ ExtResource( 11 ), ExtResource( 4 ), ExtResource( 9 ), ExtResource( 2 ) ],
+"frames": [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 11 ), ExtResource( 9 ) ],
 "loop": true,
 "name": "Move",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 5 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 6 ) ],
+"frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 5 ), ExtResource( 8 ) ],
 "loop": true,
 "name": "Idle",
 "speed": 10.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=2]
-radius = 3.3582
-height = 6.50899
-
-[sub_resource type="CapsuleShape2D" id=3]
-radius = 6.85531
-height = 6.1177
-
 [sub_resource type="CapsuleShape2D" id=4]
-radius = 6.03873
-height = 6.36863
+radius = 2.4011
+height = 8.88879
+
+[sub_resource type="CapsuleShape2D" id=5]
+radius = 6.83685
+height = 2.93756
+
+[sub_resource type="CapsuleShape2D" id=6]
+radius = 4.97622
+height = 6.59033
 
 [sub_resource type="CircleShape2D" id=7]
 radius = 96.0
@@ -83,10 +83,9 @@ scale = Vector2( 1.25, 1.25 )
 texture = ExtResource( 3 )
 
 [node name="Sprite" parent="." index="1"]
-material = SubResource( 6 )
-position = Vector2( 0, -12 )
-scale = Vector2( 1.25, 1.25 )
-frames = SubResource( 1 )
+material = SubResource( 2 )
+position = Vector2( 1.04384, -9.76804 )
+frames = SubResource( 3 )
 animation = "Idle"
 frame = 1
 
@@ -97,23 +96,23 @@ scale = Vector2( 1.25, 1.25 )
 
 [node name="Boundry" parent="." index="3"]
 visible = false
-position = Vector2( 1.27721, -3.17076 )
+position = Vector2( 0.00140762, -2.12692 )
 rotation = 1.5708
-shape = SubResource( 2 )
+shape = SubResource( 4 )
 
 [node name="HitBox" parent="." index="4"]
 visible = false
 
 [node name="CollisionShape2D" parent="HitBox" index="0"]
-position = Vector2( 1.16988, -9.51344 )
-shape = SubResource( 3 )
+position = Vector2( 1.0539, -7.65772 )
+shape = SubResource( 5 )
 
 [node name="HurtBox" parent="." index="5"]
 visible = false
 
 [node name="CollisionPolygon2D" parent="HurtBox" index="0"]
-position = Vector2( 1.1748, -8.85179 )
-shape = SubResource( 4 )
+position = Vector2( 1.05882, -7.11205 )
+shape = SubResource( 6 )
 
 [node name="SightBox" parent="." index="6"]
 visible = false

@@ -1,0 +1,96 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://src/actors/enemies/EnemyBase.tscn" type="PackedScene" id=1]
+[ext_resource path="res://asset/frames/wogol_run_anim_f2.png" type="Texture" id=2]
+[ext_resource path="res://asset/frames/wogol_idle_anim_f0.png" type="Texture" id=3]
+[ext_resource path="res://asset/frames/wogol_run_anim_f1.png" type="Texture" id=4]
+[ext_resource path="res://asset/frames/wogol_run_anim_f3.png" type="Texture" id=5]
+[ext_resource path="res://asset/frames/wogol_run_anim_f0.png" type="Texture" id=6]
+[ext_resource path="res://asset/frames/wogol_idle_anim_f2.png" type="Texture" id=7]
+[ext_resource path="res://asset/frames/wogol_idle_anim_f3.png" type="Texture" id=8]
+[ext_resource path="res://asset/frames/wogol_idle_anim_f1.png" type="Texture" id=9]
+
+[sub_resource type="Shader" id=5]
+code = "shader_type canvas_item;
+
+uniform bool white_out = false;
+uniform bool frozen = false;
+
+void fragment() {
+	vec4 previous_color = texture(TEXTURE, UV);
+	if (white_out) {
+		COLOR = vec4(1.0, 1.0, 1.0, previous_color.a);
+	}
+	else if (frozen) {
+		float red = previous_color.r * 0.5;
+		float green = previous_color.g * 0.8;
+		float blue = previous_color.b * 1.0;
+		float alpha = previous_color.a * 1.0;
+		COLOR = vec4(red, green, blue, alpha);
+	}
+	else {
+		COLOR = previous_color;
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id=6]
+resource_local_to_scene = true
+shader = SubResource( 5 )
+shader_param/white_out = false
+shader_param/frozen = false
+
+[sub_resource type="SpriteFrames" id=7]
+animations = [ {
+"frames": [ ExtResource( 6 ), ExtResource( 4 ), ExtResource( 2 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "Move",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 3 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 8 ) ],
+"loop": true,
+"name": "Idle",
+"speed": 10.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=8]
+radius = 2.35731
+height = 6.90891
+
+[sub_resource type="CapsuleShape2D" id=9]
+radius = 4.52357
+height = 5.37695
+
+[sub_resource type="CapsuleShape2D" id=10]
+radius = 5.07566
+height = 4.64083
+
+[node name="LesserDemon" instance=ExtResource( 1 )]
+
+[node name="Sprite" parent="." index="1"]
+material = SubResource( 6 )
+position = Vector2( 0, -10 )
+frames = SubResource( 7 )
+animation = "Idle"
+
+[node name="DeathSprite" parent="." index="2"]
+visible = false
+
+[node name="Boundry" parent="." index="3"]
+visible = false
+position = Vector2( -0.184029, -2.02428 )
+rotation = 1.5708
+shape = SubResource( 8 )
+
+[node name="HitBox" parent="." index="4"]
+visible = false
+
+[node name="CollisionShape2D" parent="HitBox" index="0"]
+position = Vector2( 0.184029, -6.99299 )
+shape = SubResource( 9 )
+
+[node name="HurtBox" parent="." index="5"]
+visible = false
+
+[node name="CollisionPolygon2D" parent="HurtBox" index="0"]
+position = Vector2( 0.184021, -7.36105 )
+shape = SubResource( 10 )

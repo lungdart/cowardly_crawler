@@ -1,0 +1,102 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://src/actors/enemies/EnemyBase.tscn" type="PackedScene" id=1]
+[ext_resource path="res://asset/frames/orc_shaman_idle_anim_f2.png" type="Texture" id=2]
+[ext_resource path="res://asset/frames/orc_shaman_run_anim_f1.png" type="Texture" id=3]
+[ext_resource path="res://asset/frames/orc_shaman_run_anim_f3.png" type="Texture" id=4]
+[ext_resource path="res://asset/frames/orc_shaman_run_anim_f2.png" type="Texture" id=5]
+[ext_resource path="res://asset/frames/orc_shaman_idle_anim_f0.png" type="Texture" id=6]
+[ext_resource path="res://asset/frames/orc_shaman_run_anim_f0.png" type="Texture" id=7]
+[ext_resource path="res://asset/frames/orc_shaman_idle_anim_f3.png" type="Texture" id=8]
+[ext_resource path="res://asset/frames/orc_shaman_idle_anim_f1.png" type="Texture" id=9]
+[ext_resource path="res://asset/SmallShadow.png" type="Texture" id=10]
+
+[sub_resource type="Shader" id=5]
+code = "shader_type canvas_item;
+
+uniform bool white_out = false;
+uniform bool frozen = false;
+
+void fragment() {
+	vec4 previous_color = texture(TEXTURE, UV);
+	if (white_out) {
+		COLOR = vec4(1.0, 1.0, 1.0, previous_color.a);
+	}
+	else if (frozen) {
+		float red = previous_color.r * 0.5;
+		float green = previous_color.g * 0.8;
+		float blue = previous_color.b * 1.0;
+		float alpha = previous_color.a * 1.0;
+		COLOR = vec4(red, green, blue, alpha);
+	}
+	else {
+		COLOR = previous_color;
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id=6]
+resource_local_to_scene = true
+shader = SubResource( 5 )
+shader_param/white_out = false
+shader_param/frozen = false
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "Move",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 9 ), ExtResource( 2 ), ExtResource( 8 ) ],
+"loop": true,
+"name": "Idle",
+"speed": 10.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=7]
+radius = 3.08623
+height = 3.80248
+
+[sub_resource type="CapsuleShape2D" id=8]
+radius = 4.77812
+height = 5.20611
+
+[sub_resource type="CapsuleShape2D" id=9]
+radius = 4.56877
+height = 4.15937
+
+[node name="Shaman" instance=ExtResource( 1 )]
+
+[node name="Shadow" parent="." index="0"]
+position = Vector2( 0.869488, -0.148403 )
+texture = ExtResource( 10 )
+
+[node name="Sprite" parent="." index="1"]
+material = SubResource( 6 )
+position = Vector2( -0.184029, -9.93741 )
+frames = SubResource( 1 )
+animation = "Idle"
+frame = 3
+
+[node name="DeathSprite" parent="." index="2"]
+visible = false
+
+[node name="Boundry" parent="." index="3"]
+visible = false
+position = Vector2( 0.837395, -2.8262 )
+rotation = 1.5708
+shape = SubResource( 7 )
+
+[node name="HitBox" parent="." index="4"]
+visible = false
+
+[node name="CollisionShape2D" parent="HitBox" index="0"]
+position = Vector2( 0.314022, -6.90849 )
+shape = SubResource( 8 )
+
+[node name="HurtBox" parent="." index="5"]
+visible = false
+
+[node name="CollisionPolygon2D" parent="HurtBox" index="0"]
+position = Vector2( 0.523373, -7.11784 )
+shape = SubResource( 9 )
