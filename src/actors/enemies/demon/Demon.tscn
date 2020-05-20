@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://src/actors/enemies/EnemyBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://asset/frames/chort_idle_anim_f3.png" type="Texture" id=2]
@@ -10,6 +10,8 @@
 [ext_resource path="res://asset/frames/chort_idle_anim_f1.png" type="Texture" id=8]
 [ext_resource path="res://asset/frames/chort_idle_anim_f2.png" type="Texture" id=9]
 [ext_resource path="res://asset/SmallShadow.png" type="Texture" id=10]
+[ext_resource path="res://src/actors/enemies/demon/Demon.gd" type="Script" id=11]
+[ext_resource path="res://src/particles/Flame.tscn" type="PackedScene" id=12]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -65,7 +67,11 @@ height = 6.48108
 radius = 5.44373
 height = 5.00886
 
+[sub_resource type="CircleShape2D" id=7]
+radius = 75.0
+
 [node name="Demon" instance=ExtResource( 1 )]
+script = ExtResource( 11 )
 
 [node name="Shadow" parent="." index="0"]
 position = Vector2( -0.184029, 0 )
@@ -76,6 +82,7 @@ material = SubResource( 2 )
 position = Vector2( 0, -12 )
 frames = SubResource( 3 )
 animation = "Idle"
+frame = 1
 
 [node name="DeathSprite" parent="." index="2"]
 visible = false
@@ -99,3 +106,12 @@ visible = false
 [node name="CollisionPolygon2D" parent="HurtBox" index="0"]
 position = Vector2( 0, -8.4652 )
 shape = SubResource( 6 )
+
+[node name="CollisionShape2D" parent="SightBox" index="0"]
+shape = SubResource( 7 )
+
+[node name="FlamePivot" type="Position2D" parent="." index="14"]
+position = Vector2( 0.736107, -5.33676 )
+
+[node name="Flame" parent="FlamePivot" index="0" instance=ExtResource( 12 )]
+position = Vector2( 16, 0 )

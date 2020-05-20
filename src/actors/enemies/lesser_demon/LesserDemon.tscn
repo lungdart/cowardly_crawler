@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://src/actors/enemies/EnemyBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://asset/frames/wogol_run_anim_f2.png" type="Texture" id=2]
@@ -9,8 +9,9 @@
 [ext_resource path="res://asset/frames/wogol_idle_anim_f2.png" type="Texture" id=7]
 [ext_resource path="res://asset/frames/wogol_idle_anim_f3.png" type="Texture" id=8]
 [ext_resource path="res://asset/frames/wogol_idle_anim_f1.png" type="Texture" id=9]
+[ext_resource path="res://src/actors/enemies/lesser_demon/LesserDemon.gd" type="Script" id=10]
 
-[sub_resource type="Shader" id=5]
+[sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
 uniform bool white_out = false;
@@ -33,13 +34,13 @@ void fragment() {
 	}
 }"
 
-[sub_resource type="ShaderMaterial" id=6]
+[sub_resource type="ShaderMaterial" id=2]
 resource_local_to_scene = true
-shader = SubResource( 5 )
+shader = SubResource( 1 )
 shader_param/white_out = false
 shader_param/frozen = false
 
-[sub_resource type="SpriteFrames" id=7]
+[sub_resource type="SpriteFrames" id=3]
 animations = [ {
 "frames": [ ExtResource( 6 ), ExtResource( 4 ), ExtResource( 2 ), ExtResource( 5 ) ],
 "loop": true,
@@ -52,25 +53,30 @@ animations = [ {
 "speed": 10.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=8]
+[sub_resource type="CapsuleShape2D" id=4]
 radius = 2.35731
 height = 6.90891
 
-[sub_resource type="CapsuleShape2D" id=9]
+[sub_resource type="CapsuleShape2D" id=5]
 radius = 4.52357
 height = 5.37695
 
-[sub_resource type="CapsuleShape2D" id=10]
+[sub_resource type="CapsuleShape2D" id=6]
 radius = 5.07566
 height = 4.64083
 
+[sub_resource type="CircleShape2D" id=7]
+radius = 128.0
+
 [node name="LesserDemon" instance=ExtResource( 1 )]
+script = ExtResource( 10 )
 
 [node name="Sprite" parent="." index="1"]
-material = SubResource( 6 )
+material = SubResource( 2 )
 position = Vector2( 0, -10 )
-frames = SubResource( 7 )
+frames = SubResource( 3 )
 animation = "Idle"
+frame = 1
 
 [node name="DeathSprite" parent="." index="2"]
 visible = false
@@ -79,18 +85,21 @@ visible = false
 visible = false
 position = Vector2( -0.184029, -2.02428 )
 rotation = 1.5708
-shape = SubResource( 8 )
+shape = SubResource( 4 )
 
 [node name="HitBox" parent="." index="4"]
 visible = false
 
 [node name="CollisionShape2D" parent="HitBox" index="0"]
 position = Vector2( 0.184029, -6.99299 )
-shape = SubResource( 9 )
+shape = SubResource( 5 )
 
 [node name="HurtBox" parent="." index="5"]
 visible = false
 
 [node name="CollisionPolygon2D" parent="HurtBox" index="0"]
 position = Vector2( 0.184021, -7.36105 )
-shape = SubResource( 10 )
+shape = SubResource( 6 )
+
+[node name="CollisionShape2D" parent="SightBox" index="0"]
+shape = SubResource( 7 )

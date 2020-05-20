@@ -1,4 +1,4 @@
-extends "res://src/actors/enemies/EnemyBase.gd"
+extends "res://src/actors/enemies/demon/Demon.gd"
 
 onready var summonParticles = $SummonParticles
 

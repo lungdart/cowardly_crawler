@@ -584,4 +584,4 @@ position = Vector2( 528.025, 572.756 )
 [node name="Node2D" type="Node2D" parent="."]
 
 [node name="GreaterDemon" parent="Node2D" instance=ExtResource( 8 )]
-position = Vector2( 438.274, 310.743 )
+position = Vector2( 510.832, 474.344 )

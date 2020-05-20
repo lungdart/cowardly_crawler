@@ -22,20 +22,20 @@ shader_param/active = false
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ ExtResource( 9 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 5 ) ],
+"frames": [ ExtResource( 12 ) ],
 "loop": true,
-"name": "Idle",
-"speed": 10.0
+"name": "Hurt",
+"speed": 5.0
 }, {
 "frames": [ ExtResource( 4 ), ExtResource( 3 ), ExtResource( 2 ), ExtResource( 6 ) ],
 "loop": true,
 "name": "Move",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 12 ) ],
+"frames": [ ExtResource( 9 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 5 ) ],
 "loop": true,
-"name": "Hurt",
-"speed": 5.0
+"name": "Idle",
+"speed": 10.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=3]
@@ -152,7 +152,7 @@ material = SubResource( 1 )
 position = Vector2( 0, -4 )
 frames = SubResource( 2 )
 animation = "Idle"
-frame = 1
+frame = 3
 playing = true
 
 [node name="Boundry" type="CollisionShape2D" parent="."]
