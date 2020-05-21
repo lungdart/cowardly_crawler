@@ -15,15 +15,18 @@ var velocity = Vector2.ZERO
 var target_angle = 0
 var invincible = false
 
+onready var stageNode = get_tree().get_root().get_child(0)
+onready var UINode = stageNode.get_node("UI")
+onready var lifeNode = UINode.get_node("Life")
+onready var spellsNode = UINode.get_node("Spells")
 onready var sprite = $Sprite
 onready var shadowSprite = $Shadow
 onready var actionPlayer = $ActionPlayer
-onready var targetOrigin = $"Target Origin"
-onready var lifeUI = $UI/Life
+onready var targetOrigin = $TargetOrigin
 onready var iframesPlayer = $IframesPlayer
 onready var iframesTimer = $IframesTimer
-onready var deathParticles = $"Death Particles"
-onready var targetCursor = $"Target Origin"
+onready var deathParticles = $DeathParticles
+onready var targetCursor = $TargetOrigin
 
 onready var projectiles = {
 	"fireball": preload("res://src/particles/Fireball.tscn"),
@@ -35,9 +38,9 @@ onready var equipped_projectiles = [
 ]
 
 func _ready():
-	self.lifeUI.set_visible(true)
-	self.lifeUI.max_life = MAX_LIFE
-	self.lifeUI.current_life = CURRENT_LIFE
+	self.lifeNode.set_visible(true)
+	self.lifeNode.max_life = MAX_LIFE
+	self.lifeNode.current_life = CURRENT_LIFE
 	self.sprite.play("Idle")
 	self.state = IDLE
 
@@ -55,10 +58,10 @@ func _physics_process(delta):
 
 func _input(event):
 	if event.is_action_pressed("shoot1"):
-		shoot(0)
+		shoot("left")
 		
 	if event.is_action_pressed("shoot2"):
-		shoot(1)
+		shoot("right")
 
 
 func update_aim():
@@ -108,14 +111,24 @@ func get_input_vector():
 
 
 # Launch projectiles
-func shoot(id):
-	if id != 0 and id != 1:
+func shoot(side):
+	if not self.spellsNode.can_cast_spell(side):
+		# TODO: Animation indicating spell isn't ready (Player shake?)
+		return
+
+	var id = null
+	if side == "left":
+		id = 0
+	elif side == "right":
+		id = 1
+	else:
 		return
 	
 	var projectile = self.equipped_projectiles[id]
 	var instance = projectile.instance()
 	instance.init(global_position, get_global_mouse_position())
 	get_tree().get_root().add_child(instance)
+	self.spellsNode.cast_spell(side)
 
 
 # Register a hit on the player
@@ -123,10 +136,10 @@ func shoot(id):
 func _on_Hurtbox_area_entered(area):
 	# Only hurt outside of iframes
 	if not self.invincible:
-		self.lifeUI.current_life -= 1
+		self.lifeNode.current_life -= 1
 		
 		# Hurt animations unsed when not dead
-		if self.lifeUI.current_life > 0:
+		if self.lifeNode.current_life > 0:
 			self.sprite.stop()
 			self.iframesPlayer.play("Iframes Start")
 			self.actionPlayer.play("Hurt")
@@ -147,7 +160,6 @@ func _on_Hurtbox_area_entered(area):
 func _on_IframesTimer_timeout():
 	self.invincible = false
 	self.iframesPlayer.play("Iframes Stop")
-	
 
 
 func _on_ActionPlayer_animation_finished(anim_name):

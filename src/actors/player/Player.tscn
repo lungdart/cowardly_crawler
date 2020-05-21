@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://src/actors/player/Player.gd" type="Script" id=1]
 [ext_resource path="res://asset/frames/elf_m_run_anim_f2.png" type="Texture" id=2]
@@ -10,7 +10,6 @@
 [ext_resource path="res://asset/frames/elf_m_idle_anim_f2.png" type="Texture" id=8]
 [ext_resource path="res://asset/frames/elf_m_idle_anim_f0.png" type="Texture" id=9]
 [ext_resource path="res://asset/frames/wall_inner_corner_l_top_rigth.png" type="Texture" id=10]
-[ext_resource path="res://src/ui/Life.tscn" type="PackedScene" id=11]
 [ext_resource path="res://asset/frames/elf_m_hit_anim_f0.png" type="Texture" id=12]
 [ext_resource path="res://asset/frames/coin_anim_f3.png" type="Texture" id=13]
 [ext_resource path="res://src/shaders/flash_white.shader" type="Shader" id=14]
@@ -139,6 +138,8 @@ tracks/1/keys = {
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
 script = ExtResource( 1 )
+MAX_LIFE = 10
+CURRENT_LIFE = 10
 
 [node name="Shadow" type="Sprite" parent="."]
 modulate = Color( 0, 0, 0, 0.27451 )
@@ -152,7 +153,6 @@ material = SubResource( 1 )
 position = Vector2( 0, -4 )
 frames = SubResource( 2 )
 animation = "Idle"
-frame = 3
 playing = true
 
 [node name="Boundry" type="CollisionShape2D" parent="."]
@@ -171,9 +171,9 @@ collision_mask = 0
 position = Vector2( -0.166084, 3.65384 )
 shape = SubResource( 4 )
 
-[node name="Target Origin" type="Position2D" parent="."]
+[node name="TargetOrigin" type="Position2D" parent="."]
 
-[node name="TextureRect" type="TextureRect" parent="Target Origin"]
+[node name="TextureRect" type="TextureRect" parent="TargetOrigin"]
 margin_left = -16.0
 margin_bottom = 16.0
 rect_rotation = 135.0
@@ -183,20 +183,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Camera Origin" type="Position2D" parent="."]
+[node name="CameraOrigin" type="Position2D" parent="."]
 
-[node name="Camera" type="Camera2D" parent="Camera Origin"]
+[node name="Camera" type="Camera2D" parent="CameraOrigin"]
 current = true
 limit_left = -32
 limit_top = -32
 limit_right = 1056
 limit_bottom = 656
 smoothing_enabled = true
-
-[node name="UI" type="CanvasLayer" parent="."]
-
-[node name="Life" parent="UI" instance=ExtResource( 11 )]
-visible = false
 
 [node name="IframesPlayer" type="AnimationPlayer" parent="."]
 "anims/Iframes Start" = SubResource( 5 )
@@ -210,7 +205,7 @@ anims/Stand = SubResource( 8 )
 wait_time = 1.5
 one_shot = true
 
-[node name="Death Particles" parent="." instance=ExtResource( 15 )]
+[node name="DeathParticles" parent="." instance=ExtResource( 15 )]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="animation_finished" from="ActionPlayer" to="." method="_on_ActionPlayer_animation_finished"]
 [connection signal="timeout" from="IframesTimer" to="." method="_on_IframesTimer_timeout"]

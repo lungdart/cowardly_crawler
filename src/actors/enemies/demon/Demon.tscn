@@ -82,7 +82,7 @@ material = SubResource( 2 )
 position = Vector2( 0, -12 )
 frames = SubResource( 3 )
 animation = "Idle"
-frame = 1
+frame = 3
 
 [node name="DeathSprite" parent="." index="2"]
 visible = false

@@ -25,7 +25,9 @@ window/size/width=640
 window/size/height=480
 window/size/test_width=1280
 window/size/test_height=960
+mouse_cursor/custom_image="res://asset/ui/cursor.png"
 window/stretch/mode="2d"
+window/stretch/aspect="keep"
 
 [importer_defaults]
 
