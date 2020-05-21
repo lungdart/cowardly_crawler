@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://src/actors/player/Player.gd" type="Script" id=1]
 [ext_resource path="res://asset/frames/elf_m_run_anim_f2.png" type="Texture" id=2]
@@ -10,10 +10,19 @@
 [ext_resource path="res://asset/frames/elf_m_idle_anim_f2.png" type="Texture" id=8]
 [ext_resource path="res://asset/frames/elf_m_idle_anim_f0.png" type="Texture" id=9]
 [ext_resource path="res://asset/frames/wall_inner_corner_l_top_rigth.png" type="Texture" id=10]
+[ext_resource path="res://asset/frames/knight_m_idle_anim_f3.png" type="Texture" id=11]
 [ext_resource path="res://asset/frames/elf_m_hit_anim_f0.png" type="Texture" id=12]
 [ext_resource path="res://asset/frames/coin_anim_f3.png" type="Texture" id=13]
 [ext_resource path="res://src/shaders/flash_white.shader" type="Shader" id=14]
 [ext_resource path="res://src/particles/Death Particles.tscn" type="PackedScene" id=15]
+[ext_resource path="res://asset/frames/knight_m_hit_anim_f0.png" type="Texture" id=16]
+[ext_resource path="res://asset/frames/knight_m_run_anim_f2.png" type="Texture" id=17]
+[ext_resource path="res://asset/frames/knight_m_run_anim_f0.png" type="Texture" id=18]
+[ext_resource path="res://asset/frames/knight_m_run_anim_f3.png" type="Texture" id=19]
+[ext_resource path="res://asset/frames/knight_m_idle_anim_f2.png" type="Texture" id=20]
+[ext_resource path="res://asset/frames/knight_m_run_anim_f1.png" type="Texture" id=21]
+[ext_resource path="res://asset/frames/knight_m_idle_anim_f0.png" type="Texture" id=22]
+[ext_resource path="res://asset/frames/knight_m_idle_anim_f1.png" type="Texture" id=23]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 14 )
@@ -32,6 +41,24 @@ animations = [ {
 "speed": 10.0
 }, {
 "frames": [ ExtResource( 9 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "Idle",
+"speed": 10.0
+} ]
+
+[sub_resource type="SpriteFrames" id=9]
+animations = [ {
+"frames": [ ExtResource( 16 ) ],
+"loop": true,
+"name": "Hurt",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 18 ), ExtResource( 21 ), ExtResource( 17 ), ExtResource( 19 ) ],
+"loop": true,
+"name": "Move",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 22 ), ExtResource( 23 ), ExtResource( 20 ), ExtResource( 11 ) ],
 "loop": true,
 "name": "Idle",
 "speed": 10.0
@@ -152,6 +179,14 @@ texture = ExtResource( 13 )
 material = SubResource( 1 )
 position = Vector2( 0, -4 )
 frames = SubResource( 2 )
+animation = "Idle"
+frame = 3
+playing = true
+
+[node name="Armor" type="AnimatedSprite" parent="."]
+visible = false
+position = Vector2( 0, -4 )
+frames = SubResource( 9 )
 animation = "Idle"
 playing = true
 
