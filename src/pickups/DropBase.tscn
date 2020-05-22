@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/pickups/DropBase.gd" type="Script" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Fizzle"
+
+[node name="DropBase" type="StaticBody2D"]
+script = ExtResource( 2 )
+
+[node name="Icon" type="Sprite" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Fizzle = SubResource( 1 )
+
+[node name="Pickup" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pickup"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="body_entered" from="Pickup" to="." method="_on_Pickup_body_entered"]

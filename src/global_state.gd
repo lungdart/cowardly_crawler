@@ -11,6 +11,9 @@ var right_spell = null
 
 var armor = false
 
+func _ready():
+	randomize()
+
 func set_armor(true):
 	self.armor = true
 	self.player.set_armor(true)
@@ -19,3 +22,7 @@ func set_armor(true):
 func add_spell(spell_name, side):
 	self.spells.append(spell_name)
 	self.spellsUI.set_spell(side, spell_name)
+	
+func heal(value):
+	self.player.heal(value)
+	

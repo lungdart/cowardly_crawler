@@ -74,6 +74,9 @@ func update_aim():
 	self.targetOrigin.set_rotation(self.target_angle)
 
 
+func heal(value):
+	self.lifeNode.current_life += value
+
 # warning-ignore:unused_argument
 func idle_state(delta):
 	if get_input_vector() != Vector2.ZERO:
