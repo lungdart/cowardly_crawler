@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://asset/ui/player_frame.png" type="Texture" id=1]
 [ext_resource path="res://asset/ui/life_bar_cap.png" type="Texture" id=2]
 [ext_resource path="res://src/ui/Life.gd" type="Script" id=3]
 [ext_resource path="res://asset/ui/bar_empty.png" type="Texture" id=4]
 [ext_resource path="res://asset/ui/bar_red.png" type="Texture" id=5]
+[ext_resource path="res://asset/portraits/elf.png" type="Texture" id=6]
+[ext_resource path="res://asset/ui/player_frame_bg.png" type="Texture" id=7]
+[ext_resource path="res://asset/portraits/knight.png" type="Texture" id=8]
 
 [node name="Life" type="Control"]
 anchor_right = 1.0
@@ -13,6 +16,41 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="PortraitUnderlay" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="TextureRect" parent="PortraitUnderlay"]
+margin_left = 9.56936
+margin_top = 8.09715
+margin_right = 57.5694
+margin_bottom = 56.0972
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MainPortrait" type="TextureRect" parent="PortraitUnderlay"]
+margin_left = 8.0
+margin_top = 6.0
+margin_right = 56.0
+margin_bottom = 54.0
+texture = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ArmorPortrait" type="TextureRect" parent="PortraitUnderlay"]
+visible = false
+margin_left = 8.0
+margin_top = 6.0
+margin_right = 56.0
+margin_bottom = 54.0
+texture = ExtResource( 8 )
 
 [node name="Frame" type="TextureRect" parent="."]
 margin_right = 84.0
@@ -33,7 +71,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureProgress" type="TextureProgress" parent="."]
+[node name="LifeBar" type="TextureProgress" parent="."]
 margin_left = 84.0
 margin_top = 4.0
 margin_right = 184.0

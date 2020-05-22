@@ -24,11 +24,13 @@ onready var spell_list = {
 
 # Equipped spells and their states
 var left_spell = {
+	"name": null,
 	"spell": null,
 	"current_cooldown": 0.0,
 	"cooling": false
 }
 var right_spell = {
+	"name": null,
 	"spell": null,
 	"current_cooldown": 0.0,
 	"cooling": false
@@ -71,14 +73,28 @@ func set_spell(side, spell):
 		print("Bad spell name: ", spell)
 		return
 
+
 	if side == "left":
+		# Remove old instance of the spell to allow it to move correctly
+		if self.right_spell["name"] == spell:
+			print("Moving spell to the left")
+			set_empty("right")
+
 		self.leftEmptyIcon.set_visible(false)
+		self.left_spell["name"] = spell
 		self.left_spell["spell"] = self.spell_list[spell]
 		self.left_spell["spell"]["icon"].rect_position.x = 18
 		self.left_spell["spell"]["icon"].set_visible(true)
 		self.left_spell["spell"]["icon"].set_value(0)
+
 	elif side == "right":
+		# Remove old instance of the spell to allow it to move correctly
+		if self.left_spell["name"] == spell:
+			print("Moving spell to the right")
+			set_empty("left")
+
 		self.rightEmptyIcon.set_visible(false)
+		self.right_spell["name"] = spell
 		self.right_spell["spell"] = self.spell_list[spell]
 		self.right_spell["spell"]["icon"].rect_position.x = 106
 		self.right_spell["spell"]["icon"].set_visible(true)
@@ -92,7 +108,7 @@ func cast_spell(side, player_position):
 	elif side == "right":
 		spell = self.right_spell
 		
-	if spell and not spell["cooling"]:
+	if spell["spell"] and not spell["cooling"]:
 		spell["current_cooldown"] = spell["spell"]["cooldown"]
 		spell["cooling"] = true
 		emit_signal("instance_spell", spell["spell"]["scene"], player_position)

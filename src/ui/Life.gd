@@ -4,13 +4,18 @@ export var max_life = 10 setget set_max_life
 export var current_life = 10 setget set_current_life
 
 var initialized = false
+onready var mainPortrait = $PortraitUnderlay/MainPortrait
+onready var armorPortrait = $PortraitUnderlay/ArmorPortrait
 onready var lifeCap = $LifeCap
-onready var progressBar = $TextureProgress
+onready var progressBar = $LifeBar
 
 func _ready():
 	initialized = true
 	set_max_life(max_life)
 	set_current_life(current_life)
+	
+	self.mainPortrait.set_visible(true)
+	self.armorPortrait.set_visible(false)
 
 func set_max_life(value):
 	max_life = value
@@ -30,6 +35,9 @@ func get_cap_position(value):
 func get_bar_length(value):
 	return 4 + (value * 10)
 
+func set_armor(value):
+	self.mainPortrait.set_visible(not value)
+	self.armorPortrait.set_visible(value)
 
 func _on_Life_resized():
 	# Resize back to 1:1 scale regardless of window settings
