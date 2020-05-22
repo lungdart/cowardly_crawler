@@ -19,6 +19,10 @@ config/name="Game"
 run/main_scene="res://src/level/main level.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+GlobalState="*res://src/global_state.gd"
+
 [display]
 
 window/size/width=640

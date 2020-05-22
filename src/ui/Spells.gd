@@ -1,105 +1,120 @@
 extends Control
 
-onready var fireSpell = $Fire
-onready var iceSpell = $Ice
+signal instance_spell(scene, player_position)
 
-var left_spell = null
-var left_cooling = false
-var left_cooldown = 0.0
-var left_current_cooldown = 0.0
+# Empty spell icons
+onready var leftEmptyIcon = $LeftEmpty
+onready var rightEmptyIcon = $RightEmpty
 
-var right_spell = null
-var right_cooling = false
-var right_cooldown = 0.0
-var right_current_cooldown = 0.0
+# Spell lists
+onready var fire_spell = {
+	"icon": $Fire,
+	"scene": preload("res://src/particles/Fireball.tscn"),
+	"cooldown": 0.4
+}
+onready var ice_spell = {
+	"icon": $Ice,
+	"scene": preload("res://src/particles/Ice.tscn"),
+	"cooldown": 2.5
+}
+onready var spell_list = {
+	"fire": fire_spell,
+	"ice": ice_spell
+}
+
+# Equipped spells and their states
+var left_spell = {
+	"spell": null,
+	"current_cooldown": 0.0,
+	"cooling": false
+}
+var right_spell = {
+	"spell": null,
+	"current_cooldown": 0.0,
+	"cooling": false
+}
 
 
 func _ready():
-	set_fire("left")
-	set_cooldown("left", 0.4)
+	set_empty("left")
+	set_empty("right")
+	
+	if GlobalState.left_spell and self.spell_list.has(GlobalState.left_spell):
+		set_spell("left", GlobalState.left_spell)
+	if GlobalState.right_spell and self.spell_list.has(GlobalState.right_spell):
+		set_spell("right", GlobalState.right_spell)
 
-	set_ice("right")
-	set_cooldown("right", 2.5)
 
-
-func set_cooldown(side, value):
+func set_empty(side):
 	if side == "left":
-		self.left_cooling = false
-		self.left_cooldown = value
-		self.left_current_cooldown = 0.0
+		self.leftEmptyIcon.set_visible(true)
+		if self.left_spell:
+			if self.left_spell["spell"]:
+				self.left_spell["spell"]["icon"].set_visible(false)
+			self.left_spell["spell"] = null
+			self.left_spell["current_cooldown"] = 0.0
+			self.left_spell["cooling"] = false
+
 	elif side == "right":
-		self.right_cooling = false
-		self.right_cooldown = value
-		self.right_current_cooldown = 0.0
+		self.rightEmptyIcon.set_visible(true)
+		if self.right_spell:
+			if self.right_spell["spell"]:
+				self.right_spell["spell"]["icon"].set_visible(false)
+			self.right_spell["spell"] = null
+			self.right_spell["current_cooldown"] = 0.0
+			self.right_spell["cooling"] = false
 
 
-func set_fire(side):
-	if side != "left" and side != "right":
+func set_spell(side, spell):
+	# Sanity checks
+	if not self.spell_list.has(spell):
+		print("Bad spell name: ", spell)
 		return
 
 	if side == "left":
-		self.left_spell = self.fireSpell
-		print("Set fire to left: ", self.left_spell)
-		self.fireSpell.rect_position.x = 18
+		self.leftEmptyIcon.set_visible(false)
+		self.left_spell["spell"] = self.spell_list[spell]
+		self.left_spell["spell"]["icon"].rect_position.x = 18
+		self.left_spell["spell"]["icon"].set_visible(true)
+		self.left_spell["spell"]["icon"].set_value(0)
 	elif side == "right":
-		self.right_spell = self.fireSpell
-		self.fireSpell.rect_position.x = 106
+		self.rightEmptyIcon.set_visible(false)
+		self.right_spell["spell"] = self.spell_list[spell]
+		self.right_spell["spell"]["icon"].rect_position.x = 106
+		self.right_spell["spell"]["icon"].set_visible(true)
+		self.right_spell["spell"]["icon"].set_value(0)
 
-	self.fireSpell.set_visible(true)
-	self.fireSpell.set_value(0)
 
-
-func set_ice(side):
-	if side != "left" and side != "right":
-		return
-
+func cast_spell(side, player_position):
+	var spell = null
 	if side == "left":
-		self.left_spell = self.iceSpell
-		self.iceSpell.rect_position.x = 18
+		spell = self.left_spell
 	elif side == "right":
-		self.right_spell = self.iceSpell
-		self.iceSpell.rect_position.x = 106
-
-	self.iceSpell.set_visible(true)
-	self.iceSpell.set_value(0)
-
-
-func cast_spell(side):
-	if side == "left":
-		self.left_current_cooldown = self.left_cooldown
-		self.left_cooling = true
+		spell = self.right_spell
 		
-	elif side == "right":
-		self.right_current_cooldown = self.right_cooldown
-		self.right_cooling = true
+	if spell and not spell["cooling"]:
+		spell["current_cooldown"] = spell["spell"]["cooldown"]
+		spell["cooling"] = true
+		emit_signal("instance_spell", spell["spell"]["scene"], player_position)
 
 
 func can_cast_spell(side):
-	if side == "left":
-		return not self.left_cooling
-	
-	if side == "right":
-		return not self.right_cooling
+	if side == "left" and self.left_spell["spell"]:
+		return not self.left_spell["cooling"]
+	if side == "right" and self.right_spell["spell"]:
+		return not self.right_spell["cooling"]
 
 
 func _physics_process(delta):
 	# Operate the left side cooldown
-	if self.left_cooling:
-		self.left_current_cooldown -= delta
-		self.left_spell.value = int(self.left_current_cooldown / self.left_cooldown * 100)
-		if self.left_current_cooldown <= 0.0:
-			self.left_cooling = false
-			self.left_current_cooldown = 0.0
-			
-	# Operate the right side cooldown
-	if self.right_cooling:
-		self.right_current_cooldown -= delta
-		self.right_spell.value = int(self.right_current_cooldown / self.right_cooldown * 100)
-		if self.right_current_cooldown <= 0.0:
-			self.right_cooling = false
-			self.right_current_cooldown = 0.0
-	
-	
+	for spell in [self.left_spell, self.right_spell]:
+		if spell["cooling"]:
+			spell["current_cooldown"] -= delta
+			if spell["current_cooldown"] <= 0.0:
+				spell["cooling"] = false
+				spell["current_cooldown"] = 0.0
+			spell["spell"]["icon"].value = int(spell["current_cooldown"] / spell["spell"]["cooldown"] * 100)
+
 
 func _on_Spells_resized():
 	# Resize back to 1:1 scale regardless of window settings

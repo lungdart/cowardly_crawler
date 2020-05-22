@@ -1,10 +1,11 @@
-[gd_scene load_steps=67 format=2]
+[gd_scene load_steps=68 format=2]
 
 [ext_resource path="res://src/actors/player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://asset/0x72_DungeonTilesetII_v1.3.png" type="Texture" id=2]
 [ext_resource path="res://asset/frames/floor_1.png" type="Texture" id=3]
 [ext_resource path="res://src/ui/Life.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/ui/Spells.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/level/main level.gd" type="Script" id=6]
 [ext_resource path="res://src/actors/enemies/greater_demon/GreaterDemon.tscn" type="PackedScene" id=8]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
@@ -563,6 +564,7 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 12.1603, 16, 12.1603 )
 0/z_index = 0
 
 [node name="Level" type="Node2D"]
+script = ExtResource( 6 )
 
 [node name="TextureRect" type="TextureRect" parent="."]
 margin_right = 1027.0
@@ -586,7 +588,19 @@ tile_data = PoolIntArray( -1, 0, 458752, -65536, 0, 2, -65535, 0, 2, -65534, 0, 
 position = Vector2( 528.025, 572.756 )
 
 [node name="GreaterDemon" parent="Actors" instance=ExtResource( 8 )]
-position = Vector2( 546.664, 430.353 )
+position = Vector2( 200.444, 248.648 )
+
+[node name="GreaterDemon2" parent="Actors" instance=ExtResource( 8 )]
+position = Vector2( 190.622, 477.007 )
+
+[node name="GreaterDemon3" parent="Actors" instance=ExtResource( 8 )]
+position = Vector2( 793.438, 230.232 )
+
+[node name="GreaterDemon4" parent="Actors" instance=ExtResource( 8 )]
+position = Vector2( 809.399, 513.839 )
+
+[node name="GreaterDemon5" parent="Actors" instance=ExtResource( 8 )]
+position = Vector2( 533.159, 216.727 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -601,3 +615,4 @@ margin_left = 282.0
 margin_top = 444.0
 margin_right = 282.0
 margin_bottom = 444.0
+[connection signal="instance_spell" from="UI/Spells" to="." method="_on_Spells_instance_spell"]

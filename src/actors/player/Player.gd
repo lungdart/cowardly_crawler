@@ -15,7 +15,7 @@ var velocity = Vector2.ZERO
 var target_angle = 0
 var invincible = false
 
-onready var stageNode = get_tree().get_root().get_child(0)
+onready var stageNode = get_tree().get_root().get_child(1)
 onready var UINode = stageNode.get_node("UI")
 onready var lifeNode = UINode.get_node("Life")
 onready var spellsNode = UINode.get_node("Spells")
@@ -27,15 +27,6 @@ onready var iframesPlayer = $IframesPlayer
 onready var iframesTimer = $IframesTimer
 onready var deathParticles = $DeathParticles
 onready var targetCursor = $TargetOrigin
-
-onready var projectiles = {
-	"fireball": preload("res://src/particles/Fireball.tscn"),
-	"ice": preload("res://src/particles/Ice.tscn")
-}
-onready var equipped_projectiles = [
-	projectiles["fireball"],
-	projectiles["ice"]
-]
 
 func _ready():
 	self.lifeNode.set_visible(true)
@@ -58,10 +49,10 @@ func _physics_process(delta):
 
 func _input(event):
 	if event.is_action_pressed("shoot1"):
-		shoot("left")
+		self.spellsNode.cast_spell("left", global_position)
 		
 	if event.is_action_pressed("shoot2"):
-		shoot("right")
+		self.spellsNode.cast_spell("right", global_position)
 
 
 func update_aim():
@@ -108,28 +99,6 @@ func get_input_vector():
 	input_vector.x = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
 	input_vector.y = int(Input.is_action_pressed("move_down")) - int(Input.is_action_pressed("move_up"))
 	return input_vector.normalized()
-
-
-# Launch projectiles
-func shoot(side):
-	if not self.spellsNode.can_cast_spell(side):
-		# TODO: Animation indicating spell isn't ready (Player shake?)
-		return
-
-	var id = null
-	if side == "left":
-		id = 0
-	elif side == "right":
-		id = 1
-	else:
-		return
-	
-	var projectile = self.equipped_projectiles[id]
-	var instance = projectile.instance()
-	instance.init(global_position, get_global_mouse_position())
-	get_tree().get_root().add_child(instance)
-	self.spellsNode.cast_spell(side)
-
 
 # Register a hit on the player
 # warning-ignore:unused_argument
