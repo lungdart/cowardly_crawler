@@ -20,6 +20,7 @@ onready var UINode = stageNode.get_node("UI")
 onready var lifeNode = UINode.get_node("Life")
 onready var spellsNode = UINode.get_node("Spells")
 onready var sprite = $Sprite
+onready var armorSprite = $Armor
 onready var shadowSprite = $Shadow
 onready var actionPlayer = $ActionPlayer
 onready var targetOrigin = $TargetOrigin
@@ -33,7 +34,10 @@ func _ready():
 	self.lifeNode.max_life = MAX_LIFE
 	self.lifeNode.current_life = CURRENT_LIFE
 	self.sprite.play("Idle")
+	self.armorSprite.play("Idle")
 	self.state = IDLE
+	
+	set_armor(GlobalState.armor)
 
 
 func _physics_process(delta):
@@ -54,6 +58,16 @@ func _input(event):
 	if event.is_action_pressed("shoot2"):
 		self.spellsNode.cast_spell("right", global_position)
 
+
+func set_armor(value):
+	if value:
+		self.armorSprite.set_animation(self.sprite.animation)
+		self.sprite.set_visible(false)
+		self.armorSprite.set_visible(true)
+	else:
+		self.sprite.set_animation(self.armorSprite.animation)
+		self.sprite.set_visible(true)
+		self.armorSprite.set_visible(false)
 
 func update_aim():
 	self.target_angle = global_position.angle_to_point(get_global_mouse_position())
@@ -105,11 +119,16 @@ func get_input_vector():
 func _on_Hurtbox_area_entered(area):
 	# Only hurt outside of iframes
 	if not self.invincible:
-		self.lifeNode.current_life -= 1
+		self.lifeNode.hurt(1)
+		
+		if GlobalState.armor and self.lifeNode.current_armor <= 0:
+			# TODO: Broken armor animation
+			self.set_armor(false)
 		
 		# Hurt animations unsed when not dead
 		if self.lifeNode.current_life > 0:
 			self.sprite.stop()
+			self.armorSprite.stop()
 			self.iframesPlayer.play("Iframes Start")
 			self.actionPlayer.play("Hurt")
 			self.invincible = true

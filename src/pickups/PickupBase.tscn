@@ -1,0 +1,83 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://asset/item_cushion.png" type="Texture" id=2]
+[ext_resource path="res://src/pickups/PickupBase.gd" type="Script" id=3]
+
+[sub_resource type="Animation" id=3]
+resource_name = "Fizzle"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("FizzleParticles:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "Float"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Icon:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1.25, 1.25 ),
+"update": 0,
+"values": [ Vector2( 0, -7 ), Vector2( 0, -9 ) ]
+}
+
+[sub_resource type="Gradient" id=4]
+offsets = PoolRealArray( 0, 0.214022, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 0.376953, 0.376953, 0.376953, 1, 0, 0, 0, 0 )
+
+[node name="PickupBase" type="StaticBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource( 3 )
+
+[node name="Base" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="Icon" type="Sprite" parent="."]
+position = Vector2( 1, -6.94387 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="Pickup" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pickup"]
+position = Vector2( -1.27886, 0.426289 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Fizzle = SubResource( 3 )
+anims/Float = SubResource( 2 )
+
+[node name="FizzleParticles" type="CPUParticles2D" parent="."]
+position = Vector2( -0.230835, -3.53946 )
+emitting = false
+amount = 16
+lifetime = 1.25
+one_shot = true
+explosiveness = 1.0
+emission_shape = 1
+emission_sphere_radius = 4.0
+direction = Vector2( 0, -1 )
+gravity = Vector2( 0, 0 )
+initial_velocity = 10.0
+angular_velocity = 300.0
+angular_velocity_random = 1.0
+linear_accel = 10.0
+color_ramp = SubResource( 4 )
+[connection signal="body_entered" from="Pickup" to="." method="_on_Pickup_body_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

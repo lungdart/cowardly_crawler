@@ -2,16 +2,11 @@
 Another attempt at a game in Godot
 
 ## TODO
-* Revamp spell system to support
-  * Empty spell slots
-  * Spell pickups (Treasure chests)
-  * A few more spells
+* Spell system
+  * Add a few more spells
 
 * Armor system
-  * Armor sprite
-  * Armor pickup
-  * Armor health UI
-  * Armor destruction animation
+  * Destruction animation
 
 * Enemys
   * Drop health pickups (Doesn't repair armor)
@@ -37,9 +32,6 @@ Another attempt at a game in Godot
   * Add background music
   * Add Menu sound effects
   * Add in game sound effects
-
-* Lighting
-  * Add lightning effects for creepier dungeon feel
 
 * Level design
   * Additional tile sets

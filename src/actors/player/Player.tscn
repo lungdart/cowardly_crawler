@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://src/actors/player/Player.gd" type="Script" id=1]
 [ext_resource path="res://asset/frames/elf_m_run_anim_f2.png" type="Texture" id=2]
@@ -46,7 +46,12 @@ animations = [ {
 "speed": 10.0
 } ]
 
-[sub_resource type="SpriteFrames" id=9]
+[sub_resource type="ShaderMaterial" id=3]
+resource_local_to_scene = true
+shader = ExtResource( 14 )
+shader_param/active = false
+
+[sub_resource type="SpriteFrames" id=4]
 animations = [ {
 "frames": [ ExtResource( 16 ) ],
 "loop": true,
@@ -64,16 +69,15 @@ animations = [ {
 "speed": 10.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=3]
+[sub_resource type="CapsuleShape2D" id=5]
 radius = 3.136
 height = 6.09812
 
-[sub_resource type="CapsuleShape2D" id=4]
+[sub_resource type="CapsuleShape2D" id=6]
 radius = 5.0331
 height = 3.07029
 
-[sub_resource type="Animation" id=5]
-resource_name = "Iframes Start"
+[sub_resource type="Animation" id=7]
 length = 0.1
 loop = true
 step = 0.05
@@ -89,9 +93,20 @@ tracks/0/keys = {
 "update": 1,
 "values": [ true, false ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("Armor:material:shader_param/active")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
 
-[sub_resource type="Animation" id=6]
-resource_name = "Iframes Stop"
+[sub_resource type="Animation" id=8]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:material:shader_param/active")
@@ -105,9 +120,20 @@ tracks/0/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("Armor:material:shader_param/active")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
-[sub_resource type="Animation" id=7]
-resource_name = "Hurt"
+[sub_resource type="Animation" id=9]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:animation")
@@ -129,13 +155,36 @@ tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 0.392292, 4.28709 ),
+"transitions": PoolRealArray( 1, 0.4, 4.3 ),
+"update": 0,
+"values": [ Vector2( 0, -4 ), Vector2( 0, -16 ), Vector2( 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Armor:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "Hurt" ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Armor:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 0.4, 4.3 ),
 "update": 0,
 "values": [ Vector2( 0, -4 ), Vector2( 0, -16 ), Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=8]
-resource_name = "Stand"
+[sub_resource type="Animation" id=10]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:position")
@@ -161,6 +210,30 @@ tracks/1/keys = {
 "update": 1,
 "values": [ "Idle" ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("Armor:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "Idle" ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Armor:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -4 ) ]
+}
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
@@ -180,21 +253,22 @@ material = SubResource( 1 )
 position = Vector2( 0, -4 )
 frames = SubResource( 2 )
 animation = "Idle"
-frame = 3
+frame = 2
 playing = true
 
 [node name="Armor" type="AnimatedSprite" parent="."]
 visible = false
+material = SubResource( 3 )
 position = Vector2( 0, -4 )
-frames = SubResource( 9 )
-animation = "Idle"
+frames = SubResource( 4 )
+animation = "Hurt"
 playing = true
 
 [node name="Boundry" type="CollisionShape2D" parent="."]
 visible = false
 position = Vector2( -0.486858, 7.15848 )
 rotation = 1.5708
-shape = SubResource( 3 )
+shape = SubResource( 5 )
 
 [node name="Hurtbox" type="Area2D" parent="."]
 visible = false
@@ -204,7 +278,7 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2( -0.166084, 3.65384 )
-shape = SubResource( 4 )
+shape = SubResource( 6 )
 
 [node name="TargetOrigin" type="Position2D" parent="."]
 
@@ -229,12 +303,12 @@ limit_bottom = 656
 smoothing_enabled = true
 
 [node name="IframesPlayer" type="AnimationPlayer" parent="."]
-"anims/Iframes Start" = SubResource( 5 )
-"anims/Iframes Stop" = SubResource( 6 )
+"anims/Iframes Start" = SubResource( 7 )
+"anims/Iframes Stop" = SubResource( 8 )
 
 [node name="ActionPlayer" type="AnimationPlayer" parent="."]
-anims/Hurt = SubResource( 7 )
-anims/Stand = SubResource( 8 )
+anims/Hurt = SubResource( 9 )
+anims/Stand = SubResource( 10 )
 
 [node name="IframesTimer" type="Timer" parent="."]
 wait_time = 1.5
