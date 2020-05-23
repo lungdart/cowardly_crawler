@@ -246,7 +246,6 @@ colors = PoolColorArray( 0.855469, 0.855469, 0.855469, 1, 0.580392, 0.580392, 0.
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
 script = ExtResource( 1 )
-FRICTION = 1000
 MAX_LIFE = 10
 CURRENT_LIFE = 10
 
@@ -262,7 +261,6 @@ material = SubResource( 1 )
 position = Vector2( 0, -4 )
 frames = SubResource( 2 )
 animation = "Move"
-frame = 2
 playing = true
 
 [node name="Armor" type="AnimatedSprite" parent="."]

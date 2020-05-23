@@ -3,7 +3,7 @@ extends KinematicBody2D
 enum { IDLE, MOVE, DASH, DEAD }
 
 export var ACCELERATION = 500
-export var FRICTION = 500
+export var FRICTION = 1000
 export var MAX_SPEED = 150
 export var DASH_ACCELERATION = 1000
 export var DASH_FRICTION = 2000
