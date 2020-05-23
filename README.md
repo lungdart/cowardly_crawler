@@ -3,13 +3,13 @@ Another attempt at a game in Godot
 
 ## TODO
 * Spell system
-  * Add a few more spells
+  * Wind pushback spell for right click
+  * Wide spread hurt spell that fizzles after the first hit
 
 * Armor system
   * Destruction animation
 
 * Enemys
-  * Drop health pickups (Doesn't repair armor)
   * More enemies
     * Melee attacks?
     * Throwing arcs?
