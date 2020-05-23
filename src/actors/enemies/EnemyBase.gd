@@ -1,5 +1,6 @@
 extends KinematicBody2D
 
+
 enum { IDLE, MOVE, CAST, DIE }
 signal enemy_killed
 
@@ -108,6 +109,8 @@ func set_die_state():
 	self.hitBox.set_deferred("monitorable", false)
 	self.animationPlayer.play("Death")
 	emit_signal("enemy_killed", self)
+	
+	GlobalState.drop(global_position)
 
 # Choose a new state when finished idling
 func do_idle_state(delta):

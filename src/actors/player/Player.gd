@@ -76,7 +76,7 @@ func _physics_process(delta):
 
 
 func _input(event):
-	if event.is_action_pressed("dash"):
+	if event.is_action_pressed("dash") and GlobalState.dash:
 		if self.state == MOVE:
 			start_dash()
 			self.state = DASH

@@ -7,7 +7,7 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 15.9788
 
-[node name="DropHealth" instance=ExtResource( 2 )]
+[node name="DropMeat" instance=ExtResource( 2 )]
 script = ExtResource( 3 )
 
 [node name="Icon" parent="." index="0"]

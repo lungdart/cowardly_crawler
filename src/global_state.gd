@@ -1,5 +1,8 @@
 extends Node
 
+const MEAT_DROP = preload("res://src/pickups/DropMeat.tscn")
+const FOOD_DROP = preload("res://src/pickups/DropFood.tscn")
+
 var player = null
 var level = null
 var lifeUI = null
@@ -9,10 +12,14 @@ var spells = []
 var left_spell = null
 var right_spell = null
 
+var dash = false
 var armor = false
 
 func _ready():
 	randomize()
+
+func add_dash():
+	self.dash = true
 
 func set_armor(value):
 	if value:
@@ -30,4 +37,13 @@ func add_spell(spell_name, side):
 	
 func heal(value):
 	self.player.heal(value)
-	
+
+func drop(position):
+	var chance = randi() % 100
+	if chance >= (100 - 5):
+		var instance = MEAT_DROP.instance()
+		self.level.add_drop(instance, position)
+
+	elif chance >= (95 - 25):
+		var instance = FOOD_DROP.instance()
+		self.level.add_drop(instance, position)
