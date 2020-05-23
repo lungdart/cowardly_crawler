@@ -14,10 +14,15 @@ var armor = false
 func _ready():
 	randomize()
 
-func set_armor(true):
-	self.armor = true
-	self.player.set_armor(true)
-	self.lifeUI.set_armor(true)
+func set_armor(value):
+	if value:
+		self.armor = true
+		self.lifeUI.set_armor(true)
+		self.player.equip_armor()
+	else:
+		self.armor = false
+		self.lifeUI.set_armor(false)
+		self.player.unequip_armor()
 
 func add_spell(spell_name, side):
 	self.spells.append(spell_name)

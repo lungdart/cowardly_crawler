@@ -1,10 +1,16 @@
 extends KinematicBody2D
 
-enum { IDLE, MOVE, DEAD }
+enum { IDLE, MOVE, DASH, DEAD }
 
-export var ACCELERATION = 1000
-export var FRICTION = 1500
-export var MAX_SPEED = 300
+export var ACCELERATION = 500
+export var FRICTION = 500
+export var MAX_SPEED = 150
+export var DASH_ACCELERATION = 1000
+export var DASH_FRICTION = 2000
+export var DASH_MAX_SPEED = 500
+export var ARMOR_SPEED_MOD = 0.75
+export var ARMOR_ACCELERATION_MOD = 0.5
+export var ARMOR_FRICTION_MOD = 2.0
 export var MAX_LIFE = 3
 export var CURRENT_LIFE = 3
 export var IFRAMES = 1.5
@@ -14,6 +20,9 @@ var direction = Vector2.DOWN
 var velocity = Vector2.ZERO
 var target_angle = 0
 var invincible = false
+var speed_mod = 1.0
+var acceleration_mod = 1.0
+var friction_mod = 1.0
 
 onready var stageNode = get_tree().get_root().get_child(1)
 onready var UINode = stageNode.get_node("UI")
@@ -22,14 +31,24 @@ onready var spellsNode = UINode.get_node("Spells")
 onready var sprite = $Sprite
 onready var armorSprite = $Armor
 onready var shadowSprite = $Shadow
+onready var dashSprite = $DashPivot/ShockWave
+onready var dashTimer = $DashTimer
+onready var dashParticlePivot = $DashPivot
+onready var dashParticles = $DashPivot/DashParticles
+onready var dashHitBox = $HitBox/CollisionShape2D
 onready var actionPlayer = $ActionPlayer
 onready var targetOrigin = $TargetOrigin
 onready var iframesPlayer = $IframesPlayer
 onready var iframesTimer = $IframesTimer
+
 onready var deathParticles = $DeathParticles
 onready var targetCursor = $TargetOrigin
 
 func _ready():
+	self.dashParticles.set_emitting(false)
+	self.deathParticles.set_emitting(false)
+	self.dashHitBox.set_disabled(true)
+	self.dashSprite.set_visible(false)
 	self.lifeNode.set_visible(true)
 	self.lifeNode.max_life = MAX_LIFE
 	self.lifeNode.current_life = CURRENT_LIFE
@@ -37,7 +56,10 @@ func _ready():
 	self.armorSprite.play("Idle")
 	self.state = IDLE
 	
-	set_armor(GlobalState.armor)
+	if GlobalState.armor:
+		equip_armor()
+	else:
+		unequip_armor()
 
 
 func _physics_process(delta):
@@ -46,12 +68,19 @@ func _physics_process(delta):
 			self.idle_state(delta)
 		MOVE:
 			self.move_state(delta)
+		DASH:
+			self.dash_state(delta)
 		DEAD:
 			return
 	update_aim()
 
 
 func _input(event):
+	if event.is_action_pressed("dash"):
+		if self.state == MOVE:
+			start_dash()
+			self.state = DASH
+
 	if event.is_action_pressed("shoot1"):
 		self.spellsNode.cast_spell("left", global_position)
 		
@@ -59,15 +88,37 @@ func _input(event):
 		self.spellsNode.cast_spell("right", global_position)
 
 
-func set_armor(value):
-	if value:
-		self.armorSprite.set_animation(self.sprite.animation)
-		self.sprite.set_visible(false)
-		self.armorSprite.set_visible(true)
-	else:
-		self.sprite.set_animation(self.armorSprite.animation)
-		self.sprite.set_visible(true)
-		self.armorSprite.set_visible(false)
+func equip_armor():
+	self.speed_mod *= ARMOR_SPEED_MOD
+	self.acceleration_mod *= ARMOR_ACCELERATION_MOD
+	self.friction_mod *= ARMOR_FRICTION_MOD
+
+	self.armorSprite.set_animation(self.sprite.animation)
+	self.sprite.set_visible(false)
+	self.armorSprite.set_visible(true)
+
+func unequip_armor():
+	self.speed_mod /= ARMOR_SPEED_MOD
+	self.acceleration_mod /= ARMOR_ACCELERATION_MOD
+	self.friction_mod /= ARMOR_FRICTION_MOD
+
+	self.sprite.set_animation(self.armorSprite.animation)
+	self.sprite.set_visible(true)
+	self.armorSprite.set_visible(false)
+	
+func start_dash():
+	self.dashTimer.start()
+	self.dashHitBox.set_disabled(false)
+	self.dashSprite.set_visible(true)
+	self.dashParticles.set_emitting(true)
+	self.dashParticlePivot.set_rotation(self.direction.angle() + PI)
+	self.invincible = true
+	
+func stop_dash():
+	self.dashHitBox.set_disabled(true)
+	self.dashSprite.set_visible(false)
+	self.dashParticles.set_emitting(false)
+	self.invincible = false
 
 func update_aim():
 	self.target_angle = global_position.angle_to_point(get_global_mouse_position())
@@ -85,32 +136,60 @@ func idle_state(delta):
 
 
 func move_state(delta):
-	# Set direction
-	var input_vector = get_input_vector()
-	if input_vector.x < 0:
-		self.sprite.set_flip_h(true)
-	if input_vector.x > 0:
-		self.sprite.set_flip_h(false)
+	# Continously update movement direction
+	set_direction()
 		
 	# Return to idle when movement stopped
-	if input_vector == Vector2.ZERO and self.velocity == Vector2.ZERO:
+	if self.direction == Vector2.ZERO and self.velocity == Vector2.ZERO:
 		self.state = IDLE
 		self.sprite.set_animation("Idle")
 		return
 	
 	# Slow down when input released
-	if input_vector == Vector2.ZERO and self.velocity != Vector2.ZERO:
-		self.velocity = self.velocity.move_toward(Vector2.ZERO, FRICTION * delta)
+	if self.direction == Vector2.ZERO and self.velocity != Vector2.ZERO:
+		var friction = FRICTION * self.friction_mod
+		self.velocity = self.velocity.move_toward(Vector2.ZERO, friction * delta)
 	
 	# Speed up to max speed when input is held
-	elif input_vector != Vector2.ZERO:
-		self.velocity = self.velocity.move_toward(input_vector * MAX_SPEED, ACCELERATION * delta)
+	elif self.direction != Vector2.ZERO:
+		var max_speed = MAX_SPEED * self.speed_mod
+		var acceleration = ACCELERATION * self.acceleration_mod
+		self.velocity = self.velocity.move_toward(self.direction * max_speed, acceleration * delta)
 	
 	# Update player position
 	self.velocity = move_and_slide(self.velocity)
 
+func dash_state(delta):
+	# Slow down to regular max speed after dashing
+	var original_max_speed = MAX_SPEED * self.speed_mod
+	var dash_friction = DASH_FRICTION * self.friction_mod
+	if self.dashTimer.is_stopped() and self.velocity.length() > original_max_speed:
+		stop_dash()
+		self.velocity = self.velocity.move_toward(Vector2.ZERO, dash_friction * delta)
+		
+	# Once back to speed, go back to move state
+	elif self.dashTimer.is_stopped():
+		stop_dash()
+		self.state = MOVE
+		return
 
-# Calculates unit vector from player input
+	# Dash at a higher speed in a single direction
+	else:
+		var dash_max_speed = DASH_MAX_SPEED * self.speed_mod
+		var dash_acceleration = DASH_ACCELERATION * self.acceleration_mod
+		self.velocity = self.velocity.move_toward(self.direction * dash_max_speed, dash_acceleration * delta)
+	
+	self.velocity = move_and_slide(self.velocity)
+
+func set_direction():
+	self.direction = get_input_vector()
+	if self.direction.x < 0:
+		self.sprite.set_flip_h(true)
+		self.armorSprite.set_flip_h(true)
+	if self.direction.x > 0:
+		self.sprite.set_flip_h(false)
+		self.armorSprite.set_flip_h(false)
+
 func get_input_vector():
 	var input_vector = Vector2.ZERO
 	input_vector.x = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
@@ -126,7 +205,7 @@ func _on_Hurtbox_area_entered(area):
 		
 		if GlobalState.armor and self.lifeNode.current_armor <= 0:
 			# TODO: Broken armor animation
-			self.set_armor(false)
+			self.unequip_armor()
 		
 		# Hurt animations unsed when not dead
 		if self.lifeNode.current_life > 0:

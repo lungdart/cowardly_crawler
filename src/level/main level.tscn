@@ -7,7 +7,7 @@
 [ext_resource path="res://src/ui/Spells.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/level/main level.gd" type="Script" id=6]
 [ext_resource path="res://src/pickups/PickupArmor.tscn" type="PackedScene" id=7]
-[ext_resource path="res://src/actors/enemies/greater_demon/GreaterDemon.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/actors/enemies/shaman/Shaman.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/pickups/PickupIce.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/pickups/PickupFire.tscn" type="PackedScene" id=10]
 
@@ -601,20 +601,8 @@ position = Vector2( 662.976, 558.619 )
 [node name="Player" parent="Actors" instance=ExtResource( 1 )]
 position = Vector2( 528.025, 572.756 )
 
-[node name="GreaterDemon" parent="Actors" instance=ExtResource( 8 )]
-position = Vector2( 200.444, 248.648 )
-
-[node name="GreaterDemon2" parent="Actors" instance=ExtResource( 8 )]
-position = Vector2( 190.622, 477.007 )
-
-[node name="GreaterDemon3" parent="Actors" instance=ExtResource( 8 )]
-position = Vector2( 793.438, 230.232 )
-
-[node name="GreaterDemon4" parent="Actors" instance=ExtResource( 8 )]
-position = Vector2( 809.399, 513.839 )
-
-[node name="GreaterDemon5" parent="Actors" instance=ExtResource( 8 )]
-position = Vector2( 533.159, 216.727 )
+[node name="Shaman" parent="Actors" instance=ExtResource( 8 )]
+position = Vector2( 523.015, 450.578 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 
