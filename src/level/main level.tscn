@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=2]
+[gd_scene load_steps=76 format=2]
 
 [ext_resource path="res://src/actors/player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://asset/0x72_DungeonTilesetII_v1.3.png" type="Texture" id=2]
@@ -13,6 +13,8 @@
 [ext_resource path="res://src/pickups/PickupDash.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/actors/enemies/greater_demon/GreaterDemon.tscn" type="PackedScene" id=12]
 [ext_resource path="res://src/ui/Pause.tscn" type="PackedScene" id=13]
+[ext_resource path="res://src/actors/enemies/big_zombie/BigZombie.tscn" type="PackedScene" id=14]
+[ext_resource path="res://src/actors/enemies/necromancer/Necromancer.tscn" type="PackedScene" id=15]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -591,16 +593,16 @@ tile_data = PoolIntArray( -1, 0, 458752, -65536, 0, 2, -65535, 0, 2, -65534, 0, 
 [node name="Pickups" type="Node2D" parent="."]
 
 [node name="PickupArmor" parent="Pickups" instance=ExtResource( 7 )]
-position = Vector2( 369.548, 363.409 )
+position = Vector2( 495.983, 120.83 )
 
 [node name="PickupFire" parent="Pickups" instance=ExtResource( 10 )]
-position = Vector2( 399.013, 561.074 )
+position = Vector2( 224.062, 485.36 )
 
 [node name="PickupIce" parent="Pickups" instance=ExtResource( 9 )]
-position = Vector2( 662.976, 558.619 )
+position = Vector2( 788.676, 507.163 )
 
 [node name="PickupDash" parent="Pickups" instance=ExtResource( 11 )]
-position = Vector2( 647.016, 368.32 )
+position = Vector2( 526.461, 526.364 )
 
 [node name="Actors" type="Node2D" parent="."]
 
@@ -608,19 +610,55 @@ position = Vector2( 647.016, 368.32 )
 position = Vector2( 528.025, 572.756 )
 
 [node name="Shaman" parent="Actors" instance=ExtResource( 8 )]
-position = Vector2( 523.015, 450.578 )
+position = Vector2( 369.381, 328.553 )
 
 [node name="Shaman2" parent="Actors" instance=ExtResource( 8 )]
-position = Vector2( 482.499, 435.845 )
+position = Vector2( 650.834, 332.933 )
 
 [node name="Shaman3" parent="Actors" instance=ExtResource( 8 )]
-position = Vector2( 558.619, 384.281 )
+position = Vector2( 371.171, 567.318 )
 
 [node name="Shaman4" parent="Actors" instance=ExtResource( 8 )]
-position = Vector2( 478.816, 370.776 )
+position = Vector2( 689.051, 555.283 )
 
 [node name="GreaterDemon" parent="Actors" instance=ExtResource( 12 )]
-position = Vector2( 550.025, 494.777 )
+position = Vector2( 242.023, 222.794 )
+
+[node name="GreaterDemon3" parent="Actors" instance=ExtResource( 12 )]
+position = Vector2( 160.428, 541.823 )
+
+[node name="GreaterDemon4" parent="Actors" instance=ExtResource( 12 )]
+position = Vector2( 911.689, 516.095 )
+
+[node name="GreaterDemon5" parent="Actors" instance=ExtResource( 12 )]
+position = Vector2( 493.423, 183.099 )
+
+[node name="GreaterDemon2" parent="Actors" instance=ExtResource( 12 )]
+position = Vector2( 778.459, 255.811 )
+
+[node name="Necromancer" parent="Actors" instance=ExtResource( 15 )]
+position = Vector2( 99.237, 383.716 )
+
+[node name="Necromancer2" parent="Actors" instance=ExtResource( 15 )]
+position = Vector2( 893.868, 348.432 )
+
+[node name="Necromancer3" parent="Actors" instance=ExtResource( 15 )]
+position = Vector2( 350.637, 144.077 )
+
+[node name="Necromancer4" parent="Actors" instance=ExtResource( 15 )]
+position = Vector2( 661.58, 154.369 )
+
+[node name="BigZombie" parent="Actors" instance=ExtResource( 14 )]
+position = Vector2( 91.151, 183.772 )
+
+[node name="BigZombie2" parent="Actors" instance=ExtResource( 14 )]
+position = Vector2( 185.242, 113.204 )
+
+[node name="BigZombie3" parent="Actors" instance=ExtResource( 14 )]
+position = Vector2( 807.127, 110.263 )
+
+[node name="BigZombie4" parent="Actors" instance=ExtResource( 14 )]
+position = Vector2( 944.589, 242.579 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 
