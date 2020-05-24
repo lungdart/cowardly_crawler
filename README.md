@@ -2,18 +2,6 @@
 Another attempt at a game in Godot
 
 ## TODO
-* Spell system
-  * Wind pushback spell for right click
-  * Wide spread hurt spell that fizzles after the first hit
-
-* Armor system
-  * Destruction animation
-
-* Enemys
-  * More enemies
-    * Melee attacks?
-    * Throwing arcs?
-
 * Menus
   * Start game
     * High kill count
@@ -31,7 +19,6 @@ Another attempt at a game in Godot
 * Sounds
   * Add background music
   * Add Menu sound effects
-  * Add in game sound effects
 
 * Level design
   * Additional tile sets
