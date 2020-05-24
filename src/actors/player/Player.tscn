@@ -392,6 +392,7 @@ texture = ExtResource( 13 )
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 material = SubResource( 1 )
+position = Vector2( 0, -4 )
 frames = SubResource( 2 )
 animation = "Hurt"
 playing = true
@@ -399,6 +400,7 @@ playing = true
 [node name="Armor" type="AnimatedSprite" parent="."]
 visible = false
 material = SubResource( 3 )
+position = Vector2( 0, -4 )
 frames = SubResource( 4 )
 animation = "Hurt"
 playing = true

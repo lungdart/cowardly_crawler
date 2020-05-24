@@ -89,6 +89,7 @@ func _input(event):
 
 
 func equip_armor():
+	GlobalState.armor = true
 	self.speed_mod *= ARMOR_SPEED_MOD
 	self.acceleration_mod *= ARMOR_ACCELERATION_MOD
 	self.friction_mod *= ARMOR_FRICTION_MOD
@@ -98,6 +99,7 @@ func equip_armor():
 	self.armorSprite.set_visible(true)
 
 func unequip_armor():
+	GlobalState.armor = false
 	self.speed_mod /= ARMOR_SPEED_MOD
 	self.acceleration_mod /= ARMOR_ACCELERATION_MOD
 	self.friction_mod /= ARMOR_FRICTION_MOD
@@ -125,6 +127,7 @@ func heal(value):
 func idle_state(delta):
 	if get_input_vector() != Vector2.ZERO:
 		self.sprite.set_animation("Move")
+		self.armorSprite.set_animation("Move")
 		self.state = MOVE
 
 
@@ -136,6 +139,7 @@ func move_state(delta):
 	if self.direction == Vector2.ZERO and self.velocity == Vector2.ZERO:
 		self.state = IDLE
 		self.sprite.set_animation("Idle")
+		self.armorSprite.set_animation("Idle")
 		return
 	
 	# Slow down when input released
