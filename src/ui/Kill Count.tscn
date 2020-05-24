@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/ui/Kill Count.gd" type="Script" id=1]
+
+[node name="Kills" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="RichTextLabel" parent="."]
+margin_right = 70.0
+margin_bottom = 16.0
+text = "Kill Count:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Count" type="RichTextLabel" parent="."]
+margin_left = 70.0
+margin_right = 326.0
+margin_bottom = 16.0
+grow_horizontal = 0
+text = "0
+"

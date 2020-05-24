@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 
 enum { IDLE, MOVE, CAST, DIE }
-signal enemy_killed
+signal enemy_killed()
 
 export var ACCELERATION = 800
 export var FRICTION = 1200
@@ -108,7 +108,7 @@ func set_die_state():
 	self.deathSprite.set_visible(true)
 	self.hitBox.set_deferred("monitorable", false)
 	self.animationPlayer.play("Death")
-	emit_signal("enemy_killed", self)
+	emit_signal("enemy_killed")
 	
 	GlobalState.drop(global_position)
 

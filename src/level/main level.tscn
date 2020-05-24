@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=2]
+[gd_scene load_steps=74 format=2]
 
 [ext_resource path="res://src/actors/player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://asset/0x72_DungeonTilesetII_v1.3.png" type="Texture" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://src/pickups/PickupFire.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/pickups/PickupDash.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/actors/enemies/greater_demon/GreaterDemon.tscn" type="PackedScene" id=12]
+[ext_resource path="res://src/ui/Pause.tscn" type="PackedScene" id=13]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -634,4 +635,6 @@ margin_left = 282.0
 margin_top = 444.0
 margin_right = 282.0
 margin_bottom = 444.0
+
+[node name="Pause" parent="UI" instance=ExtResource( 13 )]
 [connection signal="instance_spell" from="UI/Spells" to="." method="_on_Spells_instance_spell"]

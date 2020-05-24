@@ -1,0 +1,156 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://asset/ui/ice.png" type="Texture" id=1]
+[ext_resource path="res://asset/ui/fireball.png" type="Texture" id=2]
+[ext_resource path="res://asset/pickups/A_Armor04.png" type="Texture" id=3]
+[ext_resource path="res://asset/pickups/A_Shoes07.png" type="Texture" id=4]
+[ext_resource path="res://src/ui/Pause.gd" type="Script" id=5]
+
+[node name="Pause" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -0.902496
+margin_top = 0.902466
+margin_right = -0.902466
+margin_bottom = 0.902466
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PopupMenu" type="PopupMenu" parent="."]
+margin_right = 401.0
+margin_bottom = 226.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="RichTextLabel" parent="PopupMenu"]
+margin_left = 172.688
+margin_top = 5.67224
+margin_right = 262.688
+margin_bottom = 25.6722
+text = "Paused"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quit" type="Button" parent="PopupMenu"]
+margin_left = 152.382
+margin_top = 186.424
+margin_right = 252.382
+margin_bottom = 206.424
+text = "Save and Quit"
+
+[node name="Close" type="Button" parent="PopupMenu"]
+margin_left = 153.462
+margin_top = 164.269
+margin_right = 247.462
+margin_bottom = 184.269
+text = "Continue"
+
+[node name="Items" type="Control" parent="PopupMenu"]
+margin_left = 2.0
+margin_top = 23.0
+margin_right = 253.0
+margin_bottom = 101.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="RichTextLabel" parent="PopupMenu/Items"]
+margin_left = 10.5043
+margin_top = 12.0
+margin_right = 239.504
+margin_bottom = 30.0
+text = "Spells and Items"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Icons" type="GridContainer" parent="PopupMenu/Items"]
+margin_left = 21.7952
+margin_top = 32.5084
+margin_right = 237.795
+margin_bottom = 72.5084
+columns = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Fire" type="TextureRect" parent="PopupMenu/Items/Icons"]
+margin_right = 32.0
+margin_bottom = 34.0
+texture = ExtResource( 2 )
+
+[node name="Spell2" type="TextureRect" parent="PopupMenu/Items/Icons"]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 34.0
+texture = ExtResource( 2 )
+
+[node name="Ice" type="TextureRect" parent="PopupMenu/Items/Icons"]
+margin_left = 72.0
+margin_right = 104.0
+margin_bottom = 34.0
+texture = ExtResource( 1 )
+
+[node name="Wind" type="TextureRect" parent="PopupMenu/Items/Icons"]
+margin_left = 108.0
+margin_right = 140.0
+margin_bottom = 34.0
+texture = ExtResource( 1 )
+
+[node name="Dash" type="TextureRect" parent="PopupMenu/Items/Icons"]
+margin_left = 144.0
+margin_right = 178.0
+margin_bottom = 34.0
+texture = ExtResource( 4 )
+
+[node name="Armor" type="TextureRect" parent="PopupMenu/Items/Icons"]
+margin_left = 182.0
+margin_right = 216.0
+margin_bottom = 34.0
+texture = ExtResource( 3 )
+
+[node name="Kills" type="Control" parent="PopupMenu"]
+margin_left = 9.45375
+margin_top = 93.2769
+margin_right = 159.454
+margin_bottom = 135.277
+
+[node name="Label" type="RichTextLabel" parent="PopupMenu/Kills"]
+margin_left = 6.93275
+margin_top = 5.04199
+margin_right = 138.933
+margin_bottom = 23.042
+text = "Kill Counter"
+
+[node name="Count" type="RichTextLabel" parent="PopupMenu/Kills"]
+margin_left = 21.4285
+margin_top = 25.21
+margin_right = 159.428
+margin_bottom = 44.21
+text = "9999"
+
+[node name="DungeonLevel" type="Control" parent="PopupMenu"]
+margin_left = 148.739
+margin_top = 96.4281
+margin_right = 188.739
+margin_bottom = 136.428
+
+[node name="Label" type="RichTextLabel" parent="PopupMenu/DungeonLevel"]
+margin_right = 161.0
+margin_bottom = 19.0
+text = "Max Dungeon Level"
+
+[node name="Max" type="RichTextLabel" parent="PopupMenu/DungeonLevel"]
+margin_left = 33.4032
+margin_top = 17.647
+margin_right = 72.4032
+margin_bottom = 34.647
+text = "100"
+[connection signal="popup_hide" from="PopupMenu" to="." method="_on_PopupMenu_popup_hide"]
+[connection signal="pressed" from="PopupMenu/Quit" to="." method="_on_Quit_pressed"]
+[connection signal="pressed" from="PopupMenu/Close" to="." method="_on_Close_pressed"]

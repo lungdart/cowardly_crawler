@@ -9,11 +9,14 @@ var lifeUI = null
 var spellsUI = null
 
 var spells = []
+var dash = false
+var armor = false
+
 var left_spell = null
 var right_spell = null
 
-var dash = false
-var armor = false
+var kill_counter = 0
+var max_dungeon_level = 0
 
 func _ready():
 	randomize()
