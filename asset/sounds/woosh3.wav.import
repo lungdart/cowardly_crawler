@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/woosh3.wav-12a7298bb3573c6788cf68bfebf1dbca.sample"
+
+[deps]
+
+source_file="res://asset/sounds/woosh3.wav"
+dest_files=[ "res://.import/woosh3.wav-12a7298bb3573c6788cf68bfebf1dbca.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

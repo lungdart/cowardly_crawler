@@ -16,6 +16,7 @@ export var CURRENT_LIFE = 3
 export var IFRAMES = 1.5
 
 var state = IDLE
+var dashing = false
 var direction = Vector2.DOWN
 var velocity = Vector2.ZERO
 var target_angle = 0
@@ -40,12 +41,12 @@ onready var actionPlayer = $ActionPlayer
 onready var targetOrigin = $TargetOrigin
 onready var iframesPlayer = $IframesPlayer
 onready var iframesTimer = $IframesTimer
-
 onready var deathParticles = $DeathParticles
 onready var targetCursor = $TargetOrigin
 
 func _ready():
 	self.dashParticles.set_emitting(false)
+	self.dashParticles.set_visible(true)
 	self.deathParticles.set_emitting(false)
 	self.dashHitBox.set_disabled(true)
 	self.dashSprite.set_visible(false)
@@ -78,8 +79,7 @@ func _physics_process(delta):
 func _input(event):
 	if event.is_action_pressed("dash") and GlobalState.dash:
 		if self.state == MOVE:
-			start_dash()
-			self.state = DASH
+			self.do_dash()
 
 	if event.is_action_pressed("shoot1"):
 		self.spellsNode.cast_spell("left", global_position)
@@ -106,19 +106,12 @@ func unequip_armor():
 	self.sprite.set_visible(true)
 	self.armorSprite.set_visible(false)
 	
-func start_dash():
-	self.dashTimer.start()
-	self.dashHitBox.set_disabled(false)
-	self.dashSprite.set_visible(true)
-	self.dashParticles.set_emitting(true)
+func do_dash():
+	self.dashing = true
 	self.dashParticlePivot.set_rotation(self.direction.angle() + PI)
 	self.invincible = true
-	
-func stop_dash():
-	self.dashHitBox.set_disabled(true)
-	self.dashSprite.set_visible(false)
-	self.dashParticles.set_emitting(false)
-	self.invincible = false
+	self.actionPlayer.play("Dash Start")
+	self.state = DASH
 
 func update_aim():
 	self.target_angle = global_position.angle_to_point(get_global_mouse_position())
@@ -163,13 +156,11 @@ func dash_state(delta):
 	# Slow down to regular max speed after dashing
 	var original_max_speed = MAX_SPEED * self.speed_mod
 	var dash_friction = DASH_FRICTION * self.friction_mod
-	if self.dashTimer.is_stopped() and self.velocity.length() > original_max_speed:
-		stop_dash()
+	if not self.dashing and self.velocity.length() > original_max_speed:
 		self.velocity = self.velocity.move_toward(Vector2.ZERO, dash_friction * delta)
 		
 	# Once back to speed, go back to move state
-	elif self.dashTimer.is_stopped():
-		stop_dash()
+	elif not self.dashing:
 		self.state = MOVE
 		return
 
@@ -237,3 +228,8 @@ func _on_ActionPlayer_animation_finished(anim_name):
 		self.actionPlayer.play("Stand")
 		self.sprite.play("IDLE")
 		self.state = IDLE
+	elif anim_name == "Dash Start":
+		self.actionPlayer.play("Dash End")
+		self.invincible = false
+		self.dashing = false
+		

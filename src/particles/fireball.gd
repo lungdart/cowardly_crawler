@@ -9,14 +9,16 @@ var velocity = Vector2.ZERO
 var direction = Vector2.ZERO
 
 onready var sprite = $Sprite
-onready var tailParticles = $"Tail Particles"
-onready var explodeParticles = $"Explode Particles"
+onready var tailParticles = $TailParticles
+onready var explodeParticles = $ExplodeParticles
 onready var timer = $Timer
+onready var animationPlayer = $AnimationPlayer
 
 func _ready():
 	self.tailParticles.set_emitting(true)
 	self.explodeParticles.set_emitting(false)
 	self.sprite.visible = true
+	self.animationPlayer.play("Fire")
 
 func init(player_position, mouse_position):
 	var target_angle = player_position.angle_to_point(mouse_position)
@@ -36,6 +38,7 @@ func move(delta):
 		self.sprite.set_visible(false)
 		self.tailParticles.set_emitting(false)
 		self.explodeParticles.set_emitting(true)
+		#self.animationPlayer.play("Collide")
 		self.timer.start()
 
 

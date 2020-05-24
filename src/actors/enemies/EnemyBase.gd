@@ -179,8 +179,10 @@ func set_life(value):
 func _on_hurtBox_area_entered(area):
 	if area.name == "HitBox":
 		self.current_life -= 1
-		self.shaderPlayer.play("Iframes Start")
-		self.iframesTimer.start()
+		if self.current_life > 0:
+			self.animationPlayer.play("Hit")
+			self.shaderPlayer.play("Iframes Start")
+			self.iframesTimer.start()
 	elif area.name == "FreezeBox":
 		self.frozen = true
 		self.sprite.get_material().set_shader_param("frozen", true)

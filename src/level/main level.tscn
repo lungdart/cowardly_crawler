@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=2]
+[gd_scene load_steps=73 format=2]
 
 [ext_resource path="res://src/actors/player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://asset/0x72_DungeonTilesetII_v1.3.png" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://src/pickups/PickupIce.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/pickups/PickupFire.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/pickups/PickupDash.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/actors/enemies/greater_demon/GreaterDemon.tscn" type="PackedScene" id=12]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -617,23 +618,8 @@ position = Vector2( 558.619, 384.281 )
 [node name="Shaman4" parent="Actors" instance=ExtResource( 8 )]
 position = Vector2( 478.816, 370.776 )
 
-[node name="Shaman5" parent="Actors" instance=ExtResource( 8 )]
-position = Vector2( 564.757, 426.024 )
-
-[node name="Shaman6" parent="Actors" instance=ExtResource( 8 )]
-position = Vector2( 521.787, 385.508 )
-
-[node name="Shaman7" parent="Actors" instance=ExtResource( 8 )]
-position = Vector2( 594.223, 448.123 )
-
-[node name="Shaman8" parent="Actors" instance=ExtResource( 8 )]
-position = Vector2( 601.589, 390.419 )
-
-[node name="Shaman9" parent="Actors" instance=ExtResource( 8 )]
-position = Vector2( 577.035, 347.449 )
-
-[node name="Shaman10" parent="Actors" instance=ExtResource( 8 )]
-position = Vector2( 514.42, 331.488 )
+[node name="GreaterDemon" parent="Actors" instance=ExtResource( 12 )]
+position = Vector2( 550.025, 494.777 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 

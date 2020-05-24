@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://src/actors/player/Player.gd" type="Script" id=1]
 [ext_resource path="res://asset/frames/elf_m_run_anim_f2.png" type="Texture" id=2]
@@ -24,6 +24,8 @@
 [ext_resource path="res://asset/frames/knight_m_idle_anim_f0.png" type="Texture" id=22]
 [ext_resource path="res://asset/frames/knight_m_idle_anim_f1.png" type="Texture" id=23]
 [ext_resource path="res://asset/shock wave.png" type="Texture" id=24]
+[ext_resource path="res://asset/sounds/hit1.wav" type="AudioStream" id=25]
+[ext_resource path="res://asset/sounds/woosh2.wav" type="AudioStream" id=26]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 14 )
@@ -78,10 +80,7 @@ height = 6.09812
 radius = 5.0331
 height = 3.07029
 
-[sub_resource type="CircleShape2D" id=11]
-radius = 19.2605
-
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=8]
 length = 0.1
 loop = true
 step = 0.05
@@ -110,7 +109,7 @@ tracks/1/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=9]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:material:shader_param/active")
@@ -137,7 +136,125 @@ tracks/1/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=14]
+resource_name = "Dash End"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("HitBox/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DashPivot/DashParticles:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("DashPivot/DashParticles:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("DashPivot/ShockWave:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=13]
+resource_name = "Dash Start"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("DashPivot/DashParticles:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DashPivot/ShockWave:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "audio"
+tracks/2/path = NodePath("AudioStreamPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 26 )
+} ],
+"times": PoolRealArray( 0 )
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("HitBox/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("DashPivot/DashParticles:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=10]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:animation")
@@ -187,8 +304,22 @@ tracks/3/keys = {
 "update": 0,
 "values": [ Vector2( 0, -4 ), Vector2( 0, -16 ), Vector2( 0, 0 ) ]
 }
+tracks/4/type = "audio"
+tracks/4/path = NodePath("AudioStreamPlayer")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 25 )
+} ],
+"times": PoolRealArray( 0 )
+}
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=11]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:position")
@@ -243,6 +374,9 @@ tracks/3/keys = {
 offsets = PoolRealArray( 0, 0.306273 )
 colors = PoolColorArray( 0.855469, 0.855469, 0.855469, 1, 0.580392, 0.580392, 0.580392, 0 )
 
+[sub_resource type="CircleShape2D" id=7]
+radius = 19.2605
+
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
 script = ExtResource( 1 )
@@ -258,16 +392,13 @@ texture = ExtResource( 13 )
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 material = SubResource( 1 )
-position = Vector2( 0, -4 )
 frames = SubResource( 2 )
-animation = "Move"
-frame = 2
+animation = "Hurt"
 playing = true
 
 [node name="Armor" type="AnimatedSprite" parent="."]
 visible = false
 material = SubResource( 3 )
-position = Vector2( 0, -4 )
 frames = SubResource( 4 )
 animation = "Hurt"
 playing = true
@@ -287,14 +418,6 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2( -0.166084, 3.65384 )
 shape = SubResource( 6 )
-
-[node name="HitBox" type="Area2D" parent="."]
-collision_layer = 4
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-position = Vector2( -0.523155, -0.0166092 )
-shape = SubResource( 11 )
 
 [node name="TargetOrigin" type="Position2D" parent="."]
 
@@ -319,12 +442,14 @@ limit_bottom = 656
 smoothing_enabled = true
 
 [node name="IframesPlayer" type="AnimationPlayer" parent="."]
-"anims/Iframes Start" = SubResource( 7 )
-"anims/Iframes Stop" = SubResource( 8 )
+"anims/Iframes Start" = SubResource( 8 )
+"anims/Iframes Stop" = SubResource( 9 )
 
 [node name="ActionPlayer" type="AnimationPlayer" parent="."]
-anims/Hurt = SubResource( 9 )
-anims/Stand = SubResource( 10 )
+"anims/Dash End" = SubResource( 14 )
+"anims/Dash Start" = SubResource( 13 )
+anims/Hurt = SubResource( 10 )
+anims/Stand = SubResource( 11 )
 
 [node name="DashTimer" type="Timer" parent="."]
 wait_time = 0.2
@@ -360,6 +485,18 @@ position = Vector2( -8, 0 )
 scale = Vector2( 1.25, 1.5 )
 texture = ExtResource( 24 )
 flip_h = true
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2( -0.523155, -0.0166092 )
+shape = SubResource( 7 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 25 )
+volume_db = -18.0
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="animation_finished" from="ActionPlayer" to="." method="_on_ActionPlayer_animation_finished"]
 [connection signal="timeout" from="IframesTimer" to="." method="_on_IframesTimer_timeout"]
