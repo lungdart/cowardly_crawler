@@ -43,6 +43,7 @@ onready var targetOrigin = $TargetOrigin
 onready var iframesPlayer = $IframesPlayer
 onready var iframesTimer = $IframesTimer
 onready var deathParticles = $DeathParticles
+onready var deathSound = $DeathSound
 onready var targetCursor = $TargetOrigin
 
 func _ready():
@@ -209,6 +210,7 @@ func _on_Hurtbox_area_entered(area):
 	# Only hurt outside of iframes
 	if not self.invincible:
 		self.lifeNode.hurt(1)
+		self.hurtBox.set_deferred("monitorable", false)
 		
 		if GlobalState.armor and self.lifeNode.current_armor <= 0:
 			# TODO: Broken armor animation
@@ -220,18 +222,18 @@ func _on_Hurtbox_area_entered(area):
 			self.actionPlayer.play("Hurt")
 			self.invincible = true
 			self.iframesTimer.start()
-			self.hurtBox.set_deferred("monitorable", false)
 	
 		# Do a different set of animations for dying
-		else:
+		elif not self.state == DEAD:
 			self.state = DEAD
 			self.sprite.set_visible(false)
 			self.shadowSprite.set_visible(false)
 			self.targetCursor.set_visible(false)
 			self.deathParticles.set_visible(true)
 			self.deathParticles.set_emitting(true)
-			
-			yield(get_tree().create_timer(1.0), "timeout")
+			self.deathSound.play()
+			self.stageNode.fade_out()
+			yield(self.deathSound, "finished")
 			var death_screen = load("res://src/ui/DeathScreen.tscn")
 			self.stageNode.add_child(death_screen.instance())
 			queue_free()

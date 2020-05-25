@@ -3,6 +3,7 @@ extends Node2D
 onready var pickups = $Pickups
 onready var killCounter = $UI/Kills
 onready var pauseMenu = $UI/Pause
+onready var soundPlayer = $AnimationPlayer
 
 func _ready():
 	GlobalState.level = self
@@ -14,6 +15,8 @@ func _ready():
 		if child.name != "Player":
 			print("Connecting enemy kill counter for ", child.name)
 			child.connect("enemy_killed", self, "_on_enemy_killed")
+			
+	self.soundPlayer.play("Fade in")
 
 func _input(event):
 	if event.is_action_pressed("pause"):
@@ -24,6 +27,9 @@ func _input(event):
 func add_drop(instance, pos):
 	instance.global_position = pos
 	pickups.add_child(instance)
+
+func fade_out():
+	self.soundPlayer.play("Fade out")
 
 func _on_enemy_killed():
 	GlobalState.kill_counter += 1

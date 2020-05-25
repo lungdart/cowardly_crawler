@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://src/ui/DeathScreen.gd" type="Script" id=1]
+[ext_resource path="res://asset/music/POL-children-of-shadows-short.wav" type="AudioStream" id=2]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Fade"
@@ -41,6 +42,30 @@ tracks/2/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("AudioStreamPlayer:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -48.0, -24.0 ]
+}
 
 [node name="DeathScreen" type="CanvasLayer"]
 pause_mode = 2
@@ -56,12 +81,14 @@ __meta__ = {
 [node name="ColorRect" type="ColorRect" parent="Control"]
 margin_right = 1024.0
 margin_bottom = 768.0
-color = Color( 0.152941, 0, 0, 0 )
+color = Color( 0.152762, 0, 0, 0.150588 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Title" type="RichTextLabel" parent="Control"]
+visible = false
+modulate = Color( 1, 1, 1, 0 )
 margin_left = 260.433
 margin_top = 128.037
 margin_right = 354.433
@@ -109,6 +136,10 @@ text = "Save and Quit"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Fade = SubResource( 1 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+volume_db = -26.4
 [connection signal="pressed" from="Control/Menu/Continue" to="." method="_on_Continue_pressed"]
 [connection signal="pressed" from="Control/Menu/Quit" to="." method="_on_Quit_pressed"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

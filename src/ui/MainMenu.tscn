@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://asset/menubg.jpg" type="Texture" id=1]
 [ext_resource path="res://src/ui/MainMenu.gd" type="Script" id=2]
+[ext_resource path="res://src/music/IntroMusic.tscn" type="PackedScene" id=3]
+[ext_resource path="res://asset/sounds/select1.wav" type="AudioStream" id=4]
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -38,7 +40,6 @@ margin_top = 267.901
 margin_right = 323.051
 margin_bottom = 287.901
 rect_scale = Vector2( 2, 2 )
-disabled = true
 text = "Continue"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -54,5 +55,11 @@ text = "New Game"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="IntroMusic" parent="." instance=ExtResource( 3 )]
+
+[node name="SelectSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -18.0
 [connection signal="pressed" from="Continue" to="." method="_on_Continue_pressed"]
 [connection signal="pressed" from="NewGame" to="." method="_on_NewGame_pressed"]

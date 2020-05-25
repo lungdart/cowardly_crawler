@@ -3,16 +3,6 @@ Another attempt at a game in Godot
 
 ## TODO
 * Menus
-  * Start game
-    * High kill count
-    * Lowest level in dungeon
-
-  * In game pause menu
-    * Exit to main menu, lose all progress
-  
-  * Death menu
-    * Show and record kill count, and dungeon level
-
   * Win menu
 	* Maybe a stupid animation to mark the occasion
 

@@ -41,3 +41,12 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Fade = SubResource( 1 )
+
+[node name="StartDelay" type="Timer" parent="."]
+one_shot = true
+
+[node name="ChangeDelay" type="Timer" parent="."]
+one_shot = true
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="timeout" from="StartDelay" to="." method="_on_StartDelay_timeout"]
+[connection signal="timeout" from="ChangeDelay" to="." method="_on_ChangeDelay_timeout"]

@@ -1,9 +1,11 @@
 extends Control
 
+onready var selectSound = $SelectSound
+onready var music = $IntroMusic
 
 func _ready():
 	#TODO: Detect saved game, and enable continue
-	pass
+	self.music.play()
 
 func _on_Continue_pressed():
 	#TODO: Load saved game into global state
@@ -14,4 +16,4 @@ func _on_Continue_pressed():
 func _on_NewGame_pressed():
 	#TODO: Setup global state
 	SceneChanger.change_scene("res://src/level/main level.tscn")
-	pass
+

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/POL-phantom-mansion-short.wav-fee1f3cb872a03193a0339dbb37bd916.sample"
+
+[deps]
+
+source_file="res://asset/music/POL-phantom-mansion-short.wav"
+dest_files=[ "res://.import/POL-phantom-mansion-short.wav-fee1f3cb872a03193a0339dbb37bd916.sample" ]
+
+[params]
+
+force/8_bit=true
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=0

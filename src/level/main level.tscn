@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=2]
+[gd_scene load_steps=79 format=2]
 
 [ext_resource path="res://src/actors/player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://asset/0x72_DungeonTilesetII_v1.3.png" type="Texture" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://src/ui/Pause.tscn" type="PackedScene" id=13]
 [ext_resource path="res://src/actors/enemies/big_zombie/BigZombie.tscn" type="PackedScene" id=14]
 [ext_resource path="res://src/actors/enemies/necromancer/Necromancer.tscn" type="PackedScene" id=15]
+[ext_resource path="res://asset/music/POL-chamber-of-secrets-short.wav" type="AudioStream" id=16]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -571,6 +572,60 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 12.1603, 16, 12.1603 )
 } ]
 0/z_index = 0
 
+[sub_resource type="Animation" id=61]
+resource_name = "Fade in"
+tracks/0/type = "value"
+tracks/0/path = NodePath("AudioStreamPlayer:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -30.0, -18.0 ]
+}
+
+[sub_resource type="Animation" id=62]
+resource_name = "Fade out"
+tracks/0/type = "value"
+tracks/0/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -18.0, -30.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AudioStreamPlayer:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
 [node name="Level" type="Node2D"]
 script = ExtResource( 6 )
 
@@ -687,4 +742,12 @@ limit_top = -32
 limit_right = 1056
 limit_bottom = 656
 smoothing_enabled = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 16 )
+volume_db = -30.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+"anims/Fade in" = SubResource( 61 )
+"anims/Fade out" = SubResource( 62 )
 [connection signal="instance_spell" from="UI/Spells" to="." method="_on_Spells_instance_spell"]
