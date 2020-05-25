@@ -57,3 +57,9 @@ func _on_PopupMenu_popup_hide():
 
 func _on_Close_pressed():
 	self.menu.set_visible(false)
+
+
+func _on_Quit_pressed():
+	#TODO: Save, exist game to main menu
+	self.menu.set_visible(false)
+	SceneChanger.change_scene("res://src/ui/MainMenu.tscn")

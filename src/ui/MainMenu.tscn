@@ -1,0 +1,55 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://asset/menubg.jpg" type="Texture" id=1]
+[ext_resource path="res://src/ui/MainMenu.gd" type="Script" id=2]
+
+[node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="TextureRect" parent="."]
+margin_left = -120.65
+margin_top = -6.65002
+margin_right = 903.35
+margin_bottom = 761.35
+texture = ExtResource( 1 )
+stretch_mode = 5
+
+[node name="Title" type="RichTextLabel" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -226.9
+margin_top = 34.15
+margin_right = -98.8998
+margin_bottom = 50.15
+rect_scale = Vector2( 4, 5 )
+text = "Cowardly Crawler"
+
+[node name="Continue" type="Button" parent="."]
+margin_left = 190.95
+margin_top = 266.001
+margin_right = 318.95
+margin_bottom = 290.001
+rect_scale = Vector2( 2, 2 )
+disabled = true
+text = "Continue"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NewGame" type="Button" parent="."]
+margin_left = 189.05
+margin_top = 334.401
+margin_right = 317.05
+margin_bottom = 358.401
+rect_scale = Vector2( 2, 2 )
+text = "New Game"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="Continue" to="." method="_on_Continue_pressed"]
+[connection signal="pressed" from="NewGame" to="." method="_on_NewGame_pressed"]

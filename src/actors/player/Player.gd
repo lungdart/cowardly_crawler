@@ -25,7 +25,7 @@ var speed_mod = 1.0
 var acceleration_mod = 1.0
 var friction_mod = 1.0
 
-onready var stageNode = get_tree().get_root().get_child(1)
+onready var stageNode = get_tree().get_root().get_child(2)
 onready var UINode = stageNode.get_node("UI")
 onready var lifeNode = UINode.get_node("Life")
 onready var spellsNode = UINode.get_node("Spells")

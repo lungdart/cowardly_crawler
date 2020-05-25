@@ -80,7 +80,7 @@ height = 6.09812
 radius = 5.0331
 height = 3.07029
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=7]
 length = 0.1
 loop = true
 step = 0.05
@@ -109,7 +109,7 @@ tracks/1/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=8]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:material:shader_param/active")
@@ -136,7 +136,7 @@ tracks/1/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=9]
 resource_name = "Dash End"
 length = 0.1
 tracks/0/type = "value"
@@ -188,7 +188,7 @@ tracks/3/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=10]
 resource_name = "Dash Start"
 length = 0.2
 tracks/0/type = "value"
@@ -254,7 +254,7 @@ tracks/4/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=11]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:animation")
@@ -319,7 +319,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0 )
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=12]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:position")
@@ -370,11 +370,11 @@ tracks/3/keys = {
 "values": [ Vector2( 0, -4 ) ]
 }
 
-[sub_resource type="Gradient" id=12]
+[sub_resource type="Gradient" id=13]
 offsets = PoolRealArray( 0, 0.306273 )
 colors = PoolColorArray( 0.855469, 0.855469, 0.855469, 1, 0.580392, 0.580392, 0.580392, 0 )
 
-[sub_resource type="CircleShape2D" id=7]
+[sub_resource type="CircleShape2D" id=14]
 radius = 19.2605
 
 [node name="Player" type="KinematicBody2D"]
@@ -444,14 +444,14 @@ limit_bottom = 656
 smoothing_enabled = true
 
 [node name="IframesPlayer" type="AnimationPlayer" parent="."]
-"anims/Iframes Start" = SubResource( 8 )
-"anims/Iframes Stop" = SubResource( 9 )
+"anims/Iframes Start" = SubResource( 7 )
+"anims/Iframes Stop" = SubResource( 8 )
 
 [node name="ActionPlayer" type="AnimationPlayer" parent="."]
-"anims/Dash End" = SubResource( 14 )
-"anims/Dash Start" = SubResource( 13 )
-anims/Hurt = SubResource( 10 )
-anims/Stand = SubResource( 11 )
+"anims/Dash End" = SubResource( 9 )
+"anims/Dash Start" = SubResource( 10 )
+anims/Hurt = SubResource( 11 )
+anims/Stand = SubResource( 12 )
 
 [node name="DashTimer" type="Timer" parent="."]
 wait_time = 0.2
@@ -479,7 +479,7 @@ angular_velocity = 300.0
 angular_velocity_random = 1.0
 scale_amount = 2.0
 scale_amount_random = 1.0
-color_ramp = SubResource( 12 )
+color_ramp = SubResource( 13 )
 
 [node name="ShockWave" type="Sprite" parent="DashPivot"]
 modulate = Color( 1, 1, 1, 0.498039 )
@@ -494,7 +494,7 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2( -0.523155, -0.0166092 )
-shape = SubResource( 7 )
+shape = SubResource( 14 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 25 )

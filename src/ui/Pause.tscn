@@ -20,6 +20,7 @@ __meta__ = {
 }
 
 [node name="PopupMenu" type="PopupMenu" parent="."]
+visible = true
 margin_right = 401.0
 margin_bottom = 226.0
 __meta__ = {
@@ -37,17 +38,17 @@ __meta__ = {
 }
 
 [node name="Quit" type="Button" parent="PopupMenu"]
-margin_left = 152.382
-margin_top = 186.424
-margin_right = 252.382
-margin_bottom = 206.424
+margin_left = 140.0
+margin_top = 188.0
+margin_right = 268.0
+margin_bottom = 212.0
 text = "Save and Quit"
 
 [node name="Close" type="Button" parent="PopupMenu"]
-margin_left = 153.462
-margin_top = 164.269
-margin_right = 247.462
-margin_bottom = 184.269
+margin_left = 140.0
+margin_top = 158.0
+margin_right = 268.0
+margin_bottom = 182.0
 text = "Continue"
 
 [node name="Items" type="Control" parent="PopupMenu"]
@@ -85,40 +86,42 @@ margin_bottom = 34.0
 texture = ExtResource( 2 )
 
 [node name="Spell2" type="TextureRect" parent="PopupMenu/Items/Icons"]
+visible = false
 margin_left = 36.0
 margin_right = 68.0
 margin_bottom = 34.0
 texture = ExtResource( 2 )
 
 [node name="Ice" type="TextureRect" parent="PopupMenu/Items/Icons"]
-margin_left = 72.0
-margin_right = 104.0
+margin_left = 36.0
+margin_right = 68.0
 margin_bottom = 34.0
 texture = ExtResource( 1 )
 
 [node name="Wind" type="TextureRect" parent="PopupMenu/Items/Icons"]
+visible = false
 margin_left = 108.0
 margin_right = 140.0
 margin_bottom = 34.0
 texture = ExtResource( 1 )
 
 [node name="Dash" type="TextureRect" parent="PopupMenu/Items/Icons"]
-margin_left = 144.0
-margin_right = 178.0
+margin_left = 72.0
+margin_right = 106.0
 margin_bottom = 34.0
 texture = ExtResource( 4 )
 
 [node name="Armor" type="TextureRect" parent="PopupMenu/Items/Icons"]
-margin_left = 182.0
-margin_right = 216.0
+margin_left = 110.0
+margin_right = 144.0
 margin_bottom = 34.0
 texture = ExtResource( 3 )
 
 [node name="Kills" type="Control" parent="PopupMenu"]
-margin_left = 9.45375
-margin_top = 93.2769
-margin_right = 159.454
-margin_bottom = 135.277
+margin_left = 11.8921
+margin_top = 104.493
+margin_right = 161.892
+margin_bottom = 146.494
 
 [node name="Label" type="RichTextLabel" parent="PopupMenu/Kills"]
 margin_left = 6.93275
@@ -135,10 +138,10 @@ margin_bottom = 44.21
 text = "9999"
 
 [node name="DungeonLevel" type="Control" parent="PopupMenu"]
-margin_left = 148.739
-margin_top = 96.4281
-margin_right = 188.739
-margin_bottom = 136.428
+margin_left = 243.348
+margin_top = 112.034
+margin_right = 283.348
+margin_bottom = 152.034
 
 [node name="Label" type="RichTextLabel" parent="PopupMenu/DungeonLevel"]
 margin_right = 161.0
@@ -146,10 +149,10 @@ margin_bottom = 19.0
 text = "Max Dungeon Level"
 
 [node name="Max" type="RichTextLabel" parent="PopupMenu/DungeonLevel"]
-margin_left = 33.4032
-margin_top = 17.647
-margin_right = 72.4032
-margin_bottom = 34.647
+margin_left = 19.7483
+margin_top = 15.6963
+margin_right = 58.7483
+margin_bottom = 32.6963
 text = "100"
 [connection signal="popup_hide" from="PopupMenu" to="." method="_on_PopupMenu_popup_hide"]
 [connection signal="pressed" from="PopupMenu/Quit" to="." method="_on_Quit_pressed"]
