@@ -25,10 +25,10 @@ var speed_mod = 1.0
 var acceleration_mod = 1.0
 var friction_mod = 1.0
 
-onready var stageNode = get_tree().get_root().get_child(2)
-onready var UINode = stageNode.get_node("UI")
-onready var lifeNode = UINode.get_node("Life")
-onready var spellsNode = UINode.get_node("Spells")
+onready var stageNode = null
+onready var UINode = null
+onready var lifeNode = null
+onready var spellsNode = null
 onready var sprite = $Sprite
 onready var armorSprite = $Armor
 onready var shadowSprite = $Shadow
@@ -45,6 +45,16 @@ onready var deathParticles = $DeathParticles
 onready var targetCursor = $TargetOrigin
 
 func _ready():
+	# Find UI nodes dynamically
+	var nodes = get_tree().get_root().get_children()
+	for node in nodes:
+		if node.name == "Level":
+			self.stageNode = node
+			break
+	self.UINode = self.stageNode.get_node("UI")
+	self.lifeNode = self.UINode.get_node("Life")
+	self.spellsNode = self.UINode.get_node("Spells")
+
 	self.dashParticles.set_emitting(false)
 	self.dashParticles.set_visible(true)
 	self.deathParticles.set_emitting(false)

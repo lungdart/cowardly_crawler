@@ -17,10 +17,12 @@ func change_scene(path, delay=0.0):
 	yield(get_tree().create_timer(delay), "timeout")
 	
 	self.animationPlayer.play("Fade")
-	yield(animationPlayer, "animation_finished")
+	yield(self.animationPlayer, "animation_finished")
 
 	assert(get_tree().change_scene(path) == OK)
-	self.animationPlayer.play_backwards("Fade")
-	
 	get_tree().paused = false
+	self.animationPlayer.play_backwards("Fade")
+	yield(self.animationPlayer, "animation_finished")
+	
+	self.control.set_visible(false)
 	emit_signal("scene_changed")

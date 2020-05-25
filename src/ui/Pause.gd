@@ -1,6 +1,7 @@
 extends Control
 
 onready var menu = $PopupMenu
+onready var quitConfirm = $QuitConfirm
 onready var fireIcon = $PopupMenu/Items/Icons/Fire
 onready var spell2Icon = $PopupMenu/Items/Icons/Spell2
 onready var iceIcon = $PopupMenu/Items/Icons/Ice
@@ -60,6 +61,16 @@ func _on_Close_pressed():
 
 
 func _on_Quit_pressed():
-	#TODO: Save, exist game to main menu
+	self.quitConfirm.popup_centered()
+
+
+func _on_Quit_confirm_pressed():
+	#TODO: Save game
+	self.quitConfirm.set_visible(false)
 	self.menu.set_visible(false)
 	SceneChanger.change_scene("res://src/ui/MainMenu.tscn")
+
+
+func _on_Quit_cancel_pressed():
+	self.menu.set_visible(true)
+	self.quitConfirm.set_visible(false)

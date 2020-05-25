@@ -10,9 +10,9 @@
 pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -0.902496
+margin_left = -0.414795
 margin_top = 0.902466
-margin_right = -0.902466
+margin_right = -0.414795
 margin_bottom = 0.902466
 script = ExtResource( 5 )
 __meta__ = {
@@ -20,7 +20,6 @@ __meta__ = {
 }
 
 [node name="PopupMenu" type="PopupMenu" parent="."]
-visible = true
 margin_right = 401.0
 margin_bottom = 226.0
 __meta__ = {
@@ -154,6 +153,40 @@ margin_top = 15.6963
 margin_right = 58.7483
 margin_bottom = 32.6963
 text = "100"
+
+[node name="QuitConfirm" type="PopupMenu" parent="."]
+margin_right = 228.0
+margin_bottom = 130.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="QuitConfirm"]
+margin_left = 19.5071
+margin_top = 13.1673
+margin_right = 212.507
+margin_bottom = 53.1673
+bbcode_enabled = true
+bbcode_text = "[center]Are you sure you'd like to
+Save and Quit?[/center]"
+text = "Are you sure you'd like to
+Save and Quit?"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quit" type="Button" parent="QuitConfirm"]
+margin_left = 82.4173
+margin_top = 64.861
+margin_right = 146.417
+margin_bottom = 88.861
+text = "Quit"
+
+[node name="Cancel" type="Button" parent="QuitConfirm"]
+margin_left = 82.4173
+margin_top = 95.5846
+margin_right = 146.417
+margin_bottom = 119.585
+text = "Cancel"
 [connection signal="popup_hide" from="PopupMenu" to="." method="_on_PopupMenu_popup_hide"]
 [connection signal="pressed" from="PopupMenu/Quit" to="." method="_on_Quit_pressed"]
 [connection signal="pressed" from="PopupMenu/Close" to="." method="_on_Close_pressed"]
+[connection signal="pressed" from="QuitConfirm/Quit" to="." method="_on_Quit_confirm_pressed"]
+[connection signal="pressed" from="QuitConfirm/Cancel" to="." method="_on_Quit_cancel_pressed"]
