@@ -609,6 +609,9 @@ position = Vector2( 526.461, 526.364 )
 [node name="Player" parent="Actors" instance=ExtResource( 1 )]
 position = Vector2( 528.025, 572.756 )
 
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Actors/Player"]
+remote_path = NodePath("../../../Camera2D")
+
 [node name="Shaman" parent="Actors" instance=ExtResource( 8 )]
 position = Vector2( 369.381, 328.553 )
 
@@ -675,4 +678,13 @@ margin_right = 282.0
 margin_bottom = 444.0
 
 [node name="Pause" parent="UI" instance=ExtResource( 13 )]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 528.025, 572.756 )
+current = true
+limit_left = -32
+limit_top = -32
+limit_right = 1056
+limit_bottom = 656
+smoothing_enabled = true
 [connection signal="instance_spell" from="UI/Spells" to="." method="_on_Spells_instance_spell"]

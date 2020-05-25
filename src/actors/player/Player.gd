@@ -32,6 +32,7 @@ onready var spellsNode = null
 onready var sprite = $Sprite
 onready var armorSprite = $Armor
 onready var shadowSprite = $Shadow
+onready var hurtBox = $Hurtbox
 onready var dashSprite = $DashPivot/ShockWave
 onready var dashTimer = $DashTimer
 onready var dashParticlePivot = $DashPivot
@@ -136,6 +137,7 @@ func heal(value):
 # warning-ignore:unused_argument
 func idle_state(delta):
 	if get_input_vector() != Vector2.ZERO:
+		self.velocity = Vector2.ZERO
 		self.sprite.set_animation("Move")
 		self.armorSprite.set_animation("Move")
 		self.state = MOVE
@@ -214,12 +216,11 @@ func _on_Hurtbox_area_entered(area):
 		
 		# Hurt animations unsed when not dead
 		if self.lifeNode.current_life > 0:
-			self.sprite.stop()
-			self.armorSprite.stop()
 			self.iframesPlayer.play("Iframes Start")
 			self.actionPlayer.play("Hurt")
 			self.invincible = true
 			self.iframesTimer.start()
+			self.hurtBox.set_deferred("monitorable", false)
 	
 		# Do a different set of animations for dying
 		else:
@@ -229,19 +230,26 @@ func _on_Hurtbox_area_entered(area):
 			self.targetCursor.set_visible(false)
 			self.deathParticles.set_visible(true)
 			self.deathParticles.set_emitting(true)
-
+			
+			yield(get_tree().create_timer(1.0), "timeout")
+			var death_screen = load("res://src/ui/DeathScreen.tscn")
+			self.stageNode.add_child(death_screen.instance())
+			queue_free()
 
 # Turn off iframes when invincibility is finished
 func _on_IframesTimer_timeout():
 	self.invincible = false
+	self.hurtBox.set_deferred("monitorable", true)
 	self.iframesPlayer.play("Iframes Stop")
 
 
 func _on_ActionPlayer_animation_finished(anim_name):
 	if anim_name == "Hurt":
-		self.actionPlayer.play("Stand")
-		self.sprite.play("IDLE")
-		self.state = IDLE
+		if self.state == IDLE:
+			self.actionPlayer.play("Stand Idle")
+		elif self.state == MOVE:
+			self.actionPlayer.play("Stand Move")
+
 	elif anim_name == "Dash Start":
 		self.actionPlayer.play("Dash End")
 		self.invincible = false

@@ -12,12 +12,15 @@ __meta__ = {
 }
 
 [node name="Background" type="TextureRect" parent="."]
-margin_left = -120.65
-margin_top = -6.65002
-margin_right = 903.35
-margin_bottom = 761.35
+margin_left = -119.7
+margin_top = -7.60001
+margin_right = 904.3
+margin_bottom = 760.4
 texture = ExtResource( 1 )
 stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Title" type="RichTextLabel" parent="."]
 anchor_left = 0.5
@@ -30,10 +33,10 @@ rect_scale = Vector2( 4, 5 )
 text = "Cowardly Crawler"
 
 [node name="Continue" type="Button" parent="."]
-margin_left = 190.95
-margin_top = 266.001
-margin_right = 318.95
-margin_bottom = 290.001
+margin_left = 227.051
+margin_top = 267.901
+margin_right = 323.051
+margin_bottom = 287.901
 rect_scale = Vector2( 2, 2 )
 disabled = true
 text = "Continue"
@@ -42,10 +45,10 @@ __meta__ = {
 }
 
 [node name="NewGame" type="Button" parent="."]
-margin_left = 189.05
-margin_top = 334.401
-margin_right = 317.05
-margin_bottom = 358.401
+margin_left = 228.001
+margin_top = 339.151
+margin_right = 324.001
+margin_bottom = 359.151
 rect_scale = Vector2( 2, 2 )
 text = "New Game"
 __meta__ = {

@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://src/actors/player/Player.gd" type="Script" id=1]
 [ext_resource path="res://asset/frames/elf_m_run_anim_f2.png" type="Texture" id=2]
@@ -136,7 +136,7 @@ tracks/1/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=15]
 resource_name = "Dash End"
 length = 0.1
 tracks/0/type = "value"
@@ -188,7 +188,7 @@ tracks/3/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=16]
 resource_name = "Dash Start"
 length = 0.2
 tracks/0/type = "value"
@@ -254,7 +254,7 @@ tracks/4/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=17]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:animation")
@@ -319,7 +319,8 @@ tracks/4/keys = {
 "times": PoolRealArray( 0 )
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=18]
+resource_name = "Stand Move"
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:position")
@@ -334,7 +335,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, -4 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:animation")
+tracks/1/path = NodePath("Armor:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -342,11 +343,11 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ "Idle" ]
+"update": 0,
+"values": [ Vector2( 0, -4 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Armor:animation")
+tracks/2/path = NodePath("Sprite:animation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -356,6 +357,57 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ "Idle" ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Armor:animation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "Idle" ]
+}
+
+[sub_resource type="Animation" id=19]
+resource_name = "Stand Move"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Armor:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "Move" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "Move" ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -4 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("Armor:position")
@@ -394,7 +446,7 @@ texture = ExtResource( 13 )
 material = SubResource( 1 )
 position = Vector2( 0, -4 )
 frames = SubResource( 2 )
-animation = "Hurt"
+animation = "Move"
 playing = true
 
 [node name="Armor" type="AnimatedSprite" parent="."]
@@ -402,7 +454,7 @@ visible = false
 material = SubResource( 3 )
 position = Vector2( 0, -4 )
 frames = SubResource( 4 )
-animation = "Hurt"
+animation = "Move"
 playing = true
 
 [node name="Boundry" type="CollisionShape2D" parent="."]
@@ -433,25 +485,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CameraOrigin" type="Position2D" parent="."]
-
-[node name="Camera" type="Camera2D" parent="CameraOrigin"]
-current = true
-limit_left = -32
-limit_top = -32
-limit_right = 1056
-limit_bottom = 656
-smoothing_enabled = true
-
 [node name="IframesPlayer" type="AnimationPlayer" parent="."]
 "anims/Iframes Start" = SubResource( 7 )
 "anims/Iframes Stop" = SubResource( 8 )
 
 [node name="ActionPlayer" type="AnimationPlayer" parent="."]
-"anims/Dash End" = SubResource( 9 )
-"anims/Dash Start" = SubResource( 10 )
-anims/Hurt = SubResource( 11 )
-anims/Stand = SubResource( 12 )
+"anims/Dash End" = SubResource( 15 )
+"anims/Dash Start" = SubResource( 16 )
+anims/Hurt = SubResource( 17 )
+"anims/Stand Idle" = SubResource( 18 )
+"anims/Stand Move" = SubResource( 19 )
 
 [node name="DashTimer" type="Timer" parent="."]
 wait_time = 0.2
@@ -466,7 +509,9 @@ one_shot = true
 [node name="DashPivot" type="Position2D" parent="."]
 
 [node name="DashParticles" type="CPUParticles2D" parent="DashPivot"]
+visible = false
 position = Vector2( 16, 0 )
+emitting = false
 amount = 128
 lifetime = 0.75
 speed_scale = 1.5
@@ -482,6 +527,7 @@ scale_amount_random = 1.0
 color_ramp = SubResource( 13 )
 
 [node name="ShockWave" type="Sprite" parent="DashPivot"]
+visible = false
 modulate = Color( 1, 1, 1, 0.498039 )
 position = Vector2( -8, 0 )
 scale = Vector2( 1.25, 1.5 )
@@ -495,6 +541,7 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2( -0.523155, -0.0166092 )
 shape = SubResource( 14 )
+disabled = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 25 )

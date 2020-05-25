@@ -12,7 +12,7 @@
 [ext_resource path="res://asset/MediumShadow.png" type="Texture" id=10]
 [ext_resource path="res://src/actors/enemies/greater_demon/GreaterDemon.gd" type="Script" id=11]
 
-[sub_resource type="Shader" id=7]
+[sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
 uniform bool white_out = false;
@@ -35,13 +35,13 @@ void fragment() {
 	}
 }"
 
-[sub_resource type="ShaderMaterial" id=8]
+[sub_resource type="ShaderMaterial" id=2]
 resource_local_to_scene = true
-shader = SubResource( 7 )
+shader = SubResource( 1 )
 shader_param/white_out = false
 shader_param/frozen = false
 
-[sub_resource type="SpriteFrames" id=9]
+[sub_resource type="SpriteFrames" id=3]
 animations = [ {
 "frames": [ ExtResource( 7 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ) ],
 "loop": true,
@@ -54,7 +54,7 @@ animations = [ {
 "speed": 10.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=10]
+[sub_resource type="CapsuleShape2D" id=4]
 radius = 5.30173
 height = 13.5339
 
@@ -66,7 +66,7 @@ height = 10.9594
 radius = 11.1591
 height = 10.6107
 
-[sub_resource type="CircleShape2D" id=11]
+[sub_resource type="CircleShape2D" id=7]
 radius = 100.0
 
 [node name="GreaterDemon" instance=ExtResource( 1 )]
@@ -82,11 +82,11 @@ position = Vector2( 0, 0.19371 )
 texture = ExtResource( 10 )
 
 [node name="Sprite" parent="." index="1"]
-material = SubResource( 8 )
+material = SubResource( 2 )
 position = Vector2( 0, -18 )
-frames = SubResource( 9 )
+frames = SubResource( 3 )
 animation = "Idle"
-frame = 2
+frame = 1
 
 [node name="DeathSprite" parent="." index="2"]
 visible = false
@@ -97,7 +97,7 @@ scale = Vector2( 1.5, 1.5 )
 visible = false
 position = Vector2( -0.552086, -5.33676 )
 rotation = 1.5708
-shape = SubResource( 10 )
+shape = SubResource( 4 )
 
 [node name="HitBox" parent="." index="4"]
 visible = false
@@ -118,7 +118,7 @@ visible = false
 
 [node name="CollisionShape2D" parent="SightBox" index="0"]
 position = Vector2( 0.581139, -8.52332 )
-shape = SubResource( 11 )
+shape = SubResource( 7 )
 
 [node name="CastParticles" parent="." index="12"]
 position = Vector2( 0.968561, -11.8164 )
