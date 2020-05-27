@@ -18,7 +18,7 @@ func set_cast_state():
 	var instance = summon.instance()
 	var new_position = get_random_summoning_position()
 	instance.global_position = new_position + global_position
-	get_tree().get_root().add_child(instance)
+	GlobalState.level.add_child(instance)
 	
 	.set_idle_state()
 	
