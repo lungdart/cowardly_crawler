@@ -9,9 +9,8 @@ func set_cast_state():
 	.set_cast_state()
 	
 	var instance = SUMMON_SKELLY.instance()
-	var new_position = get_random_summoning_position()
-	instance.global_position = new_position + global_position
-	GlobalState.level.add_child(instance)
+	var new_position = get_random_summoning_position() + global_position
+	GlobalState.level.add_actor(instance, new_position)
 	
 	.set_idle_state()
 	

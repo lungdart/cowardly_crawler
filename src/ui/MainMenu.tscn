@@ -40,6 +40,7 @@ margin_top = 267.901
 margin_right = 323.051
 margin_bottom = 287.901
 rect_scale = Vector2( 2, 2 )
+disabled = true
 text = "Continue"
 __meta__ = {
 "_edit_use_anchors_": false

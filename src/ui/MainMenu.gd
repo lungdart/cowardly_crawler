@@ -15,5 +15,5 @@ func _on_Continue_pressed():
 
 func _on_NewGame_pressed():
 	#TODO: Setup global state
-	SceneChanger.change_scene("res://src/level/main level.tscn")
+	SceneChanger.change_scene("res://src/level/Level0.tscn")
 

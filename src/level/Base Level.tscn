@@ -1,0 +1,123 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://src/ui/Pause.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/level/Base Level.gd" type="Script" id=2]
+[ext_resource path="res://src/ui/Life.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/ui/Spells.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/actors/player/Player.tscn" type="PackedScene" id=6]
+
+[sub_resource type="Animation" id=61]
+resource_name = "Fade in"
+tracks/0/type = "value"
+tracks/0/path = NodePath("SoundPlayer/BackGroundMusic:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SoundPlayer/BackGroundMusic:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -30.0, -18.0 ]
+}
+
+[sub_resource type="Animation" id=62]
+resource_name = "Fade out"
+tracks/0/type = "value"
+tracks/0/path = NodePath("SoundPlayer/BackGroundMusic:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -18.0, -30.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SoundPlayer/BackGroundMusic:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[node name="Level" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Map" type="Node2D" parent="."]
+
+[node name="Background" type="TextureRect" parent="Map"]
+margin_right = 1027.0
+margin_bottom = 611.0
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Objects" type="YSort" parent="."]
+
+[node name="Actors" type="Node2D" parent="Objects"]
+
+[node name="Pickups" type="Node2D" parent="Objects"]
+
+[node name="Player" parent="Objects" instance=ExtResource( 6 )]
+visible = false
+position = Vector2( 528.025, 572.756 )
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Objects/Player"]
+remote_path = NodePath("../../../Camera2D")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Life" parent="UI" instance=ExtResource( 3 )]
+visible = false
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 16.0
+margin_bottom = 16.0
+
+[node name="Spells" parent="UI" instance=ExtResource( 4 )]
+visible = false
+margin_left = 282.0
+margin_top = 444.0
+margin_right = 282.0
+margin_bottom = 444.0
+
+[node name="Pause" parent="UI" instance=ExtResource( 1 )]
+visible = false
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 528.025, 572.756 )
+current = true
+limit_left = -32
+limit_top = -32
+limit_right = 1312
+limit_bottom = 992
+smoothing_enabled = true
+
+[node name="SoundPlayer" type="AnimationPlayer" parent="."]
+"anims/Fade in" = SubResource( 61 )
+"anims/Fade out" = SubResource( 62 )
+
+[node name="BackGroundMusic" type="AudioStreamPlayer" parent="SoundPlayer"]
+volume_db = -30.0
+[connection signal="instance_spell" from="UI/Spells" to="." method="_on_Spells_instance_spell"]
