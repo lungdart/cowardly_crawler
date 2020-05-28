@@ -40,6 +40,7 @@ shape = SubResource( 2 )
 [node name="DoorLevel2" parent="Map" index="5" instance=ExtResource( 4 )]
 position = Vector2( 768, 895.775 )
 LEVEL_PATH = "res://src/level/Level2.tscn"
+POSITION = Vector2( 0, 0 )
 
 [node name="Sprite" parent="Map/DoorLevel2" index="0"]
 texture = ExtResource( 3 )
