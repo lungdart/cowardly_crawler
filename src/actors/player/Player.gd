@@ -57,6 +57,7 @@ func _ready():
 	self.lifeNode = self.UINode.get_node("Life")
 	self.spellsNode = self.UINode.get_node("Spells")
 
+	# Configure initial state for all nodes
 	self.dashParticles.set_emitting(false)
 	self.dashParticles.set_visible(true)
 	self.deathParticles.set_emitting(false)
@@ -69,11 +70,19 @@ func _ready():
 	self.armorSprite.play("Idle")
 	self.state = IDLE
 	
+	# Check for armor
 	if GlobalState.armor:
 		equip_armor()
 	else:
 		unequip_armor()
 
+	# Check for a special position
+	if GlobalState.player_position != Vector2.ZERO:
+		self.global_position = GlobalState.player_position
+		print("PLayer position changed to: ", GlobalState.player_position)
+		GlobalState.player_position = Vector2.ZERO
+	else:
+		print("Not changing player position from: ", global_position)
 
 func _physics_process(delta):
 	match self.state:

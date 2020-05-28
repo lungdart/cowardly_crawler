@@ -4,6 +4,7 @@ const MEAT_DROP = preload("res://src/pickups/DropMeat.tscn")
 const FOOD_DROP = preload("res://src/pickups/DropFood.tscn")
 
 var player = null
+var player_position = Vector2.ZERO
 var level = null
 var lifeUI = null
 var spellsUI = null

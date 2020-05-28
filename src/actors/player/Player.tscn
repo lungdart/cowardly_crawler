@@ -137,7 +137,7 @@ tracks/1/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=9]
 resource_name = "Dash End"
 length = 0.1
 tracks/0/type = "value"
@@ -189,7 +189,7 @@ tracks/3/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=10]
 resource_name = "Dash Start"
 length = 0.2
 tracks/0/type = "value"
@@ -255,7 +255,7 @@ tracks/4/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=17]
+[sub_resource type="Animation" id=11]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:animation")
@@ -320,7 +320,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0 )
 }
 
-[sub_resource type="Animation" id=18]
+[sub_resource type="Animation" id=12]
 resource_name = "Stand Move"
 length = 0.1
 tracks/0/type = "value"
@@ -372,7 +372,7 @@ tracks/3/keys = {
 "values": [ "Idle" ]
 }
 
-[sub_resource type="Animation" id=19]
+[sub_resource type="Animation" id=13]
 resource_name = "Stand Move"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Armor:animation")
@@ -423,11 +423,11 @@ tracks/3/keys = {
 "values": [ Vector2( 0, -4 ) ]
 }
 
-[sub_resource type="Gradient" id=13]
+[sub_resource type="Gradient" id=14]
 offsets = PoolRealArray( 0, 0.306273 )
 colors = PoolColorArray( 0.855469, 0.855469, 0.855469, 1, 0.580392, 0.580392, 0.580392, 0 )
 
-[sub_resource type="CircleShape2D" id=14]
+[sub_resource type="CircleShape2D" id=15]
 radius = 19.2605
 
 [node name="Player" type="KinematicBody2D"]
@@ -489,11 +489,11 @@ __meta__ = {
 "anims/Iframes Stop" = SubResource( 8 )
 
 [node name="ActionPlayer" type="AnimationPlayer" parent="."]
-"anims/Dash End" = SubResource( 15 )
-"anims/Dash Start" = SubResource( 16 )
-anims/Hurt = SubResource( 17 )
-"anims/Stand Idle" = SubResource( 18 )
-"anims/Stand Move" = SubResource( 19 )
+"anims/Dash End" = SubResource( 9 )
+"anims/Dash Start" = SubResource( 10 )
+anims/Hurt = SubResource( 11 )
+"anims/Stand Idle" = SubResource( 12 )
+"anims/Stand Move" = SubResource( 13 )
 
 [node name="DashTimer" type="Timer" parent="."]
 wait_time = 0.2
@@ -523,7 +523,7 @@ angular_velocity = 300.0
 angular_velocity_random = 1.0
 scale_amount = 2.0
 scale_amount_random = 1.0
-color_ramp = SubResource( 13 )
+color_ramp = SubResource( 14 )
 
 [node name="ShockWave" type="Sprite" parent="DashPivot"]
 visible = false
@@ -539,7 +539,7 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2( -0.523155, -0.0166092 )
-shape = SubResource( 14 )
+shape = SubResource( 15 )
 disabled = true
 
 [node name="HitSound" type="AudioStreamPlayer" parent="."]
