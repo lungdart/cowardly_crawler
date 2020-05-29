@@ -8,9 +8,9 @@
 [ext_resource path="res://src/actors/enemies/skeleton/Skeleton.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/pickups/PickupDash.tscn" type="PackedScene" id=7]
 
-[sub_resource type="CircleShape2D" id=2]
-
 [sub_resource type="CircleShape2D" id=1]
+
+[sub_resource type="CircleShape2D" id=2]
 radius = 8.00315
 
 [node name="Level" instance=ExtResource( 1 )]
@@ -35,12 +35,11 @@ LEVEL_PATH = "res://src/level/Level0.tscn"
 POSITION = Vector2( 240, 144 )
 
 [node name="CollisionShape2D" parent="Map/DoorLevel0/Area2D" index="0"]
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="DoorLevel2" parent="Map" index="5" instance=ExtResource( 4 )]
 position = Vector2( 768, 895.775 )
 LEVEL_PATH = "res://src/level/Level2.tscn"
-POSITION = Vector2( 0, 0 )
 
 [node name="Sprite" parent="Map/DoorLevel2" index="0"]
 texture = ExtResource( 3 )
@@ -48,7 +47,7 @@ vframes = 4
 frame = 3
 
 [node name="CollisionShape2D" parent="Map/DoorLevel2/Area2D" index="0"]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="Skeleton" parent="Objects/Actors" index="0" instance=ExtResource( 6 )]
 position = Vector2( 624, 890.304 )
