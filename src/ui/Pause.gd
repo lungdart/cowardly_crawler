@@ -9,6 +9,7 @@ onready var windIcon = $PopupMenu/Items/Icons/Wind
 onready var armorIcon = $PopupMenu/Items/Icons/Armor
 onready var dashIcon = $PopupMenu/Items/Icons/Dash
 onready var killCounter = $PopupMenu/Kills/Count
+onready var maxDungeon = $PopupMenu/DungeonLevel/Max
 
 
 func popup():
@@ -48,8 +49,17 @@ func set_dash():
 
 func set_kill_counter():
 	var count = str(GlobalState.kill_counter)
-	killCounter.set_text(count)
+	var bbcode = right_align(count)
+	killCounter.set_bbcode(bbcode)
+	
+func set_dungeon_level():
+	var count = str(GlobalState.max_dungeon_level)
+	var bbcode = right_align(count)
+	maxDungeon.set_bbcode(bbcode)
 
+
+func right_align(text):
+	return "[right]" + text + "[/right]"
 
 func _on_PopupMenu_popup_hide():
 	# Unpause the game when the menu is closed
