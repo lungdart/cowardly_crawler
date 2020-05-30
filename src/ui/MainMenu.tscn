@@ -1,13 +1,15 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://asset/menubg.jpg" type="Texture" id=1]
 [ext_resource path="res://src/ui/MainMenu.gd" type="Script" id=2]
 [ext_resource path="res://src/music/IntroMusic.tscn" type="PackedScene" id=3]
 [ext_resource path="res://asset/sounds/select1.wav" type="AudioStream" id=4]
+[ext_resource path="res://src/ui/theme.tres" type="Theme" id=5]
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 5 )
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -25,21 +27,22 @@ __meta__ = {
 }
 
 [node name="Title" type="RichTextLabel" parent="."]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -226.9
-margin_top = 34.15
-margin_right = -98.8998
-margin_bottom = 50.15
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 48.0
+margin_right = -470.0
+margin_bottom = -412.0
 rect_scale = Vector2( 4, 5 )
+bbcode_enabled = true
+bbcode_text = "[center]Cowardly Crawler[/center]"
 text = "Cowardly Crawler"
 
 [node name="Continue" type="Button" parent="."]
-margin_left = 227.051
-margin_top = 267.901
-margin_right = 323.051
-margin_bottom = 287.901
-rect_scale = Vector2( 2, 2 )
+margin_left = 256.0
+margin_top = 290.0
+margin_right = 384.0
+margin_bottom = 325.0
 disabled = true
 text = "Continue"
 __meta__ = {
@@ -47,11 +50,10 @@ __meta__ = {
 }
 
 [node name="NewGame" type="Button" parent="."]
-margin_left = 228.001
-margin_top = 339.151
-margin_right = 324.001
-margin_bottom = 359.151
-rect_scale = Vector2( 2, 2 )
+margin_left = 256.0
+margin_top = 336.0
+margin_right = 384.0
+margin_bottom = 371.0
 text = "New Game"
 __meta__ = {
 "_edit_use_anchors_": false
