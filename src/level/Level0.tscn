@@ -43,7 +43,7 @@ tile_data = PoolIntArray( -131075, 3, 4, -131074, 3, 131074, -131073, 3, 131074,
 
 [node name="Ladder1" parent="Map" index="5" instance=ExtResource( 3 )]
 position = Vector2( 240, 128 )
-LEVEL_PATH = "res://src/level/Level1.tscn"
+LEVEL = 1
 
 [node name="Sprite" parent="Map/Ladder1" index="0"]
 texture = ExtResource( 4 )
@@ -57,7 +57,7 @@ shape = SubResource( 1 )
 
 [node name="Ladder2" parent="Map" index="6" instance=ExtResource( 3 )]
 position = Vector2( 1048, 648 )
-LEVEL_PATH = "res://src/level/Level6.tscn"
+LEVEL = 6
 
 [node name="Sprite" parent="Map/Ladder2" index="0"]
 texture = ExtResource( 4 )
@@ -69,7 +69,7 @@ shape = SubResource( 2 )
 
 [node name="Ladder3" parent="Map" index="7" instance=ExtResource( 3 )]
 position = Vector2( 216, 864 )
-LEVEL_PATH = "res://src/level/Level11.tscn"
+LEVEL = 11
 
 [node name="Sprite" parent="Map/Ladder3" index="0"]
 texture = ExtResource( 4 )

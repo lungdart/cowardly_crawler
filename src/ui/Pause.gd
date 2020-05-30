@@ -25,6 +25,7 @@ func popup():
 	set_dash()
 	
 	set_kill_counter()
+	set_dungeon_level()
 	
 	self.menu.popup_centered()
 

@@ -6,7 +6,7 @@
 [ext_resource path="res://src/ui/Spells.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/actors/player/Player.tscn" type="PackedScene" id=6]
 
-[sub_resource type="Animation" id=61]
+[sub_resource type="Animation" id=1]
 resource_name = "Fade in"
 tracks/0/type = "value"
 tracks/0/path = NodePath("SoundPlayer/BackGroundMusic:playing")
@@ -33,7 +33,7 @@ tracks/1/keys = {
 "values": [ -30.0, -18.0 ]
 }
 
-[sub_resource type="Animation" id=62]
+[sub_resource type="Animation" id=2]
 resource_name = "Fade out"
 tracks/0/type = "value"
 tracks/0/path = NodePath("SoundPlayer/BackGroundMusic:volume_db")
@@ -115,8 +115,8 @@ limit_bottom = 992
 smoothing_enabled = true
 
 [node name="SoundPlayer" type="AnimationPlayer" parent="."]
-"anims/Fade in" = SubResource( 61 )
-"anims/Fade out" = SubResource( 62 )
+"anims/Fade in" = SubResource( 1 )
+"anims/Fade out" = SubResource( 2 )
 
 [node name="BackGroundMusic" type="AudioStreamPlayer" parent="SoundPlayer"]
 volume_db = -30.0

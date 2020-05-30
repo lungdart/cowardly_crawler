@@ -37,7 +37,7 @@ tile_data = PoolIntArray( -131074, 0, 196620, -131073, 0, 196622, -196608, 0, 19
 
 [node name="Up" parent="Map" index="5" instance=ExtResource( 3 )]
 position = Vector2( 250.655, 21.266 )
-LEVEL_PATH = "res://src/level/Level4.tscn"
+LEVEL = 4
 POSITION = Vector2( 204, 202 )
 
 [node name="CollisionShape2D" parent="Map/Up/Area2D" index="0"]
@@ -45,7 +45,7 @@ shape = SubResource( 1 )
 
 [node name="Down" parent="Map" index="6" instance=ExtResource( 3 )]
 position = Vector2( 883.659, 73.3694 )
-LEVEL_PATH = "res://src/level/Level6.tscn"
+LEVEL = 6
 
 [node name="Sprite" parent="Map/Down" index="0"]
 texture = ExtResource( 5 )
