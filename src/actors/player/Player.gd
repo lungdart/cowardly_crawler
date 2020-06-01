@@ -68,6 +68,7 @@ func _ready():
 	self.lifeNode.current_life = CURRENT_LIFE
 	self.sprite.play("Idle")
 	self.armorSprite.play("Idle")
+	self.iframesPlayer.play("Iframes Stop")
 	self.state = IDLE
 	
 	# Check for armor
@@ -79,10 +80,7 @@ func _ready():
 	# Check for a special position
 	if GlobalState.player_position != Vector2.ZERO:
 		self.global_position = GlobalState.player_position
-		print("PLayer position changed to: ", GlobalState.player_position)
 		GlobalState.player_position = Vector2.ZERO
-	else:
-		print("Not changing player position from: ", global_position)
 
 func _physics_process(delta):
 	match self.state:
@@ -222,7 +220,6 @@ func _on_Hurtbox_area_entered(area):
 		self.hurtBox.set_deferred("monitorable", false)
 		
 		if GlobalState.armor and self.lifeNode.current_armor <= 0:
-			# TODO: Broken armor animation
 			self.unequip_armor()
 		
 		# Hurt animations unsed when not dead
@@ -258,7 +255,7 @@ func _on_ActionPlayer_animation_finished(anim_name):
 	if anim_name == "Hurt":
 		if self.state == IDLE:
 			self.actionPlayer.play("Stand Idle")
-		elif self.state == MOVE:
+		else:
 			self.actionPlayer.play("Stand Move")
 
 	elif anim_name == "Dash Start":

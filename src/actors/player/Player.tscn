@@ -254,6 +254,18 @@ tracks/4/keys = {
 "update": 1,
 "values": [ true ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sprite:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -4 ) ]
+}
 
 [sub_resource type="Animation" id=11]
 length = 0.3
@@ -446,15 +458,17 @@ texture = ExtResource( 13 )
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 material = SubResource( 1 )
+position = Vector2( 0, -4 )
 frames = SubResource( 2 )
-animation = "Hurt"
+animation = "Move"
 playing = true
 
 [node name="Armor" type="AnimatedSprite" parent="."]
 visible = false
 material = SubResource( 3 )
+position = Vector2( 0, -4 )
 frames = SubResource( 4 )
-animation = "Hurt"
+animation = "Move"
 playing = true
 
 [node name="Boundry" type="CollisionShape2D" parent="."]
@@ -509,9 +523,7 @@ one_shot = true
 [node name="DashPivot" type="Position2D" parent="."]
 
 [node name="DashParticles" type="CPUParticles2D" parent="DashPivot"]
-visible = false
 position = Vector2( 16, 0 )
-emitting = false
 amount = 128
 lifetime = 0.75
 speed_scale = 1.5
@@ -527,7 +539,6 @@ scale_amount_random = 1.0
 color_ramp = SubResource( 14 )
 
 [node name="ShockWave" type="Sprite" parent="DashPivot"]
-visible = false
 modulate = Color( 1, 1, 1, 0.498039 )
 position = Vector2( -8, 0 )
 scale = Vector2( 1.25, 1.5 )
@@ -541,7 +552,6 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2( -0.523155, -0.0166092 )
 shape = SubResource( 15 )
-disabled = true
 
 [node name="HitSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 25 )
