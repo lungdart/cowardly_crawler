@@ -92,10 +92,10 @@ func _input(event):
 			self.do_dash()
 
 	if event.is_action_pressed("shoot1"):
-		self.spellsNode.cast_spell("left", global_position)
+		GlobalState.cast_spell("left", global_position)
 		
 	if event.is_action_pressed("shoot2"):
-		self.spellsNode.cast_spell("right", global_position)
+		GlobalState.cast_spell("right", global_position)
 
 
 func equip_armor():

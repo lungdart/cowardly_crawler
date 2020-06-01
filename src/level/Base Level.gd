@@ -4,6 +4,8 @@ onready var pickups = $Objects/Pickups
 onready var actors = $Objects/Actors
 onready var player = $Objects/Player
 
+
+
 onready var lifeUI = $UI/Life
 onready var spellsUI = $UI/Spells
 onready var pauseUI = $UI/Pause
@@ -26,6 +28,9 @@ func _ready():
 			child.connect("enemy_killed", self, "_on_enemy_killed")
 			
 	self.soundPlayer.play("Fade in")
+
+func position_inbounds(pos):
+	return pos.x > 0 and pos.x < 640 and pos.y > 0 and pos.y < 480
 
 func _input(event):
 	if event.is_action_pressed("pause"):

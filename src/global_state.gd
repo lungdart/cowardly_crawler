@@ -33,6 +33,13 @@ func add_dash():
 func add_spell(spell_name, side):
 	self.spells.append(spell_name)
 	self.spellsUI.set_spell(side, spell_name)
+	
+func cast_spell(side, pos):
+	if side == "left" and left_spell:
+		self.spellsUI.cast_spell(side, pos)
+	elif side == "right" and right_spell:
+		self.spellsUI.cast_spell(side, pos)
+		
 
 func heal(value):
 	self.player_current_health += value

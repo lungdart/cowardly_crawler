@@ -87,7 +87,7 @@ material = SubResource( 2 )
 position = Vector2( 1.04384, -9.76804 )
 frames = SubResource( 3 )
 animation = "Idle"
-frame = 1
+frame = 3
 
 [node name="DeathSprite" parent="." index="2"]
 visible = false
@@ -119,3 +119,9 @@ visible = false
 
 [node name="CollisionShape2D" parent="SightBox" index="0"]
 shape = SubResource( 7 )
+
+[node name="SummonRayCast" type="RayCast2D" parent="." index="15"]
+enabled = true
+cast_to = Vector2( 128, 0 )
+collision_mask = 1025
+collide_with_areas = true
