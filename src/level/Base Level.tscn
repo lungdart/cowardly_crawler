@@ -65,14 +65,6 @@ script = ExtResource( 2 )
 
 [node name="Map" type="Node2D" parent="."]
 
-[node name="Background" type="TextureRect" parent="Map"]
-margin_right = 1027.0
-margin_bottom = 611.0
-stretch_mode = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="Objects" type="YSort" parent="."]
 
 [node name="Actors" type="Node2D" parent="Objects"]

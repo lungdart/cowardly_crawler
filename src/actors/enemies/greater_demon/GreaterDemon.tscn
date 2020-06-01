@@ -86,7 +86,7 @@ material = SubResource( 2 )
 position = Vector2( 0, -18 )
 frames = SubResource( 3 )
 animation = "Idle"
-frame = 2
+frame = 1
 
 [node name="DeathSprite" parent="." index="2"]
 visible = false
@@ -112,9 +112,6 @@ visible = false
 [node name="CollisionPolygon2D" parent="HurtBox" index="0"]
 position = Vector2( -0.193718, -14.141 )
 shape = SubResource( 6 )
-
-[node name="SightBox" parent="." index="6"]
-visible = false
 
 [node name="CollisionShape2D" parent="SightBox" index="0"]
 position = Vector2( 0.581139, -8.52332 )

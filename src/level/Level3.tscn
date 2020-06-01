@@ -16,6 +16,14 @@ radius = 8.0
 
 [node name="Level" instance=ExtResource( 1 )]
 
+[node name="Background" type="TextureRect" parent="Map" index="0"]
+margin_right = 1120.0
+margin_bottom = 844.0
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Water" type="TileMap" parent="Map" index="2"]
 tile_set = ExtResource( 7 )
 cell_size = Vector2( 16, 16 )
