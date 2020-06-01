@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://src/actors/player/Player.gd" type="Script" id=1]
 [ext_resource path="res://asset/frames/elf_m_run_anim_f2.png" type="Texture" id=2]
@@ -9,7 +9,6 @@
 [ext_resource path="res://asset/frames/elf_m_idle_anim_f1.png" type="Texture" id=7]
 [ext_resource path="res://asset/frames/elf_m_idle_anim_f2.png" type="Texture" id=8]
 [ext_resource path="res://asset/frames/elf_m_idle_anim_f0.png" type="Texture" id=9]
-[ext_resource path="res://asset/frames/wall_inner_corner_l_top_rigth.png" type="Texture" id=10]
 [ext_resource path="res://asset/frames/knight_m_idle_anim_f3.png" type="Texture" id=11]
 [ext_resource path="res://asset/frames/elf_m_hit_anim_f0.png" type="Texture" id=12]
 [ext_resource path="res://asset/frames/coin_anim_f3.png" type="Texture" id=13]
@@ -466,7 +465,6 @@ material = SubResource( 1 )
 position = Vector2( 0, -4 )
 frames = SubResource( 2 )
 animation = "Move"
-frame = 1
 playing = true
 
 [node name="Armor" type="AnimatedSprite" parent="."]
@@ -475,7 +473,6 @@ material = SubResource( 3 )
 position = Vector2( 0, -4 )
 frames = SubResource( 4 )
 animation = "Move"
-frame = 1
 playing = true
 
 [node name="Boundry" type="CollisionShape2D" parent="."]
@@ -493,18 +490,6 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2( -0.166084, 3.65384 )
 shape = SubResource( 6 )
-
-[node name="TargetOrigin" type="Position2D" parent="."]
-
-[node name="TextureRect" type="TextureRect" parent="TargetOrigin"]
-margin_left = -16.0
-margin_bottom = 16.0
-rect_rotation = 135.0
-rect_scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 10 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="IframesPlayer" type="AnimationPlayer" parent="."]
 "anims/Iframes Start" = SubResource( 7 )
@@ -530,6 +515,7 @@ one_shot = true
 [node name="DashPivot" type="Position2D" parent="."]
 
 [node name="DashParticles" type="CPUParticles2D" parent="DashPivot"]
+visible = false
 position = Vector2( 16, 0 )
 amount = 128
 lifetime = 0.75
@@ -546,6 +532,7 @@ scale_amount_random = 1.0
 color_ramp = SubResource( 14 )
 
 [node name="ShockWave" type="Sprite" parent="DashPivot"]
+visible = false
 modulate = Color( 1, 1, 1, 0.498039 )
 position = Vector2( -8, 0 )
 scale = Vector2( 1.25, 1.5 )

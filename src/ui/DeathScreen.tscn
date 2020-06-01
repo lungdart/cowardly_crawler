@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/ui/DeathScreen.gd" type="Script" id=1]
 [ext_resource path="res://asset/music/POL-children-of-shadows-short.wav" type="AudioStream" id=2]
+[ext_resource path="res://src/ui/theme.tres" type="Theme" id=3]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Fade"
@@ -74,6 +75,7 @@ script = ExtResource( 1 )
 [node name="Control" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
+theme = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -81,19 +83,20 @@ __meta__ = {
 [node name="ColorRect" type="ColorRect" parent="Control"]
 margin_right = 1024.0
 margin_bottom = 768.0
-color = Color( 0.152762, 0, 0, 0.150588 )
+color = Color( 0.152941, 0, 0, 0 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Title" type="RichTextLabel" parent="Control"]
 visible = false
-modulate = Color( 1, 1, 1, 0 )
-margin_left = 260.433
-margin_top = 128.037
-margin_right = 354.433
-margin_bottom = 154.037
+margin_left = 226.0
+margin_top = 118.0
+margin_right = 320.0
+margin_bottom = 144.0
 rect_scale = Vector2( 2, 2 )
+bbcode_enabled = true
+bbcode_text = "[center]You DIED![/center]"
 text = "You DIED!"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -102,17 +105,17 @@ __meta__ = {
 [node name="Menu" type="PopupMenu" parent="Control"]
 margin_left = 18.0
 margin_top = 10.0
-margin_right = 273.0
-margin_bottom = 142.0
+margin_right = 274.0
+margin_bottom = 174.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Control/Menu"]
-margin_left = 23.0999
-margin_top = 12.1422
-margin_right = 235.1
-margin_bottom = 62.1422
+margin_left = 28.0
+margin_top = 16.0
+margin_right = 228.0
+margin_bottom = 66.0
 bbcode_enabled = true
 bbcode_text = "[center] Continue from the last
 save point?[/center]"
@@ -120,18 +123,18 @@ text = " Continue from the last
 save point?"
 
 [node name="Continue" type="Button" parent="Control/Menu"]
-margin_left = 67.2831
-margin_top = 58.1673
-margin_right = 195.283
-margin_bottom = 82.1673
+margin_left = 64.0
+margin_top = 64.0
+margin_right = 192.0
+margin_bottom = 99.0
 disabled = true
 text = "Continue"
 
 [node name="Quit" type="Button" parent="Control/Menu"]
-margin_left = 68.6983
-margin_top = 92.5257
-margin_right = 196.698
-margin_bottom = 116.526
+margin_left = 64.0
+margin_top = 108.0
+margin_right = 192.0
+margin_bottom = 143.0
 text = "Save and Quit"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -139,7 +142,7 @@ anims/Fade = SubResource( 1 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
-volume_db = -26.4
+volume_db = -48.0
 [connection signal="pressed" from="Control/Menu/Continue" to="." method="_on_Continue_pressed"]
 [connection signal="pressed" from="Control/Menu/Quit" to="." method="_on_Quit_pressed"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

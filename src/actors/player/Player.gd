@@ -27,7 +27,6 @@ var friction_mod = 1.0
 
 onready var stageNode = null
 onready var UINode = null
-onready var lifeNode = null
 onready var spellsNode = null
 onready var sprite = $Sprite
 onready var armorSprite = $Armor
@@ -53,9 +52,6 @@ func _ready():
 		if node.name == "Level":
 			self.stageNode = node
 			break
-	self.UINode = self.stageNode.get_node("UI")
-	self.lifeNode = self.UINode.get_node("Life")
-	self.spellsNode = self.UINode.get_node("Spells")
 
 	# Configure initial state for all nodes
 	self.dashParticles.set_emitting(false)
@@ -63,9 +59,6 @@ func _ready():
 	self.deathParticles.set_emitting(false)
 	self.dashHitBox.set_disabled(true)
 	self.dashSprite.set_visible(false)
-	self.lifeNode.set_visible(true)
-	self.lifeNode.max_life = MAX_LIFE
-	self.lifeNode.current_life = CURRENT_LIFE
 	self.sprite.play("Idle")
 	self.armorSprite.play("Idle")
 	self.iframesPlayer.play("Iframes Stop")
@@ -80,6 +73,7 @@ func _ready():
 		self.global_position = GlobalState.player_position
 		GlobalState.player_position = Vector2.ZERO
 
+
 func _physics_process(delta):
 	match self.state:
 		IDLE:
@@ -90,7 +84,6 @@ func _physics_process(delta):
 			self.dash_state(delta)
 		DEAD:
 			return
-	update_aim()
 
 
 func _input(event):
@@ -106,7 +99,6 @@ func _input(event):
 
 
 func equip_armor():
-	GlobalState.armor = true
 	self.speed_mod *= ARMOR_SPEED_MOD
 	self.acceleration_mod *= ARMOR_ACCELERATION_MOD
 	self.friction_mod *= ARMOR_FRICTION_MOD
@@ -115,8 +107,8 @@ func equip_armor():
 	self.sprite.set_visible(false)
 	self.armorSprite.set_visible(true)
 
+
 func unequip_armor():
-	GlobalState.armor = false
 	self.speed_mod /= ARMOR_SPEED_MOD
 	self.acceleration_mod /= ARMOR_ACCELERATION_MOD
 	self.friction_mod /= ARMOR_FRICTION_MOD
@@ -124,7 +116,8 @@ func unequip_armor():
 	self.sprite.set_animation(self.armorSprite.animation)
 	self.sprite.set_visible(true)
 	self.armorSprite.set_visible(false)
-	
+
+
 func do_dash():
 	self.dashing = true
 	self.dashParticlePivot.set_rotation(self.direction.angle() + PI)
@@ -132,15 +125,7 @@ func do_dash():
 	self.actionPlayer.play("Dash Start")
 	self.state = DASH
 
-func update_aim():
-	self.target_angle = global_position.angle_to_point(get_global_mouse_position())
-	self.targetOrigin.set_rotation(self.target_angle)
 
-
-func heal(value):
-	self.lifeNode.current_life += value
-
-# warning-ignore:unused_argument
 func idle_state(delta):
 	if get_input_vector() != Vector2.ZERO:
 		self.velocity = Vector2.ZERO
@@ -214,14 +199,11 @@ func get_input_vector():
 func _on_Hurtbox_area_entered(area):
 	# Only hurt outside of iframes
 	if not self.invincible:
-		self.lifeNode.hurt(1)
+		GlobalState.hurt(1)
 		self.hurtBox.set_deferred("monitorable", false)
 		
-		if GlobalState.armor and self.lifeNode.current_armor <= 0:
-			self.unequip_armor()
-		
 		# Hurt animations unsed when not dead
-		if self.lifeNode.current_life > 0:
+		if GlobalState.player_current_health > 0:
 			self.iframesPlayer.play("Iframes Start")
 			self.actionPlayer.play("Hurt")
 			self.invincible = true
@@ -232,7 +214,6 @@ func _on_Hurtbox_area_entered(area):
 			self.state = DEAD
 			self.sprite.set_visible(false)
 			self.shadowSprite.set_visible(false)
-			self.targetCursor.set_visible(false)
 			self.deathParticles.set_visible(true)
 			self.deathParticles.set_emitting(true)
 			self.deathSound.play()

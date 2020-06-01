@@ -5,13 +5,18 @@ const FOOD_DROP = preload("res://src/pickups/DropFood.tscn")
 
 var player = null
 var player_position = Vector2.ZERO
+var player_max_health = 10 setget _set_max_health
+var player_current_health = 10 setget _set_current_health
+
 var level = null
 var lifeUI = null
 var spellsUI = null
 
 var spells = []
 var dash = false
-var armor = false
+var armor = false setget _set_armor
+var armor_max_health = 3 setget _set_max_armor_health
+var armor_current_health = 3 setget _set_current_armor_health
 
 var left_spell = null
 var right_spell = null
@@ -25,22 +30,18 @@ func _ready():
 func add_dash():
 	self.dash = true
 
-func set_armor(value):
-	if value:
-		self.armor = true
-		self.lifeUI.set_armor(true)
-		self.player.equip_armor()
-	else:
-		self.armor = false
-		self.lifeUI.set_armor(false)
-		self.player.unequip_armor()
-
 func add_spell(spell_name, side):
 	self.spells.append(spell_name)
 	self.spellsUI.set_spell(side, spell_name)
-	
+
 func heal(value):
-	self.player.heal(value)
+	self.player_current_health += value
+	
+func hurt(value):
+	if self.armor:
+		self.armor_current_health -= value
+	else:
+		self.player_current_health -= value
 
 func drop(position):
 	var chance = randi() % 100
@@ -51,3 +52,43 @@ func drop(position):
 	elif chance >= (95 - 25):
 		var instance = FOOD_DROP.instance()
 		self.level.add_drop(instance, position)
+
+func _set_max_health(value):
+	player_max_health = value
+	self.lifeUI.max_life = value
+	
+func _set_current_health(value):
+	# Can't exceed max health
+	if value > self.player_max_health:
+		value = self.player_max_health
+
+	player_current_health = value
+	self.lifeUI.current_life = value
+
+func _set_armor(value):
+	# Newly pickuped armor
+	if value and not self.armor:
+		armor = true
+		self.lifeUI.toggle_armor(true)
+		self.player.equip_armor()
+		
+	# Newly lost armor
+	elif not value and self.armor:
+		armor = false
+		self.lifeUI.toggle_armor(false)
+		self.player.unequip_armor()
+
+func _set_max_armor_health(value):
+	armor_max_health = value
+	self.lifeUI.max_armor = value
+	
+func _set_current_armor_health(value):
+	# Increasing current armor maxes out max armor temporarily
+	if value > self.armor_max_health:
+		self.lifeUI.max_armor = value
+		
+	if value <= 0 and self.armor:
+		self.armor = false
+
+	armor_current_health = value
+	self.lifeUI.current_armor = value
