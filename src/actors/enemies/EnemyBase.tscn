@@ -37,7 +37,7 @@ shader = SubResource( 1 )
 shader_param/white_out = true
 shader_param/frozen = false
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 length = 0.2
 loop = true
 tracks/0/type = "value"
@@ -53,7 +53,7 @@ tracks/0/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=4]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:material:shader_param/white_out")
 tracks/0/interp = 1
@@ -67,7 +67,7 @@ tracks/0/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=5]
 tracks/0/type = "value"
 tracks/0/path = NodePath("DeathSprite:position")
 tracks/0/interp = 1
@@ -127,6 +127,7 @@ tracks/0/keys = {
 
 [node name="EnemyBase" type="KinematicBody2D"]
 collision_layer = 0
+collision_mask = 1025
 script = ExtResource( 3 )
 
 [node name="Shadow" type="Sprite" parent="."]
@@ -173,8 +174,8 @@ wait_time = 1.5
 one_shot = true
 
 [node name="ShaderPlayer" type="AnimationPlayer" parent="."]
-"anims/Iframes Start" = SubResource( 4 )
-"anims/Iframes Stop" = SubResource( 5 )
+"anims/Iframes Start" = SubResource( 3 )
+"anims/Iframes Stop" = SubResource( 4 )
 
 [node name="DeathParticles" parent="." instance=ExtResource( 1 )]
 visible = true
@@ -182,7 +183,7 @@ visible = true
 [node name="CastParticles" parent="." instance=ExtResource( 2 )]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Death = SubResource( 3 )
+anims/Death = SubResource( 5 )
 anims/Hit = SubResource( 6 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
