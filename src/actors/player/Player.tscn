@@ -34,14 +34,14 @@ shader_param/active = false
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ ExtResource( 4 ), ExtResource( 3 ), ExtResource( 2 ), ExtResource( 6 ) ],
-"loop": true,
-"name": "Move",
-"speed": 10.0
-}, {
 "frames": [ ExtResource( 9 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 5 ) ],
 "loop": true,
 "name": "Idle",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 3 ), ExtResource( 2 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "Move",
 "speed": 10.0
 }, {
 "frames": [ ExtResource( 12 ) ],
@@ -57,14 +57,14 @@ shader_param/active = false
 
 [sub_resource type="SpriteFrames" id=4]
 animations = [ {
-"frames": [ ExtResource( 18 ), ExtResource( 21 ), ExtResource( 17 ), ExtResource( 19 ) ],
-"loop": true,
-"name": "Move",
-"speed": 10.0
-}, {
 "frames": [ ExtResource( 22 ), ExtResource( 23 ), ExtResource( 20 ), ExtResource( 11 ) ],
 "loop": true,
 "name": "Idle",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 18 ), ExtResource( 21 ), ExtResource( 17 ), ExtResource( 19 ) ],
+"loop": true,
+"name": "Move",
 "speed": 10.0
 }, {
 "frames": [ ExtResource( 16 ) ],
@@ -446,6 +446,11 @@ radius = 19.2605
 collision_layer = 2
 collision_mask = 1025
 script = ExtResource( 1 )
+ACCELERATION = 750
+FRICTION = 1500
+MAX_SPEED = 175
+ARMOR_ACCELERATION_MOD = 0.75
+ARMOR_FRICTION_MOD = 1.0
 MAX_LIFE = 10
 CURRENT_LIFE = 10
 
@@ -461,6 +466,7 @@ material = SubResource( 1 )
 position = Vector2( 0, -4 )
 frames = SubResource( 2 )
 animation = "Move"
+frame = 1
 playing = true
 
 [node name="Armor" type="AnimatedSprite" parent="."]
@@ -469,6 +475,7 @@ material = SubResource( 3 )
 position = Vector2( 0, -4 )
 frames = SubResource( 4 )
 animation = "Move"
+frame = 1
 playing = true
 
 [node name="Boundry" type="CollisionShape2D" parent="."]

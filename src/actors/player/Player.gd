@@ -74,8 +74,6 @@ func _ready():
 	# Check for armor
 	if GlobalState.armor:
 		equip_armor()
-	else:
-		unequip_armor()
 
 	# Check for a special position
 	if GlobalState.player_position != Vector2.ZERO:
