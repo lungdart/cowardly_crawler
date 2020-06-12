@@ -43,14 +43,14 @@ shader_param/frozen = false
 
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
-"frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 5 ), ExtResource( 8 ) ],
-"loop": true,
-"name": "Idle",
-"speed": 10.0
-}, {
 "frames": [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 11 ), ExtResource( 9 ) ],
 "loop": true,
 "name": "Move",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 5 ), ExtResource( 8 ) ],
+"loop": true,
+"name": "Idle",
 "speed": 10.0
 } ]
 
@@ -87,7 +87,6 @@ material = SubResource( 2 )
 position = Vector2( 1.04384, -9.76804 )
 frames = SubResource( 3 )
 animation = "Idle"
-frame = 3
 
 [node name="DeathSprite" parent="." index="2"]
 visible = false

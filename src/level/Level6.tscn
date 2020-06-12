@@ -30,7 +30,7 @@ POSITION = Vector2( 884, 42 )
 shape = SubResource( 1 )
 
 [node name="Down" parent="Map" index="4" instance=ExtResource( 2 )]
-position = Vector2( 999.682, 375.707 )
+position = Vector2( 1000, 376 )
 LEVEL = 7
 
 [node name="Sprite" parent="Map/Down" index="0"]

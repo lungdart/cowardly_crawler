@@ -8,6 +8,8 @@ const SUMMONS = [
 ]
 
 
+onready var summonRayCast = $SummonRayCast
+
 export var SUMMON_RADIUS = 128.0
 export var SUMMON_RADIUS_PAD = 16.0
 

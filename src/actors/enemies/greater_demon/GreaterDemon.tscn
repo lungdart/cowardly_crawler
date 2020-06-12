@@ -43,14 +43,14 @@ shader_param/frozen = false
 
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
-"frames": [ ExtResource( 8 ), ExtResource( 6 ), ExtResource( 9 ), ExtResource( 5 ) ],
-"loop": true,
-"name": "Idle",
-"speed": 10.0
-}, {
 "frames": [ ExtResource( 7 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ) ],
 "loop": true,
 "name": "Move",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 8 ), ExtResource( 6 ), ExtResource( 9 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "Idle",
 "speed": 10.0
 } ]
 
@@ -86,7 +86,7 @@ material = SubResource( 2 )
 position = Vector2( 0, -18 )
 frames = SubResource( 3 )
 animation = "Idle"
-frame = 1
+frame = 3
 
 [node name="DeathSprite" parent="." index="2"]
 visible = false
@@ -119,3 +119,7 @@ shape = SubResource( 7 )
 
 [node name="CastParticles" parent="." index="12"]
 position = Vector2( 0.968561, -11.8164 )
+
+[node name="SummonRayCast" type="RayCast2D" parent="." index="15"]
+cast_to = Vector2( 128, 0 )
+collision_mask = 1025
