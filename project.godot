@@ -122,6 +122,8 @@ pause={
 2d_physics/layer_4="Player Hurt"
 2d_physics/layer_5="Player Effect"
 2d_physics/layer_11="Walls"
+2d_physics/layer_12="Grass"
+2d_physics/layer_13="Path"
 
 [rendering]
 

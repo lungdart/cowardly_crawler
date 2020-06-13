@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+signal fear(value)
+
 enum { IDLE, MOVE, DASH, DEAD }
 
 export var ACCELERATION = 500
@@ -72,6 +74,12 @@ func _ready():
 	if GlobalState.player_position != Vector2.ZERO:
 		self.global_position = GlobalState.player_position
 		GlobalState.player_position = Vector2.ZERO
+		
+	# Disable fearful collisions if no longer afraid
+	if not GlobalState.fear_path:
+		set_collision_mask_bit(12, false)
+	if not GlobalState.fear_grass:
+		set_collision_mask_bit(11, false)
 
 
 func _physics_process(delta):
@@ -158,6 +166,14 @@ func move_state(delta):
 	
 	# Update player position
 	self.velocity = move_and_slide(self.velocity)
+	for i in get_slide_count():
+		var collision = get_slide_collision(i)
+		if collision.collider.get_collision_layer_bit(11):
+			emit_signal("fear", 11)
+		elif collision.collider.get_collision_layer_bit(12):
+			emit_signal("fear", 12)
+		
+	
 
 func dash_state(delta):
 	# Slow down to regular max speed after dashing

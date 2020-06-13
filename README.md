@@ -12,15 +12,11 @@ A top down dungeon crawler with a theme of cowardice
 
 ## TODO
 * Menus
-  * Stylize menus
-    * Borders, backgrounds, fonts
   * Win menu
-  * Enable max dungeon level recording
   * Show current dungeon level on screen
 
 * Level design
-  * Dungeon levels x5
-  * Hell levels x5
+  * Finish 15 levels
   * Add blocks and events to guide the player during progression
 
 * Story
@@ -28,5 +24,4 @@ A top down dungeon crawler with a theme of cowardice
   * Develop simple story that makes player progress
 
 * Core game stuff
-  * Bug fixing
   * Saving and loading

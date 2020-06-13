@@ -24,6 +24,11 @@ var right_spell = null
 var kill_counter = 0
 var max_dungeon_level = 0
 
+var intro_played = false
+var fear_grass = true
+var fear_path = true
+
+
 func _ready():
 	randomize()
 
