@@ -18,3 +18,6 @@ texture = ExtResource( 2 )
 [node name="CollisionShape2D" parent="Pickup" index="0"]
 position = Vector2( -0.0224322, -4.24044 )
 shape = SubResource( 1 )
+
+[node name="Dialog" parent="CanvasLayer" index="0"]
+TEXT = "OMG Magic! It feels like waves of power coursing through my veins. Maybe I don't have to be afraid of fighting any more? I bet I could shoot fire using the \"LEFT MOUSE BUTTON\" now!"

@@ -13,13 +13,13 @@ onready var audioStream = $AudioStreamPlayer
 func _ready():
 	self.label.text = ""
 	self.avatar.texture = AVATAR_TEXTURE
-	#popup()
 
 # Call this function to start the dialog
 func popup():
 	get_tree().paused = true
 	self.dialogBox.popup_centered()
 	_play()
+	return self
 
 # Plays the text out for a nicer effect
 func _play():

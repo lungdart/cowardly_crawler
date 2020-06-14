@@ -67,6 +67,7 @@ position = Vector2( 648, 768 )
 position = Vector2( 696, 912 )
 
 [node name="PickupDash" parent="Objects/Pickups" index="0" instance=ExtResource( 7 )]
+pause_mode = 0
 position = Vector2( 184, 792 )
 
 [node name="Player" parent="Objects" index="2"]

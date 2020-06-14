@@ -3,25 +3,22 @@ extends StaticBody2D
 
 onready var icon = $Icon
 onready var animationPlayer = $AnimationPlayer
+onready var dialog = $CanvasLayer/Dialog
 
 func _ready():
-	animationPlayer.play("Float")
+	self.icon.set_visible(true)
+	self.animationPlayer.play("Float")
+
+
+func _on_Pickup_body_entered(body):
+	self.icon.set_visible(false)
+	self.animationPlayer.play("Fizzle")
+	yield(self.dialog.popup(), "modal_closed")
+
+	pick_up()
+	queue_free()
 
 
 # Override this on each instance
 func pick_up():
 	pass
-
-
-func _on_Pickup_body_entered(body):
-	pick_up()
-	destroy()
-
-
-func _on_AnimationPlayer_animation_finished(anim_name):
-	if anim_name == "Fizzle":
-		queue_free()
-
-func destroy():
-	self.icon.set_visible(false)
-	self.animationPlayer.play("Fizzle")

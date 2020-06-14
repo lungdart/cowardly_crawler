@@ -21,3 +21,7 @@ visible = true
 [node name="CollisionShape2D" parent="Pickup" index="0"]
 position = Vector2( 0.413929, -3.19013 )
 shape = SubResource( 1 )
+
+[node name="Dialog" parent="CanvasLayer" index="0"]
+visible = false
+TEXT = "Oh wow a vintage pair of Yeezys! With these bad boys I could run away from almost anything using \"SPACE BAR\". If I wasn't such a coward I could probably tackle monsters with it too..."

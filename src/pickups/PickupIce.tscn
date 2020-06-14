@@ -12,9 +12,12 @@ height = 7.80533
 script = ExtResource( 3 )
 
 [node name="Icon" parent="." index="1"]
-position = Vector2( 0, -7 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" parent="Pickup" index="0"]
 position = Vector2( -0.201628, -3.57485 )
 shape = SubResource( 1 )
+
+[node name="Dialog" parent="CanvasLayer" index="0"]
+visible = false
+TEXT = "Oh wow this magic feels cold! Maybe it's cold enough to slow people down when I press the \"RIGHT MOUSE BUTTON\""
