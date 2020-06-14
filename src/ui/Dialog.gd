@@ -1,5 +1,7 @@
 extends Control
 
+signal closed
+
 export var AVATAR_TEXTURE: Texture
 export var TEXT: String
 export var NEXT_DIALOG: NodePath
@@ -34,3 +36,4 @@ func _on_DialogBox_popup_hide():
 		get_node(NEXT_DIALOG).popup()
 	else:
 		get_tree().paused = false
+	emit_signal("closed")

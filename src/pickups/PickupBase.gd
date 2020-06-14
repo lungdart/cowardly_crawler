@@ -13,7 +13,7 @@ func _ready():
 func _on_Pickup_body_entered(body):
 	self.icon.set_visible(false)
 	self.animationPlayer.play("Fizzle")
-	yield(self.dialog.popup(), "modal_closed")
+	yield(self.dialog.popup(), "closed")
 
 	pick_up()
 	queue_free()

@@ -38,6 +38,10 @@ func add_dash():
 func add_spell(spell_name, side):
 	self.spells.append(spell_name)
 	self.spellsUI.set_spell(side, spell_name)
+	if side == "left":
+		self.left_spell = spell_name
+	elif side == "right":
+		self.right_spell = spell_name
 	
 func cast_spell(side, pos):
 	if side == "left" and left_spell:
