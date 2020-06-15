@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://src/actors/enemies/EnemyBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://asset/frames/big_zombie_idle_anim_f1.png" type="Texture" id=2]
@@ -9,8 +9,9 @@
 [ext_resource path="res://asset/frames/big_zombie_run_anim_f1.png" type="Texture" id=7]
 [ext_resource path="res://asset/frames/big_zombie_run_anim_f0.png" type="Texture" id=8]
 [ext_resource path="res://asset/frames/big_zombie_idle_anim_f3.png" type="Texture" id=9]
+[ext_resource path="res://src/actors/enemies/boss_zombie/BossZombie.gd" type="Script" id=10]
 
-[sub_resource type="Shader" id=2]
+[sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
 uniform bool white_out = false;
@@ -33,13 +34,13 @@ void fragment() {
 	}
 }"
 
-[sub_resource type="ShaderMaterial" id=3]
+[sub_resource type="ShaderMaterial" id=2]
 resource_local_to_scene = true
-shader = SubResource( 2 )
+shader = SubResource( 1 )
 shader_param/white_out = false
 shader_param/frozen = false
 
-[sub_resource type="SpriteFrames" id=1]
+[sub_resource type="SpriteFrames" id=3]
 animations = [ {
 "frames": [ ExtResource( 8 ), ExtResource( 7 ), ExtResource( 3 ), ExtResource( 4 ) ],
 "loop": true,
@@ -52,11 +53,11 @@ animations = [ {
 "speed": 10.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=5]
+[sub_resource type="CapsuleShape2D" id=4]
 radius = 24.7128
 height = 19.9857
 
-[sub_resource type="CapsuleShape2D" id=4]
+[sub_resource type="CapsuleShape2D" id=5]
 radius = 22.4596
 height = 22.4892
 
@@ -64,27 +65,41 @@ height = 22.4892
 radius = 200.0
 
 [node name="BossZombie" instance=ExtResource( 1 )]
-ACCELERATION = 500
-MAX_SPEED = 125
+script = ExtResource( 10 )
+MAX_SPEED = 75
 MAX_LIFE = 10
+IDLE_CHANCE = 0
+MOVE_CHANCE = 100
+MIN_MOVE_TIME = 0.1
+MAX_MOVE_TIME = 3.0
 
 [node name="Sprite" parent="." index="1"]
-material = SubResource( 3 )
+material = SubResource( 2 )
 scale = Vector2( 2.5, 2.5 )
-frames = SubResource( 1 )
+frames = SubResource( 3 )
 animation = "Move"
 frame = 2
 
 [node name="DeathSprite" parent="." index="2"]
 visible = false
 
+[node name="HitBox" parent="." index="4"]
+visible = false
+
 [node name="CollisionShape2D" parent="HitBox" index="0"]
 position = Vector2( 0.751022, 9.26274 )
-shape = SubResource( 5 )
+shape = SubResource( 4 )
+
+[node name="HurtBox" parent="." index="5"]
+visible = false
 
 [node name="CollisionPolygon2D" parent="HurtBox" index="0"]
 position = Vector2( 1.25172, 9.76342 )
-shape = SubResource( 4 )
+shape = SubResource( 5 )
+
+[node name="SightBox" parent="." index="6"]
+visible = false
 
 [node name="CollisionShape2D" parent="SightBox" index="0"]
+visible = false
 shape = SubResource( 6 )

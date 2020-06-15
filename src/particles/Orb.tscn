@@ -1,0 +1,99 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://asset/orb.png" type="Texture" id=1]
+[ext_resource path="res://src/particles/Orb.gd" type="Script" id=2]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0, 0.323944, 0.652582, 1 )
+colors = PoolColorArray( 0, 0, 0, 1, 1, 0.156863, 1, 1, 0.52549, 0, 0.913725, 1, 0, 0, 0, 1 )
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 16.0
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 16.0
+
+[sub_resource type="Animation" id=4]
+resource_name = "Rotation"
+length = 1.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.7, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.490196 ), Color( 1, 1, 1, 0.333333 ), Color( 1, 1, 1, 0.490196 ) ]
+}
+
+[node name="Orb" type="KinematicBody2D"]
+collision_layer = 0
+collision_mask = 1024
+script = ExtResource( 2 )
+
+[node name="BackParticles" type="CPUParticles2D" parent="."]
+amount = 32
+emission_shape = 1
+emission_sphere_radius = 16.0
+spread = 30.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 64.0
+initial_velocity_random = 0.5
+angular_velocity = 360.0
+angular_velocity_random = 1.0
+angle = 360.0
+angle_random = 1.0
+scale_amount = 2.0
+scale_amount_random = 1.0
+color_ramp = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.490196 )
+texture = ExtResource( 1 )
+
+[node name="Boundry" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource( 2 )
+
+[node name="HitBox" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource( 3 )
+
+[node name="FrontParticles" type="CPUParticles2D" parent="."]
+amount = 32
+emission_shape = 1
+emission_sphere_radius = 16.0
+spread = 30.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 64.0
+initial_velocity_random = 0.5
+angular_velocity = 360.0
+angular_velocity_random = 1.0
+angle = 360.0
+angle_random = 1.0
+scale_amount = 2.0
+scale_amount_random = 1.0
+color_ramp = SubResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Rotation = SubResource( 4 )
