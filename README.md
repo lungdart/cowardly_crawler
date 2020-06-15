@@ -11,17 +11,12 @@ A top down dungeon crawler with a theme of cowardice
 * **Mouse** Aim spells and operate menus
 
 ## TODO
-* Menus
-  * Win menu
-  * Show current dungeon level on screen
-
 * Level design
-  * Finish 15 levels
-  * Add blocks and events to guide the player during progression
-
-* Story
-  * Add character text dialogs
-  * Develop simple story that makes player progress
+  * Create 5 "hell" levels
+  * Create 3 new enemies
+  * Create final boss
 
 * Core game stuff
+  * Create two new spells and ability to change spells via the menu
+  * Game won
   * Saving and loading

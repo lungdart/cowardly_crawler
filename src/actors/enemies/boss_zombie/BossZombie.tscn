@@ -78,7 +78,6 @@ material = SubResource( 2 )
 scale = Vector2( 2.5, 2.5 )
 frames = SubResource( 3 )
 animation = "Move"
-frame = 2
 
 [node name="DeathSprite" parent="." index="2"]
 visible = false

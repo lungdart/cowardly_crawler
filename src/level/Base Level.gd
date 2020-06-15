@@ -4,11 +4,10 @@ onready var pickups = $Objects/Pickups
 onready var actors = $Objects/Actors
 onready var player = $Objects/Player
 
-
-
 onready var lifeUI = $UI/Life
 onready var spellsUI = $UI/Spells
 onready var pauseUI = $UI/Pause
+onready var currentLevel = $UI/CurrentLevel
 
 onready var soundPlayer = $SoundPlayer
 
@@ -22,6 +21,8 @@ func _ready():
 	self.lifeUI.set_visible(true)
 	self.spellsUI.set_visible(true)
 	self.pauseUI.set_visible(true)
+	self.currentLevel.set_visible(true)
+	self.currentLevel.text = "Outside"
 	
 	for child in self.actors.get_children():
 		if child.name != "Player":
