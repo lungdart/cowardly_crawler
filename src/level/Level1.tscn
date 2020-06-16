@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/level/CaveBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/level/tilesets/cave1.tres" type="TileSet" id=2]
@@ -7,12 +7,14 @@
 [ext_resource path="res://asset/music/POL-foggy-forest-short.wav" type="AudioStream" id=5]
 [ext_resource path="res://src/actors/enemies/skeleton/Skeleton.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/pickups/PickupDash.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/level/Level1.gd" type="Script" id=8]
 
 [sub_resource type="CircleShape2D" id=1]
 
 [sub_resource type="CircleShape2D" id=2]
 
 [node name="Level" instance=ExtResource( 1 )]
+script = ExtResource( 8 )
 
 [node name="Floor" parent="Map" index="0"]
 collision_mask = 0

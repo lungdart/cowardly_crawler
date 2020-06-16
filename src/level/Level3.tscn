@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/level/CaveBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/level/Door.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://src/actors/enemies/shaman/Shaman.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/level/tilesets/cave1.tres" type="TileSet" id=7]
 [ext_resource path="res://asset/music/POL-foggy-forest-short.wav" type="AudioStream" id=8]
+[ext_resource path="res://src/level/Level3.gd" type="Script" id=9]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -15,6 +16,7 @@
 radius = 8.0
 
 [node name="Level" instance=ExtResource( 1 )]
+script = ExtResource( 9 )
 
 [node name="Water" type="TileMap" parent="Map" index="1"]
 tile_set = ExtResource( 7 )

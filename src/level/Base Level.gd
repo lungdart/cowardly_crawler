@@ -22,7 +22,7 @@ func _ready():
 	self.spellsUI.set_visible(true)
 	self.pauseUI.set_visible(true)
 	self.currentLevel.set_visible(true)
-	self.currentLevel.text = "Outside"
+	self.currentLevel.bbcode_text = "[right]Outside[/right]"
 	
 	for child in self.actors.get_children():
 		if child.name != "Player":
