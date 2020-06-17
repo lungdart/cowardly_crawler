@@ -12,7 +12,7 @@
 [ext_resource path="res://src/actors/enemies/imp/Imp.gd" type="Script" id=10]
 [ext_resource path="res://asset/explosion.png" type="Texture" id=11]
 
-[sub_resource type="Shader" id=5]
+[sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
 uniform bool white_out = false;
@@ -35,93 +35,93 @@ void fragment() {
 	}
 }"
 
-[sub_resource type="ShaderMaterial" id=6]
+[sub_resource type="ShaderMaterial" id=2]
 resource_local_to_scene = true
-shader = SubResource( 5 )
+shader = SubResource( 1 )
 shader_param/white_out = false
 shader_param/frozen = false
 
-[sub_resource type="SpriteFrames" id=1]
+[sub_resource type="SpriteFrames" id=3]
 animations = [ {
-"frames": [ ExtResource( 2 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 9 ) ],
-"loop": true,
-"name": "Move",
-"speed": 10.0
-}, {
 "frames": [ ExtResource( 3 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 6 ) ],
 "loop": true,
 "name": "Idle",
 "speed": 10.0
+}, {
+"frames": [ ExtResource( 2 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 9 ) ],
+"loop": true,
+"name": "Move",
+"speed": 10.0
 } ]
 
-[sub_resource type="AtlasTexture" id=8]
+[sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 11 )
 region = Rect2( 0, 0, 48, 48 )
 
-[sub_resource type="AtlasTexture" id=9]
+[sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 11 )
 region = Rect2( 48, 0, 48, 48 )
 
-[sub_resource type="AtlasTexture" id=10]
+[sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 11 )
 region = Rect2( 96, 0, 48, 48 )
 
-[sub_resource type="AtlasTexture" id=11]
+[sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 11 )
 region = Rect2( 144, 0, 48, 48 )
 
-[sub_resource type="AtlasTexture" id=12]
+[sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 11 )
 region = Rect2( 192, 0, 48, 48 )
 
-[sub_resource type="AtlasTexture" id=13]
+[sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 11 )
 region = Rect2( 240, 0, 48, 48 )
 
-[sub_resource type="AtlasTexture" id=14]
+[sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 11 )
 region = Rect2( 288, 0, 48, 48 )
 
-[sub_resource type="AtlasTexture" id=15]
+[sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 11 )
 region = Rect2( 336, 0, 48, 48 )
 
-[sub_resource type="AtlasTexture" id=16]
+[sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 11 )
 region = Rect2( 384, 0, 48, 48 )
 
-[sub_resource type="AtlasTexture" id=17]
+[sub_resource type="AtlasTexture" id=13]
 atlas = ExtResource( 11 )
 region = Rect2( 432, 0, 48, 48 )
 
-[sub_resource type="AtlasTexture" id=18]
+[sub_resource type="AtlasTexture" id=14]
 atlas = ExtResource( 11 )
 region = Rect2( 480, 0, 48, 48 )
 
-[sub_resource type="SpriteFrames" id=19]
+[sub_resource type="SpriteFrames" id=15]
 animations = [ {
-"frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ) ],
+"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ],
 "loop": false,
 "name": "Explode",
 "speed": 16.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=2]
+[sub_resource type="CapsuleShape2D" id=16]
 radius = 1.80523
 height = 6.34564
 
-[sub_resource type="CapsuleShape2D" id=3]
+[sub_resource type="CapsuleShape2D" id=17]
 radius = 4.52361
 height = 3.16858
 
-[sub_resource type="CircleShape2D" id=20]
+[sub_resource type="CircleShape2D" id=18]
 radius = 14.6488
 
-[sub_resource type="CapsuleShape2D" id=4]
+[sub_resource type="CapsuleShape2D" id=19]
 radius = 4.70762
 height = 3.53666
 
-[sub_resource type="CircleShape2D" id=7]
+[sub_resource type="CircleShape2D" id=20]
 radius = 100.0
 
 [node name="Imp" instance=ExtResource( 1 )]
@@ -131,15 +131,16 @@ IDLE_CHANCE = 100
 MOVE_CHANCE = 0
 
 [node name="Sprite" parent="." index="1"]
-material = SubResource( 6 )
+material = SubResource( 2 )
 position = Vector2( 0, -8 )
-frames = SubResource( 1 )
+frames = SubResource( 3 )
 animation = "Idle"
+frame = 1
 
 [node name="ExplosionSprite" type="AnimatedSprite" parent="." index="2"]
 visible = false
 position = Vector2( 1.10416, -4.04858 )
-frames = SubResource( 19 )
+frames = SubResource( 15 )
 animation = "Explode"
 frame = 1
 
@@ -151,18 +152,18 @@ scale = Vector2( 0.75, 0.75 )
 visible = false
 position = Vector2( 0.552078, -1.84026 )
 rotation = 1.5708
-shape = SubResource( 2 )
+shape = SubResource( 16 )
 
 [node name="HitBox" parent="." index="5"]
 visible = false
 
 [node name="CollisionShape2D" parent="HitBox" index="0"]
 position = Vector2( 0.552071, -5.52078 )
-shape = SubResource( 3 )
+shape = SubResource( 17 )
 
 [node name="ExplosionShape" type="CollisionShape2D" parent="HitBox" index="1"]
 position = Vector2( 0.736099, -4.41663 )
-shape = SubResource( 20 )
+shape = SubResource( 18 )
 disabled = true
 
 [node name="HurtBox" parent="." index="6"]
@@ -170,11 +171,11 @@ visible = false
 
 [node name="CollisionPolygon2D" parent="HurtBox" index="0"]
 position = Vector2( 0.552078, -5.52078 )
-shape = SubResource( 4 )
+shape = SubResource( 19 )
 
 [node name="SightBox" parent="." index="7"]
 visible = false
 
 [node name="CollisionShape2D" parent="SightBox" index="0"]
-shape = SubResource( 7 )
+shape = SubResource( 20 )
 [connection signal="animation_finished" from="ExplosionSprite" to="." method="_on_ExplosionSprite_animation_finished"]

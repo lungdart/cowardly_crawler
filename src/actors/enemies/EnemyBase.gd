@@ -142,7 +142,11 @@ func do_move_state(delta):
 
 # No-op
 func do_cast_state(delta):
-	pass
+	self.current_state_time += delta
+	if self.current_state_time >= self.target_state_time:
+		var chance = randi() % 100
+		var setter = get_next_state(chance)
+		setter.call_func()
 
 # No-op
 func do_die_state(delta):
@@ -152,7 +156,7 @@ func do_die_state(delta):
 func get_next_state(chance):
 	if chance > (100 - CAST_CHANCE):
 		return funcref(self, "set_cast_state")
-	elif chance > (100 - MOVE_CHANCE):
+	elif chance > (100 - MOVE_CHANCE - CAST_CHANCE):
 		return funcref(self, "set_move_state")
 	else:
 		return funcref(self, "set_idle_state")

@@ -50,6 +50,7 @@ shape = SubResource( 2 )
 
 [node name="BossZombie" parent="Objects/Actors" index="0" instance=ExtResource( 7 )]
 position = Vector2( 641.699, 625.876 )
+MAX_LIFE = 30
 
 [node name="Player" parent="Objects" index="2"]
 visible = true
