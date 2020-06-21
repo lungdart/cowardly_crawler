@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/level/BaseDungeon.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/level/Door.tscn" type="PackedScene" id=2]
 [ext_resource path="res://asset/tilesets/stairs.png" type="Texture" id=3]
 [ext_resource path="res://src/level/tilesets/dungeon1.tres" type="TileSet" id=4]
 [ext_resource path="res://src/level/Level10.gd" type="Script" id=5]
+[ext_resource path="res://asset/music/POL-countering-evil-short.wav" type="AudioStream" id=6]
 [ext_resource path="res://src/actors/enemies/boss_zombie/BossZombie.tscn" type="PackedScene" id=7]
 
 [sub_resource type="CircleShape2D" id=1]
@@ -12,6 +13,9 @@ radius = 8.0
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 8.0
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 145.373, 13.2515 )
 
 [node name="Level" instance=ExtResource( 1 )]
 script = ExtResource( 5 )
@@ -28,7 +32,7 @@ cell_size = Vector2( 16, 16 )
 collision_layer = 1024
 collision_mask = 0
 format = 1
-tile_data = PoolIntArray( 3473445, 0, 2, 3473446, 0, 2, 3473447, 0, 2, 3473448, 0, 2, 3473449, 0, 2, 3473450, 0, 2, 3473451, 0, 2, 3538981, 0, 65538, 3538982, 0, 65538, 3538983, 0, 65538, 3538984, 0, 65538, 3538985, 0, 65538, 3538986, 0, 65538 )
+tile_data = PoolIntArray( 262182, 0, 2, 262183, 0, 2, 262184, 0, 2, 262185, 0, 2, 327718, 0, 65538, 327719, 0, 65538, 327720, 0, 65538, 327721, 0, 65538, 3473445, 0, 2, 3473446, 0, 2, 3473447, 0, 2, 3473448, 0, 2, 3473449, 0, 2, 3473450, 0, 2, 3473451, 0, 2, 3538981, 0, 65538, 3538982, 0, 65538, 3538983, 0, 65538, 3538984, 0, 65538, 3538985, 0, 65538, 3538986, 0, 65538 )
 
 [node name="Down" parent="Map" index="4" instance=ExtResource( 2 )]
 position = Vector2( 680.053, 936.987 )
@@ -48,6 +52,15 @@ texture = ExtResource( 3 )
 [node name="CollisionShape2D" parent="Map/Up/Area2D" index="0"]
 shape = SubResource( 2 )
 
+[node name="BlockTrigger" type="Area2D" parent="Map" index="6"]
+position = Vector2( 639.242, 107.531 )
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/BlockTrigger" index="0"]
+position = Vector2( -0.540344, 11.8878 )
+shape = SubResource( 3 )
+
 [node name="BossZombie" parent="Objects/Actors" index="0" instance=ExtResource( 7 )]
 position = Vector2( 641.699, 625.876 )
 MAX_LIFE = 30
@@ -58,6 +71,11 @@ position = Vector2( 597.404, 39.4915 )
 
 [node name="Camera2D" parent="." index="3"]
 position = Vector2( 597.404, 39.4915 )
+
+[node name="BackGroundMusic" parent="SoundPlayer" index="0"]
+stream = ExtResource( 6 )
+volume_db = -18.0
+[connection signal="body_entered" from="Map/BlockTrigger" to="." method="_on_BlockTrigger_body_entered"]
 [connection signal="enemy_killed" from="Objects/Actors/BossZombie" to="." method="_on_BossZombie_enemy_killed"]
 
 [editable path="Map/Down"]

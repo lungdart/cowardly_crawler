@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/POL-countering-evil-short.wav-dd76baf83c7a4a4a4fa9260411634ef4.sample"
+
+[deps]
+
+source_file="res://asset/music/POL-countering-evil-short.wav"
+dest_files=[ "res://.import/POL-countering-evil-short.wav-dd76baf83c7a4a4a4fa9260411634ef4.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=0

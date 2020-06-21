@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/POL-last-duel-short.wav-2121225c108e6904d44daa4b624c1ca5.sample"
+
+[deps]
+
+source_file="res://asset/music/POL-last-duel-short.wav"
+dest_files=[ "res://.import/POL-last-duel-short.wav-2121225c108e6904d44daa4b624c1ca5.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=0

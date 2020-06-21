@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/level/BaseHell.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/level/Level11.gd" type="Script" id=2]
@@ -8,8 +8,12 @@
 [ext_resource path="res://src/actors/enemies/lizard_guy/LizardGuy.tscn" type="PackedScene" id=6]
 [ext_resource path="res://asset/tilesets/stairs.png" type="Texture" id=7]
 [ext_resource path="res://src/level/Door.tscn" type="PackedScene" id=8]
+[ext_resource path="res://asset/tilesets/universal_ladder.png" type="Texture" id=9]
 
 [sub_resource type="CircleShape2D" id=1]
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id=2]
 radius = 8.0
 
 [node name="Level" instance=ExtResource( 1 )]
@@ -33,6 +37,14 @@ texture = ExtResource( 7 )
 shape = SubResource( 1 )
 
 [node name="Down" parent="Map" index="4" instance=ExtResource( 8 )]
+position = Vector2( 632.613, 57.6778 )
+LEVEL = 12
+
+[node name="Sprite" parent="Map/Down" index="0"]
+texture = ExtResource( 9 )
+
+[node name="CollisionShape2D" parent="Map/Down/Area2D" index="0"]
+shape = SubResource( 2 )
 
 [node name="Chest" parent="Objects/Actors" index="0" instance=ExtResource( 4 )]
 position = Vector2( 168.734, 87.481 )

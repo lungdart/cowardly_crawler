@@ -12,14 +12,14 @@ var level = null
 var lifeUI = null
 var spellsUI = null
 
-var spells = ["fire", "ice"]
+var spells = []
 var dash = false
 var armor = false setget _set_armor
 var armor_max_health = 3 setget _set_max_armor_health
 var armor_current_health = 3 setget _set_current_armor_health
 
 var left_spell = "fire"
-var right_spell = "ice"
+var right_spell = ""
 
 var kill_counter = 0
 var max_dungeon_level = 0

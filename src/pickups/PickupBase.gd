@@ -1,5 +1,6 @@
 extends StaticBody2D
 
+signal picked_up
 
 onready var icon = $Icon
 onready var animationPlayer = $AnimationPlayer
@@ -15,6 +16,7 @@ func _on_Pickup_body_entered(body):
 	self.animationPlayer.play("Fizzle")
 	yield(self.dialog.popup(), "closed")
 
+	emit_signal("picked_up")
 	pick_up()
 	queue_free()
 
