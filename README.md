@@ -12,11 +12,8 @@ A top down dungeon crawler with a theme of cowardice
 
 ## TODO
 * Level design
-  * Create 5 "hell" levels
-  * Create 3 new enemies
   * Create final boss
 
 * Core game stuff
-  * Create two new spells and ability to change spells via the menu
   * Game won
   * Saving and loading

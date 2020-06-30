@@ -25,8 +25,8 @@ var kill_counter = 0
 var max_dungeon_level = 0
 
 var intro_played = false
-var fear_grass = true
-var fear_path = true
+var fear_grass = false
+var fear_path = false
 
 
 func _ready():
