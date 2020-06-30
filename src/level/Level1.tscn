@@ -61,6 +61,7 @@ shape = SubResource( 2 )
 [node name="Up" parent="Map" index="5" instance=ExtResource( 4 )]
 position = Vector2( 394.108, 22.2635 )
 POSITION = Vector2( 240, 144 )
+GO_BACK = true
 
 [node name="CollisionShape2D" parent="Map/Up/Area2D" index="0"]
 shape = SubResource( 3 )
@@ -104,6 +105,7 @@ visible = true
 position = Vector2( 394.108, 80 )
 
 [node name="Warning" parent="UI" index="4" instance=ExtResource( 9 )]
+visible = false
 TEXT = "I can't go over there there's monsters! If I was brave enough to tackle them, then maybe I would..."
 
 [node name="Camera2D" parent="." index="3"]

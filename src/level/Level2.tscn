@@ -31,7 +31,8 @@ tile_data = PoolIntArray( -131074, 0, 196620, -131073, 0, 196622, -196608, 0, 19
 [node name="Up" parent="Map" index="3" instance=ExtResource( 2 )]
 position = Vector2( 89.7581, 21.4784 )
 LEVEL = 1
-POSITION = Vector2( 768, 863 )
+POSITION = Vector2( 240, 144 )
+GO_BACK = true
 
 [node name="CollisionShape2D" parent="Map/Up/Area2D" index="0"]
 shape = SubResource( 1 )

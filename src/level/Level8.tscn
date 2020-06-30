@@ -26,8 +26,8 @@ tile_data = PoolIntArray( -131038, 0, 458752, -131037, 0, 2, -131036, 0, 2, -131
 
 [node name="Up" parent="Map" index="3" instance=ExtResource( 2 )]
 position = Vector2( 632, 40 )
-LEVEL = 7
-POSITION = Vector2( 710, 216 )
+POSITION = Vector2( 1048, 624 )
+GO_BACK = true
 
 [node name="Sprite" parent="Map/Up" index="0"]
 texture = ExtResource( 3 )

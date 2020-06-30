@@ -12,14 +12,26 @@ onready var fire_spell = {
 	"scene": preload("res://src/particles/Fireball.tscn"),
 	"cooldown": 0.4
 }
+onready var fire2_spell = {
+	"icon": $Fire,
+	"scene": preload("res://src/particles/Fireball2.tscn"),
+	"cooldown": 0.4
+}
 onready var ice_spell = {
 	"icon": $Ice,
 	"scene": preload("res://src/particles/Ice.tscn"),
 	"cooldown": 2.5
 }
+onready var ice2_spell = {
+	"icon": $Ice,
+	"scene": preload("res://src/particles/Ice2.tscn"),
+	"cooldown": 2.0
+}
 onready var spell_list = {
 	"fire": fire_spell,
-	"ice": ice_spell
+	"fire2": fire2_spell,
+	"ice": ice_spell,
+	"ice2": ice2_spell
 }
 
 # Equipped spells and their states

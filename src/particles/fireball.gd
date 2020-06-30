@@ -20,11 +20,11 @@ func _ready():
 	self.sprite.visible = true
 	self.animationPlayer.play("Fire")
 
-func init(player_position, mouse_position):
-	var target_angle = player_position.angle_to_point(mouse_position)
+func init(player_position, mouse_position, offset=0):
+	var target_angle = player_position.angle_to_point(mouse_position) + offset
 	self.rotation = target_angle
 	self.direction = -Vector2(cos(target_angle), sin(target_angle)) 
-	self.position = player_position + (self.direction * 48)
+	self.position = player_position + (self.direction * 24)
 
 func _physics_process(delta):
 	if moving:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/level/BaseHell.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/level/Level14.gd" type="Script" id=2]
@@ -6,11 +6,13 @@
 [ext_resource path="res://src/level/Door.tscn" type="PackedScene" id=4]
 [ext_resource path="res://asset/tilesets/stairs.png" type="Texture" id=5]
 [ext_resource path="res://src/ui/Dialog.tscn" type="PackedScene" id=6]
-
-[sub_resource type="CircleShape2D" id=2]
-radius = 8.0
+[ext_resource path="res://src/pickups/PickupFire2.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/pickups/PickupArmor.tscn" type="PackedScene" id=8]
 
 [sub_resource type="CircleShape2D" id=1]
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id=2]
 radius = 8.0
 
 [node name="Level" instance=ExtResource( 1 )]
@@ -24,12 +26,14 @@ tile_data = PoolIntArray( -196582, 0, 196615, -196581, 0, 131081, -196580, 0, 13
 
 [node name="Up" parent="Map" index="3" instance=ExtResource( 4 )]
 position = Vector2( 632.453, 934.559 )
+POSITION = Vector2( 240, 864 )
+GO_BACK = true
 
 [node name="Sprite" parent="Map/Up" index="0"]
 texture = ExtResource( 5 )
 
 [node name="CollisionShape2D" parent="Map/Up/Area2D" index="0"]
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="Down" parent="Map" index="4" instance=ExtResource( 4 )]
 position = Vector2( 632.707, 73.9054 )
@@ -39,7 +43,13 @@ LEVEL = 15
 texture = ExtResource( 3 )
 
 [node name="CollisionShape2D" parent="Map/Down/Area2D" index="0"]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
+
+[node name="PickupFire2" parent="Objects/Pickups" index="0" instance=ExtResource( 7 )]
+position = Vector2( 80.2748, 478.427 )
+
+[node name="PickupArmor" parent="Objects/Pickups" index="1" instance=ExtResource( 8 )]
+position = Vector2( 1199.89, 478.83 )
 
 [node name="Player" parent="Objects" index="2"]
 position = Vector2( 640.542, 883.935 )

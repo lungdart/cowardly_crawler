@@ -31,8 +31,8 @@ shape = SubResource( 1 )
 
 [node name="Up" parent="Map" index="4" instance=ExtResource( 2 )]
 position = Vector2( 1240, 872 )
-LEVEL = 8
-POSITION = Vector2( 1016, 912 )
+POSITION = Vector2( 1048, 624 )
+GO_BACK = true
 
 [node name="Sprite" parent="Map/Up" index="0"]
 texture = ExtResource( 3 )

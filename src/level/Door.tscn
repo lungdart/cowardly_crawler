@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/level/Door.gd" type="Script" id=1]
+[ext_resource path="res://src/ui/theme.tres" type="Theme" id=2]
 
 [node name="Door" type="Node2D"]
+pause_mode = 2
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -11,4 +13,48 @@ script = ExtResource( 1 )
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Dialog" type="PopupDialog" parent="CanvasLayer"]
+margin_right = 320.0
+margin_bottom = 144.0
+theme = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Dialog"]
+margin_top = 32.0
+margin_right = 320.0
+margin_bottom = 72.0
+bbcode_enabled = true
+bbcode_text = "[center]Go back to the outdoors?[/center]"
+text = "Go back to the outdoors?"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OK" type="Button" parent="CanvasLayer/Dialog"]
+margin_left = 48.0
+margin_top = 72.0
+margin_right = 136.0
+margin_bottom = 107.0
+text = "OK"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cancel" type="Button" parent="CanvasLayer/Dialog"]
+margin_left = 184.0
+margin_top = 72.0
+margin_right = 272.0
+margin_bottom = 107.0
+text = "Cancel"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="popup_hide" from="CanvasLayer/Dialog" to="." method="_on_Dialog_popup_hide"]
+[connection signal="pressed" from="CanvasLayer/Dialog/OK" to="." method="_on_OK_pressed"]
+[connection signal="pressed" from="CanvasLayer/Dialog/Cancel" to="." method="_on_Cancel_pressed"]

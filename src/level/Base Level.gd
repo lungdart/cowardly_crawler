@@ -61,6 +61,6 @@ func _on_enemy_killed():
 
 func _on_Spells_instance_spell(scene, player_position):
 	var instance = scene.instance()
-	instance.init(player_position, get_global_mouse_position())
 	add_child(instance)
+	instance.init(player_position, get_global_mouse_position())
 

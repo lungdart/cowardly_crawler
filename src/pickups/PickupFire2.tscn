@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/pickups/PickupFire.gd" type="Script" id=1]
+[ext_resource path="res://asset/pickups/S_Fire03.png" type="Texture" id=2]
+[ext_resource path="res://src/pickups/PickupBase.tscn" type="PackedScene" id=3]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 6.66403
+height = 9.36987
+
+[node name="PickupFire2" instance=ExtResource( 3 )]
+script = ExtResource( 1 )
+
+[node name="Icon" parent="." index="1"]
+position = Vector2( 0, -7.76128 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" parent="Pickup" index="0"]
+position = Vector2( -0.0224322, -4.24044 )
+shape = SubResource( 1 )
+
+[node name="Dialog" parent="CanvasLayer" index="0"]
+TEXT = "Do these stack?"
