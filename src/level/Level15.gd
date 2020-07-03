@@ -1,8 +1,8 @@
 extends "res://src/level/Base Level.gd"
 
 onready var dialog = $UI/First
+onready var dialog2 = $UI/Encounter1
 onready var blockTiles = $Map/Block
-onready var block
 
 
 func _ready():
@@ -15,6 +15,7 @@ func _ready():
 
 
 func _on_BlockTrigger_body_entered(body):
+	self.dialog2.popup()
 	self.blockTiles.set_visible(true)
 	self.blockTiles.set_collision_layer_bit(10, true)
 	self.soundPlayer.play("Fade in")

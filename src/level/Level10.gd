@@ -10,6 +10,8 @@ func _ready():
 	self.blockedTiles.set_visible(false)
 
 func _on_BossZombie_enemy_killed():
+	GlobalState.level10_block = false
+
 	# Looks like this can trigger after free due to a bug. Simple check to prevent a crash
 	self.blockedTiles.set_visible(false)
 	self.blockedTiles.set_collision_layer_bit(10, false)
@@ -17,6 +19,7 @@ func _on_BossZombie_enemy_killed():
 
 
 func _on_BlockTrigger_body_entered(body):
-	self.blockedTiles.set_collision_layer_bit(10, true)
-	self.blockedTiles.set_visible(true)
-	self.soundPlayer.play("Fade in")
+	if GlobalState.level10_block:
+		self.blockedTiles.set_collision_layer_bit(10, true)
+		self.blockedTiles.set_visible(true)
+		self.soundPlayer.play("Fade in")

@@ -1,0 +1,63 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/ui/theme.tres" type="Theme" id=1]
+[ext_resource path="res://src/particles/Insults.gd" type="Script" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 256.0
+
+[node name="Insults" type="KinematicBody2D"]
+script = ExtResource( 2 )
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource( 1 )
+
+[node name="Words" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+theme = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Loser" type="RichTextLabel" parent="Words"]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+text = "Loser"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SpareParts" type="RichTextLabel" parent="Words"]
+visible = false
+margin_right = 94.0
+margin_bottom = 19.0
+text = "Spare parts"
+
+[node name="NerfHerder" type="RichTextLabel" parent="Words"]
+visible = false
+margin_right = 100.0
+margin_bottom = 19.0
+text = "Nerf Herder"
+
+[node name="ButtSniffer" type="RichTextLabel" parent="Words"]
+visible = false
+margin_right = 103.0
+margin_bottom = 40.0
+text = "Butt Sniffer"
+
+[node name="Chicken" type="RichTextLabel" parent="Words"]
+visible = false
+margin_right = 83.0
+margin_bottom = 40.0
+text = "Chicken"
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

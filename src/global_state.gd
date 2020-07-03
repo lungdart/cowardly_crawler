@@ -21,12 +21,16 @@ var armor_current_health = 3 setget _set_current_armor_health
 var left_spell = ""
 var right_spell = ""
 
+var kill_list = {}
 var kill_counter = 0
 var max_dungeon_level = 0
 
 var intro_played = false
-var fear_grass = false
-var fear_path = false
+var fear_grass = true
+var fear_path = true
+var level1_block = true
+var level5_block = true
+var level10_block = true
 
 
 func _ready():
@@ -93,6 +97,11 @@ func _set_armor(value):
 		armor = false
 		self.lifeUI.toggle_armor(false)
 		self.player.unequip_armor()
+		
+	# Refresh armor
+	elif value and self.armor:
+		armor = true
+		self.lifeUI.current_armor = self.lifeUI.max_armor
 
 func _set_max_armor_health(value):
 	armor_max_health = value

@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/ui/theme.tres" type="Theme" id=1]
 [ext_resource path="res://asset/portraits/elf.png" type="Texture" id=2]
 [ext_resource path="res://src/ui/Dialog.gd" type="Script" id=3]
 [ext_resource path="res://asset/sounds/typing.wav" type="AudioStream" id=4]
+[ext_resource path="res://asset/portraits/knight.png" type="Texture" id=5]
 
 [node name="Dialog" type="Control"]
 pause_mode = 2
@@ -18,7 +19,6 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-AVATAR_TEXTURE = ExtResource( 2 )
 
 [node name="DialogBox" type="PopupPanel" parent="."]
 visible = true
@@ -26,6 +26,7 @@ margin_right = 416.0
 margin_bottom = 138.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+popup_exclusive = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -40,13 +41,25 @@ __meta__ = {
 }
 
 [node name="Avatar" type="TextureRect" parent="DialogBox/HSplitContainer"]
+margin_right = 48.0
 margin_bottom = 74.0
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ArmorAvatar" type="TextureRect" parent="DialogBox/HSplitContainer"]
+visible = false
+margin_left = 60.0
+margin_right = 352.0
+margin_bottom = 74.0
+texture = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Text" type="RichTextLabel" parent="DialogBox/HSplitContainer"]
-margin_left = 12.0
+margin_left = 60.0
 margin_right = 352.0
 margin_bottom = 74.0
 bbcode_enabled = true

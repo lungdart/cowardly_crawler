@@ -34,7 +34,7 @@ void fragment() {
 [sub_resource type="ShaderMaterial" id=2]
 resource_local_to_scene = true
 shader = SubResource( 1 )
-shader_param/white_out = true
+shader_param/white_out = false
 shader_param/frozen = false
 
 [sub_resource type="Animation" id=3]

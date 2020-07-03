@@ -11,9 +11,6 @@ A top down dungeon crawler with a theme of cowardice
 * **Mouse** Aim spells and operate menus
 
 ## TODO
-* Level design
-  * Create final boss
-
 * Core game stuff
   * Game won
   * Saving and loading

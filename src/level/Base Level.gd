@@ -17,6 +17,13 @@ func _ready():
 	GlobalState.lifeUI = self.lifeUI
 	GlobalState.spellsUI = self.spellsUI
 	
+	# Remove any killed enemies from the level scenes
+	if not GlobalState.kill_list.has(self.name):
+		GlobalState.kill_list[self.name] = []
+	for enemy in self.actors.get_children():
+		if GlobalState.kill_list[self.name].find(enemy.name) != -1:
+			enemy.free()
+	
 	self.player.set_visible(true)
 	self.lifeUI.set_visible(true)
 	self.spellsUI.set_visible(true)
@@ -56,8 +63,9 @@ func add_drop(instance, pos):
 func fade_out():
 	self.soundPlayer.play("Fade out")
 
-func _on_enemy_killed():
+func _on_enemy_killed(name):
 	GlobalState.kill_counter += 1
+	GlobalState.kill_list[self.name].append(name)
 
 func _on_Spells_instance_spell(scene, player_position):
 	var instance = scene.instance()

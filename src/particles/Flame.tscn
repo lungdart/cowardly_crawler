@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/particles/Flame.gd" type="Script" id=1]
+[ext_resource path="res://asset/sounds/fire1.wav" type="AudioStream" id=2]
 
 [sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 0.981818 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.0909091 ), -0.182231, 0.0, 0, 0 ]
@@ -40,3 +41,7 @@ collision_mask = 8
 position = Vector2( 28.282, 0.193714 )
 rotation = 1.5708
 shape = SubResource( 3 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+autoplay = true
