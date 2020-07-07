@@ -4,7 +4,7 @@ signal closed
 
 export var TEXT: String
 export var NEXT_DIALOG: NodePath
-
+export var SHOW_AVATAR = true
 
 onready var dialogBox = $DialogBox
 onready var label = $DialogBox/HSplitContainer/Text
@@ -52,7 +52,10 @@ func _play():
 	
 	
 func _set_avatar():
-	if GlobalState.armor:
+	if not SHOW_AVATAR:
+		self.avatar.set_visible(false)
+		self.armorAvatar.set_visible(false)
+	elif GlobalState.armor:
 		self.avatar.set_visible(false)
 		self.armorAvatar.set_visible(true)
 	else:

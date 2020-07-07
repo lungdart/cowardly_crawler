@@ -4,13 +4,12 @@
 [ext_resource path="res://src/particles/Insults2.gd" type="Script" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 256.0
+radius = 200.0
 
 [node name="Insults2" type="KinematicBody2D"]
 script = ExtResource( 2 )
 
 [node name="HitBox" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 8
 
@@ -25,37 +24,44 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Murderer" type="RichTextLabel" parent="Words"]
+[node name="Stop" type="RichTextLabel" parent="Words"]
 visible = false
 margin_right = 80.0
 margin_bottom = 40.0
-text = "Murderer!"
+text = "Stop it!
+"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Rapist" type="RichTextLabel" parent="Words"]
+[node name="Jerk" type="RichTextLabel" parent="Words"]
 visible = false
 margin_right = 94.0
 margin_bottom = 19.0
-text = "Rapist!"
+text = "Jerk"
 
-[node name="Help" type="RichTextLabel" parent="Words"]
+[node name="Pathetic" type="RichTextLabel" parent="Words"]
 visible = false
 margin_right = 100.0
 margin_bottom = 19.0
-text = "HELP! POLICE!!!"
+text = "Pathetic"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="CantBreathe" type="RichTextLabel" parent="Words"]
+[node name="ThatsAll" type="RichTextLabel" parent="Words"]
 visible = false
-margin_right = 116.0
+margin_right = 156.0
 margin_bottom = 40.0
-text = "I can't breathe!"
+text = "That's all you have?"
 
-[node name="Psycho" type="RichTextLabel" parent="Words"]
-margin_right = 112.0
+[node name="DoBetter" type="RichTextLabel" parent="Words"]
+margin_right = 191.0
 margin_bottom = 40.0
-text = "Psychopath!!!!"
+text = "Can't you do any better?"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true

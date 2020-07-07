@@ -38,22 +38,11 @@ bbcode_enabled = true
 bbcode_text = "[center]Cowardly Crawler[/center]"
 text = "Cowardly Crawler"
 
-[node name="Continue" type="Button" parent="."]
+[node name="NewGame" type="Button" parent="."]
 margin_left = 256.0
 margin_top = 290.0
 margin_right = 384.0
 margin_bottom = 325.0
-disabled = true
-text = "Continue"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="NewGame" type="Button" parent="."]
-margin_left = 256.0
-margin_top = 336.0
-margin_right = 384.0
-margin_bottom = 371.0
 text = "New Game"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -64,5 +53,4 @@ __meta__ = {
 [node name="SelectSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
 volume_db = -18.0
-[connection signal="pressed" from="Continue" to="." method="_on_Continue_pressed"]
 [connection signal="pressed" from="NewGame" to="." method="_on_NewGame_pressed"]

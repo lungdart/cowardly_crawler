@@ -181,7 +181,6 @@ func set_life(value):
 
 # Handle being hurt, and magic effects
 func _on_hurtBox_area_entered(area):
-	print(area.name)
 	if area.name == "HitBox":
 		self.current_life -= 1
 		if self.current_life > 0:

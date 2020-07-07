@@ -42,22 +42,25 @@ position = Vector2( 662.748, 390.104 )
 position = Vector2( 642.824, 895.627 )
 
 [node name="First" parent="UI" index="4" instance=ExtResource( 2 )]
-TEXT = "What's that smell? It's disgusting!"
-NEXT_DIALOG = NodePath("../Second")
+TEXT = "I have a bad feeling about this. A save point would have been nice right about now..."
 
-[node name="Second" parent="UI" index="5" instance=ExtResource( 2 )]
-TEXT = "Looks like there's no way back... I'm Trapped!!! HEEEEEELLLLPPPP!"
+[node name="Arrest1" parent="UI" index="5" instance=ExtResource( 2 )]
+TEXT = "Officer: Hands in the air! You're under arrest!"
+NEXT_DIALOG = NodePath("../Arrest2")
+SHOW_AVATAR = false
 
-[node name="Encounter1" parent="UI" index="6" instance=ExtResource( 2 )]
-TEXT = "Oh no! It's that damned bully who made me go here in the first place!"
-NEXT_DIALOG = NodePath("../Encounter2")
-
-[node name="Encounter2" parent="UI" index="7" instance=ExtResource( 2 )]
-TEXT = "I'll show her!"
+[node name="Arrest2" parent="UI" index="6" instance=ExtResource( 2 )]
+TEXT = "Officer no! I got carried away! I'm sorry!"
 
 [node name="Camera2D" parent="." index="3"]
 position = Vector2( 642.824, 895.627 )
 
 [node name="BackGroundMusic" parent="SoundPlayer" index="0"]
 stream = ExtResource( 5 )
+
+[node name="EndingTimer" type="Timer" parent="." index="5"]
+one_shot = true
 [connection signal="body_entered" from="Map/BlockTrigger" to="." method="_on_BlockTrigger_body_entered"]
+[connection signal="enemy_killed" from="Objects/Actors/Boss" to="." method="_on_Boss_enemy_killed"]
+[connection signal="closed" from="UI/Arrest2" to="." method="_on_Arrest2_closed"]
+[connection signal="timeout" from="EndingTimer" to="." method="_on_EndingTimer_timeout"]

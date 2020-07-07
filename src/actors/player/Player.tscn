@@ -33,14 +33,14 @@ shader_param/active = false
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ ExtResource( 4 ), ExtResource( 3 ), ExtResource( 2 ), ExtResource( 6 ) ],
-"loop": true,
-"name": "Move",
-"speed": 10.0
-}, {
 "frames": [ ExtResource( 9 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 5 ) ],
 "loop": true,
 "name": "Idle",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 3 ), ExtResource( 2 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "Move",
 "speed": 10.0
 }, {
 "frames": [ ExtResource( 12 ) ],
@@ -56,14 +56,14 @@ shader_param/active = false
 
 [sub_resource type="SpriteFrames" id=4]
 animations = [ {
-"frames": [ ExtResource( 18 ), ExtResource( 21 ), ExtResource( 17 ), ExtResource( 19 ) ],
-"loop": true,
-"name": "Move",
-"speed": 10.0
-}, {
 "frames": [ ExtResource( 22 ), ExtResource( 23 ), ExtResource( 20 ), ExtResource( 11 ) ],
 "loop": true,
 "name": "Idle",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 18 ), ExtResource( 21 ), ExtResource( 17 ), ExtResource( 19 ) ],
+"loop": true,
+"name": "Move",
 "speed": 10.0
 }, {
 "frames": [ ExtResource( 16 ) ],
@@ -442,6 +442,7 @@ colors = PoolColorArray( 0.855469, 0.855469, 0.855469, 1, 0.580392, 0.580392, 0.
 radius = 19.2605
 
 [node name="Player" type="KinematicBody2D"]
+pause_mode = 1
 collision_layer = 2
 collision_mask = 7169
 script = ExtResource( 1 )
@@ -465,6 +466,7 @@ material = SubResource( 1 )
 position = Vector2( 0, -4 )
 frames = SubResource( 2 )
 animation = "Move"
+frame = 2
 playing = true
 
 [node name="Armor" type="AnimatedSprite" parent="."]
@@ -473,6 +475,7 @@ material = SubResource( 3 )
 position = Vector2( 0, -4 )
 frames = SubResource( 4 )
 animation = "Move"
+frame = 2
 playing = true
 
 [node name="Boundry" type="CollisionShape2D" parent="."]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://src/actors/enemies/EnemyBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://asset/frames/elf_f_idle_anim_f0.png" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://asset/frames/elf_f_idle_anim_f1.png" type="Texture" id=9]
 [ext_resource path="res://asset/frames/elf_f_idle_anim_f3.png" type="Texture" id=10]
 [ext_resource path="res://asset/SmallShadow.png" type="Texture" id=11]
+[ext_resource path="res://src/ui/Dialog.tscn" type="PackedScene" id=12]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -71,17 +72,18 @@ radius = 79.1965
 
 [node name="Boss" instance=ExtResource( 1 )]
 script = ExtResource( 8 )
-MAX_LIFE = 100
+MAX_LIFE = 8
 IDLE_CHANCE = 50
 MOVE_CHANCE = 0
 CAST_CHANCE = 50
 
 [node name="Shadow" parent="." index="0"]
-position = Vector2( -0.951309, 14.2696 )
+position = Vector2( 0.102768, 0.0395126 )
 texture = ExtResource( 11 )
 
 [node name="Sprite" parent="." index="1"]
 material = SubResource( 2 )
+position = Vector2( 1.05409, -14.2301 )
 frames = SubResource( 3 )
 animation = "Move"
 
@@ -90,12 +92,13 @@ visible = false
 
 [node name="Boundry" parent="." index="3"]
 visible = false
-position = Vector2( -1.42696, 9.7509 )
+position = Vector2( 0.154156, -2.37103 )
 rotation = 1.5708
 shape = SubResource( 4 )
 
 [node name="HitBox" parent="." index="4"]
 visible = false
+position = Vector2( 1.58113, -14.7571 )
 
 [node name="CollisionShape2D" parent="HitBox" index="0"]
 position = Vector2( -0.475647, 6.89698 )
@@ -103,6 +106,7 @@ shape = SubResource( 5 )
 
 [node name="HurtBox" parent="." index="5"]
 visible = false
+position = Vector2( 1.05408, -13.9666 )
 
 [node name="CollisionPolygon2D" parent="HurtBox" index="0"]
 position = Vector2( -0.475662, 6.89698 )
@@ -110,6 +114,7 @@ shape = SubResource( 6 )
 
 [node name="SightBox" parent="." index="6"]
 visible = false
+position = Vector2( 0.263519, -13.176 )
 
 [node name="CollisionShape2D" parent="SightBox" index="0"]
 position = Vector2( 0.237839, 6.65915 )
@@ -118,3 +123,31 @@ shape = SubResource( 7 )
 [node name="CastParticles" parent="." index="12"]
 visible = false
 amount = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." index="15"]
+
+[node name="First" parent="CanvasLayer" index="0" instance=ExtResource( 12 )]
+visible = false
+TEXT = "Oh no! It's that damned bully who made me go here in the first place!"
+NEXT_DIALOG = NodePath("../Second")
+
+[node name="Second" parent="CanvasLayer" index="1" instance=ExtResource( 12 )]
+visible = false
+margin_bottom = -196.0
+TEXT = "I'll show her!"
+NEXT_DIALOG = NodePath("../Third")
+
+[node name="Third" parent="CanvasLayer" index="2" instance=ExtResource( 12 )]
+visible = false
+TEXT = "Bully: Haha, this dweeb thinks he's cool now!"
+SHOW_AVATAR = false
+
+[node name="Stage2" parent="CanvasLayer" index="3" instance=ExtResource( 12 )]
+visible = false
+TEXT = "Owch! You're taking this too seriously. Go away loser."
+SHOW_AVATAR = false
+
+[node name="Stage3" parent="CanvasLayer" index="4" instance=ExtResource( 12 )]
+visible = false
+TEXT = "HELP! Police! This freak is trying to kill me!!!"
+SHOW_AVATAR = false
